@@ -1,3 +1,5 @@
+# Assumes SimpleSynth is installed and running with the desired MIDI instrument
+# https://github.com/notahat/simplesynth
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 Ceely::Assignment.new("Assignment 1", 500, 200).run do
