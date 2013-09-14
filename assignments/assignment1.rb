@@ -27,7 +27,7 @@ Ceely::Assignment.new("Assignment 1", 500, 200).run do
     end
     stack margin: 10 do
       button("Play the tone with pitch #{pitch} for #{duration} seconds via SympleSynth") do
-        note.play_simple_synth do
+        note.play_midi do
           sleep duration
         end
       end

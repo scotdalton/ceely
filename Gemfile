@@ -10,5 +10,6 @@ platforms :jruby do
     gem "ruby-debug", "~> 0.10.4"
     gem "pry", "~> 0.9.12.2"
     gem "rspec", "~> 2.14.1"
+    gem "factory_girl", "~> 4.2.0"
   end
 end
