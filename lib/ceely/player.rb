@@ -5,7 +5,7 @@ module Ceely
     
     class Player
       include_package 'javax.sound.sampled'
-      RATE = 1024*16
+      RATE = 1024*32
       SIZE = 8
       CHANNELS = 1
       attr_reader :rate, :size, :channels
@@ -15,7 +15,7 @@ module Ceely
       end
       
       def format
-        @format ||= AudioFormat.new(rate, size, channels, true, true)
+        @format ||= AudioFormat.new(rate, size, channels, false, false)
       end
 
       def line
@@ -37,7 +37,7 @@ module Ceely
           y = Math.sin(t * frequency) * amplitude + 127;
           wave << y.to_i.chr
         end
-        line.write(wave.join.to_java_string.bytes, 0, seconds*10000)
+        line.write(wave.join.unpack('c*'), 0, seconds*10000)
       end
     end
   end

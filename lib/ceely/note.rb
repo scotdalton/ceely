@@ -20,9 +20,9 @@ module Ceely
 
     # MIDI playback
     def play_midi(duration, output=nil)
-      output = Midi::OUTPUTS.first if output.nil?
+      output = Midi::OUTPUTS.find /SimpleSynth/ if output.nil?
       output.open
-      generator >> simple_synth
+      generator >> output
       start_midi(output)
       sleep duration
       stop_midi(output)
@@ -43,8 +43,7 @@ module Ceely
 
     # Pitch is in MIDI terms
     def pitch
-      # TODO convert from frequency for MIDI
+      @pitch ||= 69 + 12*(Math.log2(frequency/440))
     end
-
   end
 end
