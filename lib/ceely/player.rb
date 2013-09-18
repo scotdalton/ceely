@@ -57,20 +57,17 @@ module Ceely
     def encoding
       @encoding ||= AudioFormat::Encoding::PCM_UNSIGNED
     end
-    private :encoding
 
     # Private method to return the Audio Format
     def format
       @format ||= 
         AudioFormat.new(encoding, rate, size, channels, 1, rate, false)
     end
-    private :format
 
     # Private method to return the source data line
     # for the player's Audio Format
     def line
       @line ||= AudioSystem.get_source_data_line(format)
     end
-    private :line
   end
 end
