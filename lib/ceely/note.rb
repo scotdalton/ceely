@@ -25,6 +25,11 @@ module Ceely
       @angular_frequency ||= 2.0 * Math::PI * frequency
     end
 
+    # New player with default settings
+    def player
+      @player ||= Player.new
+    end
+
     # MIDI playback
     def play_midi(duration, output)
       output.open
@@ -44,10 +49,5 @@ module Ceely
       @generator ||= Midi::Devices::Generator.new
     end
     private :generator
-
-    def player
-      @player ||= Player.new
-    end
-    private :player
   end
 end

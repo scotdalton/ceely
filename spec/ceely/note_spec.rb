@@ -16,6 +16,12 @@ module Ceely
         end
       end
 
+      describe '#player' do
+        it 'has a player,' do
+          expect(note.player).to be_a(Player)
+        end
+      end
+
       # Don't run this test on travis since
       # we don't have permissions.
       unless(ENV['TRAVIS'].eql? "true")

@@ -11,4 +11,5 @@ To run on a Mac
     $ rvm use jruby
     $ ./bin/assignment N
 
-Hope to make this a vagrant box (probably Ubuntu) and distribute it that way.
+Hope to make this a [vagrant box](http://www.vagrantup.com/)
+(probably Ubuntu) and distribute it that way.
