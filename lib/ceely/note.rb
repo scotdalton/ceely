@@ -30,24 +30,9 @@ module Ceely
       @player ||= Player.new
     end
 
-    # MIDI playback
-    def play_midi(duration, output)
-      output.open
-      generator >> output
-      generator.note_on pitch
-      sleep duration
-      generator.note_off pitch
-      output.close
-    end
-
     # Pitch in MIDI terms
     def pitch
       @pitch ||= 69 + 12*(Math.log2(frequency/440))
     end
-
-    def generator
-      @generator ||= Midi::Devices::Generator.new
-    end
-    private :generator
   end
 end
