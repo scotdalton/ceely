@@ -24,13 +24,5 @@ Ceely::Assignment.new("Assignment 1", 500, 400).run do
         note.play(@duration.text.to_i, @amplitude.text.to_i)
       end
     end
-    # require 'jsound'
-    # output = JSound::Midi::OUTPUTS.find /SimpleSynth/ if output.nil?
-    # stack margin: 10 do
-    #   @play_midi = button("Play the tone with frequency #{frequency} for #{duration} seconds via SympleSynth") do
-    #     @note = Ceely::Note.new(@frequency.text.to_i)
-    #     @note.play_midi(duration, output)
-    #   end
-    # end
   end
 end
