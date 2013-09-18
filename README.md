@@ -6,9 +6,9 @@
 To run on a Mac
 (assumes [git](http://git-scm.com/), [rvm](http://rvm.io) and [bundler](http://bundler.io/))
 
-1. `git clone https://github.com/scotdalton/ceely.git`
-2. `cd ceely`
-3. `rvm use jruby`
-4. `./bin/assignment N`
+    $ git clone https://github.com/scotdalton/ceely.git
+    $ cd ceely
+    $ rvm use jruby
+    $ ./bin/assignment N
 
 Hope to make this a vagrant box (probably Ubuntu) and distribute it that way.
