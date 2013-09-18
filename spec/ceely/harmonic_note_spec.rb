@@ -21,7 +21,7 @@ module Ceely
 
         describe '#interval_factor' do
           expected_interval_factor = expected_values["interval_factor"]
-          it 'has the base ratio we expect' do
+          it 'has the fundamental ratio we expect' do
             expect(harmonic_note.interval_factor).to eq(Rational(relation, 1))
             expect(harmonic_note.interval_factor.to_s).to eq(expected_interval_factor)
           end

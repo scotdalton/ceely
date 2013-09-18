@@ -3,9 +3,9 @@ module Ceely
   class HarmonicNote < NoteRelation
     alias :degree :relation
 
-    def initialize(base, relation)
+    def initialize(fundamental, relation)
       interval_factor = Rational(relation, 1)
-      super(base, relation, interval_factor)
+      super(fundamental, relation, interval_factor)
     end
 
     def octave

@@ -1,12 +1,12 @@
 module Ceely
-  # A NoteRelation is a Note that takes a base note, a relation number
+  # A NoteRelation is a Note that takes a fundamental note, a relation number
   # an interval factor
   class NoteRelation < Note
-    attr_reader :base, :relation, :interval_factor
+    attr_reader :fundamental, :relation, :interval_factor
 
-    def initialize(base, relation, interval_factor)
-      @base, @relation, @interval_factor = base, relation, interval_factor
-      super((base.frequency * interval_factor).to_f)
+    def initialize(fundamental, relation, interval_factor)
+      @fundamental, @relation, @interval_factor = fundamental, relation, interval_factor
+      super((fundamental.frequency * interval_factor).to_f)
     end
 
     # Intended to be overridden by subclasses
@@ -22,7 +22,7 @@ module Ceely
     end
 
     def octave_frequency
-      @octave_frequency ||= octave_ratio.to_f * base.frequency
+      @octave_frequency ||= octave_ratio.to_f * fundamental.frequency
     end
   end
 end
