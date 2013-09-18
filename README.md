@@ -4,7 +4,9 @@
 [![Dependency Status](https://gemnasium.com/scotdalton/ceely.png)](https://gemnasium.com/scotdalton/ceely)
 
 To run on a Mac
-(assumes [git](http://git-scm.com/), [rvm](http://rvm.io) and [bundler](http://bundler.io/))
+(assumes [git](http://git-scm.com/), 
+[rvm](http://rvm.io), [bundler](http://bundler.io/) and
+[OpenJDK](http://openjdk.java.net/))
 
     $ git clone https://github.com/scotdalton/ceely.git
     $ cd ceely
