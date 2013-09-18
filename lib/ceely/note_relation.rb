@@ -9,10 +9,6 @@ module Ceely
       super((base.frequency * interval_factor).to_f)
     end
 
-    def base?
-      (base.frequency == frequency)
-    end
-
     # Intended to be overridden by subclasses
     def octave
     end
