@@ -4,7 +4,7 @@ module Ceely
   describe Player do
     context 'when the defaults are used,' do
       subject(:player) { Player.new }
-      subject(:note) { Note.new(800) }
+      subject(:note) { Note::Base.new(800) }
 
       describe '#sine_wave' do
         it 'does not error on the sine wave' do
