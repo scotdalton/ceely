@@ -2,7 +2,7 @@ source "https://rubygems.org"
 # Gotta be JRuby
 platforms :jruby do
   gem "rake", "~> 10.1.0"
-  gem "require_all", "~> 1.3.0"
+  gem "require_all", "~> 1.3.1"
   gem "jsound", "~> 0.1.3"
   gem "shoes", git: "https://github.com/shoes/shoes4.git"
 

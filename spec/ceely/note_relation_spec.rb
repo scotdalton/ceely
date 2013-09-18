@@ -1,5 +1,5 @@
 require 'spec_helper'
 module Ceely
-  describe NoteCollection do
+  describe NoteRelation do
   end
 end

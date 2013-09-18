@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Player do
-    context "when the defaults are used" do
+    context 'when the defaults are used,' do
       subject(:player) { Player.new }
       subject(:note) { Note.new(800) }
 

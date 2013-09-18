@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/shoes/shoes4.git
-  revision: a795dfd1a248aa07d77ae7134567895ab1e8121d
+  revision: 09ca046680bc565ee9cf3f149dcfff8172f1e091
   specs:
     shoes (4.0.0.pre1)
       after_do
@@ -54,7 +54,7 @@ GEM
       slop (~> 3.4)
       spoon (~> 0.0)
     rake (10.1.0)
-    require_all (1.3.0)
+    require_all (1.3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.14.1)
@@ -101,7 +101,7 @@ DEPENDENCIES
   jsound (~> 0.1.3)
   pry (~> 0.9.12.2)
   rake (~> 10.1.0)
-  require_all (~> 1.3.0)
+  require_all (~> 1.3.1)
   rspec (~> 2.14.1)
   ruby-debug (~> 0.10.4)
   shoes!

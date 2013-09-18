@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Note do
-    context "when a valid frequency is given" do
+    context 'when a valid frequency is given,' do
       subject(:note) { Note.new(440) }
 
       describe '#frequency' do
@@ -11,7 +11,7 @@ module Ceely
       end
 
       describe '#pitch' do
-        it 'has the pitch that we expect' do
+        it 'has the pitch that we expect,' do
           expect(note.pitch).to eq(69)
         end
       end

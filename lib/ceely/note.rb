@@ -8,7 +8,7 @@ module Ceely
     # Frequency in Hz
     # Raises an error if it's not a valid number
     def initialize(frequency)
-      raise ArgumentError.new("Must be a number") unless frequency.is_a? Fixnum
+      raise ArgumentError.new("Must be a number") unless frequency.is_a? Numeric
       raise ArgumentError.new("Must be a positive number") unless frequency >= 0
       @frequency = frequency
     end
