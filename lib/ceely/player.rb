@@ -25,9 +25,23 @@ module Ceely
     # Play the note for the given number of seconds
     # at the specified amplitude
     def play(note, seconds, amplitude)
+      # Get a line
+      line = self.line
+      # Open it
+      open_line(line, rate*2)
+      # Play the note
+      play_note(note, seconds, amplitude, line)
+      # Close the line
+      close_line(line)
+    end
+
+    def open_line(line, buffer)
       # Open the line and start it
-      line.open(format, rate)
+      line.open(format, buffer)
       line.start();
+    end
+
+    def play_note(note, seconds, amplitude, line)
       # Get the sine wave for the number of seconds at the given amplitude,
       # converted to byte string representations
       # http://ruby-doc.org/core-1.9.3/Array.html#method-i-pack
@@ -36,6 +50,9 @@ module Ceely
       # play it for the given number of seconds
       # http://www.ruby-doc.org/core-1.9.3/String.html#method-i-unpack
       line.write(sine_wave.unpack('c*'), 0, seconds*rate)
+    end
+
+    def close_line(a_line)
       # Drain the line and close it
       line.drain();
       line.close();
@@ -51,20 +68,20 @@ module Ceely
       return wave
     end
 
-    # Private method to return the Audio Format encoding
+    # Method to return the Audio Format encoding
     # Set to PCM unsigned
     # http://en.wikipedia.org/wiki/Pulse-code_modulation
     def encoding
       @encoding ||= AudioFormat::Encoding::PCM_UNSIGNED
     end
 
-    # Private method to return the Audio Format
+    # Method to return the Audio Format
     def format
       @format ||= 
         AudioFormat.new(encoding, rate, size, channels, 1, rate, false)
     end
 
-    # Private method to return the source data line
+    # Method to return a source data line
     # for the player's Audio Format
     def line
       @line ||= AudioSystem.get_source_data_line(format)
