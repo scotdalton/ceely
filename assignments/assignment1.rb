@@ -22,7 +22,7 @@ Ceely::Assignment.new("Assignment 1", 500, 400).run do
     end
     stack margin: 10 do
       button("Crash, Bang, Boom") do
-        note = Ceely::Note::Base.new(@frequency.text.to_i)
+        note = Ceely::Note.new(@frequency.text.to_i)
         note.play(@duration.text.to_i, @amplitude.text.to_i)
       end
     end

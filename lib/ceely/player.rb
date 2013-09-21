@@ -28,7 +28,7 @@ module Ceely
       # Get a line
       line = self.line
       # Open it
-      open_line(line, rate*2)
+      open_line(line, rate*seconds*2)
       # Play the note
       play_note(note, seconds, amplitude, line)
       # Close the line

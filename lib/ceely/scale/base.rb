@@ -1,6 +1,6 @@
 module Ceely
   module Scale
-    # A Scale is a set of Note::Relations based on a fundamental Note::Relation
+    # A Scale is a set of Intervals based on a fundamental Note
     class Base
       attr_reader :fundamental, :size, :offset
 
@@ -9,7 +9,10 @@ module Ceely
       end
 
       def notes
-        raise NotImplementedError.new("You should implement notes, Slick.")
+        @notes ||= ((0+offset)..(size-1)).collect do |index|
+          "Ceely::Interval::#{self.class.name.demodulize}".
+            constantize.new(fundamental, index).octave_adjusted_note
+        end
       end
 
       # Play the notes in the scale starting

@@ -5,6 +5,8 @@ platforms :jruby do
   gem "require_all", "~> 1.3.1"
   gem "jsound", "~> 0.1.3"
   gem "shoes", git: "https://github.com/shoes/shoes4.git"
+  # Leverage ActiveSupport core extensions.
+  gem "activesupport", "~> 4.0.0"
 
   group :development, :test do
     gem "ruby-debug", "~> 0.10.4"

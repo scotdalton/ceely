@@ -1,327 +1,262 @@
-1:
-  interval_factor: 1/1
+0:
+  factor: 1/1
   frequency: 528.00
-  octave: 1
-  octave_denominator: 1
-  octave_ratio_not_reduced: 1/1
-  octave_ratio: 1/1
-  octave_frequency: 528.00
-2:
-  interval_factor: 2/1
+  octave: 0
+  octave_adjusted_denominator: 1
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
+1:
+  factor: 2/1
   frequency: 1056.00
-  octave: 2
-  octave_denominator: 2
-  octave_ratio_not_reduced: 2/2
-  octave_ratio: 1/1
-  decimal: 1
-  octave_frequency: 528.00
+  octave: 1
+  octave_adjusted_denominator: 2
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
+
+2:
+  factor: 3/1
+  frequency: 1584.00
+  octave: 1
+  octave_adjusted_denominator: 2
+  octave_adjusted_factor: 3/2
+  octave_adjusted_frequency: 792.00
 
 3:
-  interval_factor: 3/1
-  frequency: 1584.00
+  factor: 4/1
+  frequency: 2112.00
   octave: 2
-  octave_denominator: 2
-  octave_ratio_not_reduced: 3/2
-  octave_ratio: 3/2
-  decimal: 1.5
-  octave_frequency: 792.00
+  octave_adjusted_denominator: 4
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
 
 4:
-  interval_factor: 4/1
-  frequency: 2112.00
-  octave: 3
-  octave_denominator: 4
-  octave_ratio_not_reduced: 4/4
-  octave_ratio: 1/1
-  decimal: 1.00000
-  octave_frequency: 528.00
+  factor: 5/1
+  frequency: 2640.00
+  octave: 2
+  octave_adjusted_denominator: 4
+  octave_adjusted_factor: 5/4
+  octave_adjusted_frequency: 660.00
 
 5:
-  interval_factor: 5/1
-  frequency: 2640.00
-  octave: 3
-  octave_denominator: 4
-  octave_ratio_not_reduced: 5/4
-  octave_ratio: 5/4
-  decimal: 1.25000
-  octave_frequency: 660.00
+  factor: 6/1
+  frequency: 3168.00
+  octave: 2
+  octave_adjusted_denominator: 4
+  octave_adjusted_factor: 3/2
+  octave_adjusted_frequency: 792.00
 
 6:
-  interval_factor: 6/1
-  frequency: 3168.00
-  octave: 3
-  octave_denominator: 4
-  octave_ratio_not_reduced: 6/4
-  octave_ratio: 3/2
-  decimal: 1.50000
-  octave_frequency: 792.00
+  factor: 7/1
+  frequency: 3696.00
+  octave: 2
+  octave_adjusted_denominator: 4
+  octave_adjusted_factor: 7/4
+  octave_adjusted_frequency: 924.00
 
 7:
-  interval_factor: 7/1
-  frequency: 3696.00
+  factor: 8/1
+  frequency: 4224.00
   octave: 3
-  octave_denominator: 4
-  octave_ratio_not_reduced: 7/4
-  octave_ratio: 7/4
-  decimal: 1.75000
-  octave_frequency: 924.00
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
 
 8:
-  interval_factor: 8/1
-  frequency: 4224.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 8/8
-  octave_ratio: 1/1
-  decimal: 1.00000
-  octave_frequency: 528.00
+  factor: 9/1
+  frequency: 4752.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 9/8
+  octave_adjusted_frequency: 594.00
 
 9:
-  interval_factor: 9/1
-  frequency: 4752.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 9/8
-  octave_ratio: 9/8
-  decimal: 1.12500
-  octave_frequency: 594.00
+  factor: 10/1
+  frequency: 5280.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 5/4
+  octave_adjusted_frequency: 660.00
 
 10:
-  interval_factor: 10/1
-  frequency: 5280.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 10/8
-  octave_ratio: 5/4
-  decimal: 1.25000
-  octave_frequency: 660.00
+  factor: 11/1
+  frequency: 5808.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 11/8
+  octave_adjusted_frequency: 726.00
 
 11:
-  interval_factor: 11/1
-  frequency: 5808.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 11/8
-  octave_ratio: 11/8
-  decimal: 1.37500
-  octave_frequency: 726.00
+  factor: 12/1
+  frequency: 6336.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 3/2
+  octave_adjusted_frequency: 792.00
 
 12:
-  interval_factor: 12/1
-  frequency: 6336.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 12/8
-  octave_ratio: 3/2
-  decimal: 1.50000
-  octave_frequency: 792.00
+  factor: 13/1
+  frequency: 6864.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 13/8
+  octave_adjusted_frequency: 858.00
 
 13:
-  interval_factor: 13/1
-  frequency: 6864.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 13/8
-  octave_ratio: 13/8
-  decimal: 1.62500
-  octave_frequency: 858.00
+  factor: 14/1
+  frequency: 7392.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 7/4
+  octave_adjusted_frequency: 924.00
 
 14:
-  interval_factor: 14/1
-  frequency: 7392.00
-  octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 14/8
-  octave_ratio: 7/4
-  decimal: 1.75000
-  octave_frequency: 924.00
+  factor: 15/1
+  frequency: 7920.00
+  octave: 3
+  octave_adjusted_denominator: 8
+  octave_adjusted_factor: 15/8
+  octave_adjusted_frequency: 990.00
 
 15:
-  interval_factor: 15/1
-  frequency: 7920.00
+  factor: 16/1
+  frequency: 8448.00
   octave: 4
-  octave_denominator: 8
-  octave_ratio_not_reduced: 15/8
-  octave_ratio: 15/8
-  decimal: 1.87500
-  octave_frequency: 990.00
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
 
 16:
-  interval_factor: 16/1
-  frequency: 8448.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 16/16
-  octave_ratio: 1/1
-  decimal: 1.00000
-  octave_frequency: 528.00
+  factor: 17/1
+  frequency: 8976.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 17/16
+  octave_adjusted_frequency: 561.00
 
 17:
-  interval_factor: 17/1
-  frequency: 8976.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 17/16
-  octave_ratio: 17/16
-  decimal: 1.06250
-  octave_frequency: 561.00
+  factor: 18/1
+  frequency: 9504.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 9/8
+  octave_adjusted_frequency: 594.00
 
 18:
-  interval_factor: 18/1
-  frequency: 9504.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 18/16
-  octave_ratio: 9/8
-  decimal: 1.12500
-  octave_frequency: 594.00
+  factor: 19/1
+  frequency: 10032.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 19/16
+  octave_adjusted_frequency: 627.00
 
 19:
-  interval_factor: 19/1
-  frequency: 10032.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 19/16
-  octave_ratio: 19/16
-  decimal: 1.18750
-  octave_frequency: 627.00
+  factor: 20/1
+  frequency: 10560.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 5/4
+  octave_adjusted_frequency: 660.00
 
 20:
-  interval_factor: 20/1
-  frequency: 10560.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 20/16
-  octave_ratio: 5/4
-  decimal: 1.25000
-  octave_frequency: 660.00
+  factor: 21/1
+  frequency: 11088.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 21/16
+  octave_adjusted_frequency: 693.00
 
 21:
-  interval_factor: 21/1
-  frequency: 11088.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 21/16
-  octave_ratio: 21/16
-  decimal: 1.31250
-  octave_frequency: 693.00
+  factor: 22/1
+  frequency: 11616.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 11/8
+  octave_adjusted_frequency: 726.00
 
 22:
-  interval_factor: 22/1
-  frequency: 11616.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 22/16
-  octave_ratio: 11/8
-  decimal: 1.37500
-  octave_frequency: 726.00
+  factor: 23/1
+  frequency: 12144.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 23/16
+  octave_adjusted_frequency: 759.00
 
 23:
-  interval_factor: 23/1
-  frequency: 12144.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 23/16
-  octave_ratio: 23/16
-  decimal: 1.43750
-  octave_frequency: 759.00
+  factor: 24/1
+  frequency: 12672.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 3/2
+  octave_adjusted_frequency: 792.00
 
 24:
-  interval_factor: 24/1
-  frequency: 12672.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 24/16
-  octave_ratio: 3/2
-  decimal: 1.50000
-  octave_frequency: 792.00
+  factor: 25/1
+  frequency: 13200.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 25/16
+  octave_adjusted_frequency: 825.00
 
 25:
-  interval_factor: 25/1
-  frequency: 13200.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 25/16
-  octave_ratio: 25/16
-  decimal: 1.56250
-  octave_frequency: 825.00
+  factor: 26/1
+  frequency: 13728.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 13/8
+  octave_adjusted_frequency: 858.00
 
 26:
-  interval_factor: 26/1
-  frequency: 13728.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 26/16
-  octave_ratio: 13/8
-  decimal: 1.62500
-  octave_frequency: 858.00
+  factor: 27/1
+  frequency: 14256.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 27/16
+  octave_adjusted_frequency: 891.00
 
 27:
-  interval_factor: 27/1
-  frequency: 14256.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 27/16
-  octave_ratio: 27/16
-  decimal: 1.68750
-  octave_frequency: 891.00
+  factor: 28/1
+  frequency: 14784.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 7/4
+  octave_adjusted_frequency: 924.00
 
 28:
-  interval_factor: 28/1
-  frequency: 14784.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 28/16
-  octave_ratio: 7/4
-  decimal: 1.75000
-  octave_frequency: 924.00
+  factor: 29/1
+  frequency: 15312.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 29/16
+  octave_adjusted_frequency: 957.00
 
 29:
-  interval_factor: 29/1
-  frequency: 15312.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 29/16
-  octave_ratio: 29/16
-  decimal: 1.81250
-  octave_frequency: 957.00
+  factor: 30/1
+  frequency: 15840.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 15/8
+  octave_adjusted_frequency: 990.00
 
 30:
-  interval_factor: 30/1
-  frequency: 15840.00
-  octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 30/16
-  octave_ratio: 15/8
-  decimal: 1.87500
-  octave_frequency: 990.00
+  factor: 31/1
+  frequency: 16368.00
+  octave: 4
+  octave_adjusted_denominator: 16
+  octave_adjusted_factor: 31/16
+  octave_adjusted_frequency: 1023.00
 
 31:
-  interval_factor: 31/1
-  frequency: 16368.00
+  factor: 32/1
+  frequency: 16896.00
   octave: 5
-  octave_denominator: 16
-  octave_ratio_not_reduced: 31/16
-  octave_ratio: 31/16
-  decimal: 1.93750
-  octave_frequency: 1023.00
+  octave_adjusted_denominator: 32
+  octave_adjusted_factor: 1/1
+  octave_adjusted_frequency: 528.00
 
 32:
-  interval_factor: 32/1
-  frequency: 16896.00
-  octave: 6
-  octave_denominator: 32
-  octave_ratio_not_reduced: 32/32
-  octave_ratio: 1/1
-  decimal: 1.00000
-  octave_frequency: 528.00
-
-33:
-  interval_factor: 33/1
+  factor: 33/1
   frequency: 17424.00
-  octave: 6
-  octave_denominator: 32
-  octave_ratio_not_reduced: 33/32
-  octave_ratio: 33/32
-  decimal: 1.03125
-  octave_frequency: 544.50
+  octave: 5
+  octave_adjusted_denominator: 32
+  octave_adjusted_factor: 33/32
+  octave_adjusted_frequency: 544.50

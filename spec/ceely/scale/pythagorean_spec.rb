@@ -1,46 +1,44 @@
 require 'spec_helper'
 module Ceely
   module Scale
-    describe Harmonic do
+    describe Pythagorean do
 
       # Set the expected values
-      expected_display_notes = harmonics.collect { |index, expected_values|
+      expected_display_notes = pythagoreans.collect { |index, expected_values|
         "Note with frequency #{expected_values["octave_adjusted_frequency"]}" 
       }.join("\n\n")
 
-      subject(:harmonic) { Harmonic.new(Note.new(528.0), 33) }
+      subject(:pythagorean) { Pythagorean.new(Note.new(528.0), 13, -1) }
 
       describe '#fundamental' do
         it 'is a Note' do
-          expect(harmonic.fundamental).to be_a(Note)
+          expect(pythagorean.fundamental).to be_a(Note)
         end
 
         it 'has the frequency that we expect' do
-          expect(harmonic.fundamental.frequency).to eq(528.0)
+          expect(pythagorean.fundamental.frequency).to eq(528.0)
         end
       end
 
       describe '#size' do
         it 'has the size we expect' do
-          expect(harmonic.size).to eq(33)
+          expect(pythagorean.size).to eq(13)
         end
       end
 
       describe '#notes' do
         it 'is an Array' do
-          expect(harmonic.notes).to be_a(Array)
+          expect(pythagorean.notes).to be_a(Array)
         end
-      end
 
-      describe '#notes size' do
+        describe '#offset' do
+          it 'has the offset we expect' do
+            expect(pythagorean.offset).to eq(-1)
+          end
+        end
+
         it 'has the expected size' do
-          expect(harmonic.notes.size).to eq(33)
-        end
-      end
-
-      describe '#offset' do
-        it 'has the offset we expect' do
-          expect(harmonic.offset).to eq(0)
+          expect(pythagorean.notes.size).to eq(14)
         end
       end
 
@@ -49,18 +47,18 @@ module Ceely
       unless(ENV['TRAVIS'].eql? "true")
         describe '#play' do
           it 'does not raises an error' do
-            expect{ harmonic.play(1, 50) }.not_to raise_error
+            expect{ pythagorean.play(1, 50) }.not_to raise_error
           end
         end
       end
 
       describe '#to_s' do
         it 'does not raises an error' do
-          expect{ harmonic.to_s }.not_to raise_error
+          expect{ pythagorean.to_s }.not_to raise_error
         end
 
         it 'displays the expected notes' do
-          expect(harmonic.to_s).to eql(expected_display_notes)
+          expect(pythagorean.to_s).to eql(expected_display_notes)
         end
       end
     end

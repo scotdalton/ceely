@@ -10,7 +10,6 @@ To run on a Mac
 
     $ git clone https://github.com/scotdalton/ceely.git
     $ cd ceely
-    $ rvm use jruby
     $ ./bin/assignment N
 
 Hope to make this a [vagrant box](http://www.vagrantup.com/)
