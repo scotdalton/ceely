@@ -3,16 +3,15 @@ require 'ceely'
 require 'pry'
 Ceely::Assignment.new("Assignment 3", 620, 620).run do
   def refresh_results
-    @fundamental = Ceely::Note.new(@fundamental_frequency.text.to_i)
-    @pythagorean = Ceely::Interval::Pythagorean.new(@fundamental, @index.text.to_i)
+    @pythagorean = Ceely::Pythagorean::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
     @index_para.replace "Index: ", em(@pythagorean.index)
     @frequency_para.replace "Frequency: ", em(@pythagorean.frequency)
     @octave_para.replace "Octave: ", em(@pythagorean.octave)
-    @octave_adjusted_factor_para.replace "Octave Ratio: ", em(@pythagorean.octave_adjusted_factor)
-    @octave_adjusted_frequency_para.replace "Octave Frequency: ", em(@pythagorean.octave_adjusted_frequency)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@pythagorean.octave_adjusted_factor)
+    @octave_adjusted_frequency_para.replace "Octave Adjusted Frequency: ", em(@pythagorean.octave_adjusted_frequency)
   end
   fundamental_frequency, index  = 528, 1
-  scale_size, scale_offset, duration, amplitude = 13, -1, 1, 50
+  scale_size, scale_offset, duration, amplitude = 12, -1, 1, 50
   flow width: 800, height: 800 do
     flow margin: 20, width: 350, height: 350 do
       background lightgray, curve: 20
@@ -82,9 +81,10 @@ Ceely::Assignment.new("Assignment 3", 620, 620).run do
       stack margin: 10 do
         button("Play the Pythagorean Scale") do
           refresh_results
-          scale = Ceely::Scale::Pythagorean.new(
-            @fundamental, @scale_size.text.to_i, @scale_offset.text.to_i)
-          scale.play(@duration.text.to_i, @amplitude.text.to_i)
+          scale = Ceely::Pythagorean::Scale.new(
+            @fundamental_frequency.text.to_i, @scale_size.text.to_i, 
+              @scale_offset.text.to_i)
+          scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end
     end

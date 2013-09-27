@@ -1,48 +1,75 @@
 module Ceely
-  require 'jsound'
-  require 'pry'
+  # An Note takes a fundamental frequency, an index and an optional name
   class Note
-    include JSound
-    attr_reader :frequency
+    include Comparable
 
-    # Frequency in Hz
-    # Raises an error if it's not a valid number
-    def initialize(frequency)
-      raise ArgumentError.new("Must be a number") unless frequency.is_a? Numeric
-      raise ArgumentError.new("Must be a positive number") unless frequency >= 0
-      @frequency = frequency
+    attr_reader :fundamental_frequency, :index
+    attr_accessor :name
+
+    def initialize(fundamental_frequency, index=0, name=nil)
+      @fundamental_frequency, @index, @name = fundamental_frequency, index, name
     end
 
-    # Play the note for the given number of seconds
-    # at the specified amplitude
-    def play(seconds, amplitude)
-      player.play(self, seconds, amplitude)
+    def frequency
+      @frequency ||= (fundamental_frequency * factor).to_f
     end
 
-    # Angular frequency of the note
-    # http://en.wikipedia.org/wiki/Angular_frequency
-    def angular_frequency
-      @angular_frequency ||= 2.0 * Math::PI * frequency
+    # Get the tone for this note
+    def tone
+      @tone ||= Tone.new(frequency)
     end
 
-    # New player with default settings
-    def player
-      @player ||= Player.new
+    # "Basic miracle of music"
+    # http://en.wikipedia.org/wiki/Octave
+    # Returns the number of the octave that the frequency is in
+    # First octave is 0
+    def octave
+      @octave ||= Math.log2(frequency/fundamental_frequency).floor
     end
 
-    # Pitch in MIDI terms
-    def pitch
-      @pitch ||= 69 + 12*(Math.log2(frequency/440))
+    # Intended to be overridden by subclasses
+    def factor
+      raise NotImplementedError.new("You should implement factor denominator, stretch.")
+    end
+
+    def octave_adjusted_denominator
+      @octave_adjusted_denominator ||= 2**(octave)
+    end
+
+    def octave_adjusted_factor
+      @octave_adjusted_factor ||= Rational(factor, octave_adjusted_denominator)
+    end
+
+    def octave_adjusted_frequency
+      @octave_adjusted_frequency ||= 
+        octave_adjusted_factor.to_f * fundamental_frequency
+    end
+
+    def octave_adjusted_tone
+      @octave_adjusted_tone ||= Tone.new(octave_adjusted_frequency)
+    end
+
+    def <=>(other_note)
+      octave_adjusted_tone <=> other_note.octave_adjusted_tone
     end
 
     def to_s
-      "Note with frequency #{frequency}"
+      @s ||= "Note:\n"+
+        clean(%Q{
+          Index: #{index}
+          Factor: #{factor}
+          Fundamental Frequency: #{fundamental_frequency}
+          Frequency: #{frequency}
+          Octave: #{octave}
+          Octave Adjusted Denominator: #{octave_adjusted_denominator}
+          Octave Adjusted Factor: #{octave_adjusted_factor}
+          Octave Adjusted Frequency: #{octave_adjusted_frequency}
+        })
     end
 
-    # Notes are equal if they have the same frequency
-    def ==(other_note)
-      (other_note.is_a? self.class and frequency == other_note.frequency)
+    def clean(string)
+      string.strip.gsub(/^\s*/, "\t")
     end
-    alias :eql? :==
+    protected :clean
   end
 end
