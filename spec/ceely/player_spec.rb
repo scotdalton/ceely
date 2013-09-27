@@ -32,13 +32,13 @@ module Ceely
 
       # Don't run this test on travis since
       # we don't have permissions.
-      # unless(ENV['TRAVIS'].eql? "true")
-      #   describe '#play' do
-      #     it 'plays for 2 seconds' do
-      #       expect { player.play(tone, 2, 50) }.not_to raise_error
-      #     end
-      #   end
-      # end
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'plays for 2 seconds' do
+            expect { player.play(tone, 2, 50) }.not_to raise_error
+          end
+        end
+      end
     end
   end
 end

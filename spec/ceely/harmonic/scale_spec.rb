@@ -50,13 +50,13 @@ module Ceely
 
       # Don't run this test on travis since
       # we don't have permissions.
-      # unless(ENV['TRAVIS'].eql? "true")
-      #   describe '#play' do
-      #     it 'does not raises an error' do
-      #       expect{ scale.play(1, 50) }.not_to raise_error
-      #     end
-      #   end
-      # end
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'does not raises an error' do
+            expect{ scale.play(1, 50) }.not_to raise_error
+          end
+        end
+      end
 
       describe '#to_s' do
         it 'does not raises an error' do

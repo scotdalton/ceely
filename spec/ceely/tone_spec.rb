@@ -42,13 +42,13 @@ module Ceely
 
       # Don't run this test on travis since
       # we don't have permissions.
-      # unless(ENV['TRAVIS'].eql? "true")
-      #   describe '#play' do
-      #     it 'plays for 5 seconds' do
-      #       expect { tone.play(5, 50) }.not_to raise_error
-      #     end
-      #   end
-      # end
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'plays for 5 seconds' do
+            expect { tone.play(5, 50) }.not_to raise_error
+          end
+        end
+      end
     end
 
     context "when a non number frequency is given" do
