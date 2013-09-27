@@ -22,15 +22,15 @@ module Ceely
       @rate, @size, @channels = rate, size, channels
     end
 
-    # Play the note for the given number of seconds
+    # Play the tone for the given number of seconds
     # at the specified amplitude
-    def play(note, seconds, amplitude)
+    def play(tone, seconds, amplitude)
       # Get a line
       line = self.line
       # Open it
       open_line(line, rate*seconds*2)
-      # Play the note
-      play_note(note, seconds, amplitude, line)
+      # Play the tone
+      play_tone(tone, seconds, amplitude, line)
       # Close the line
       close_line(line)
     end
@@ -41,11 +41,11 @@ module Ceely
       line.start();
     end
 
-    def play_note(note, seconds, amplitude, line)
+    def play_tone(tone, seconds, amplitude, line)
       # Get the sine wave for the number of seconds at the given amplitude,
       # converted to byte string representations
       # http://ruby-doc.org/core-1.9.3/Array.html#method-i-pack
-      sine_wave = sine_wave(note, seconds, amplitude).pack("c*")
+      sine_wave = sine_wave(tone, seconds, amplitude).pack("c*")
       # Unpack the string into bytes and 
       # play it for the given number of seconds
       # http://www.ruby-doc.org/core-1.9.3/String.html#method-i-unpack
@@ -58,12 +58,12 @@ module Ceely
       line.close();
     end
 
-    # Returns an array of integers, representing the note's sine wave
+    # Returns an array of integers, representing the tone's sine wave
     # for the given arguments
-    def sine_wave(note, seconds, amplitude)
+    def sine_wave(tone, seconds, amplitude)
       wave = []
       0.step(seconds, 1.0/rate) do |t|
-        wave << Math.sin(t * note.angular_frequency) * amplitude + 127;
+        wave << Math.sin(t * tone.angular_frequency) * amplitude + 127;
       end
       return wave
     end

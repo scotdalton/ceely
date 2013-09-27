@@ -1,51 +1,65 @@
 require 'spec_helper'
 module Ceely
-  describe Note do
-    context 'when a valid frequency is given,' do
-      subject(:note) { Note.new(440) }
+  describe Ceely::Note do
+    subject(:note) { Ceely::Note.new(528.0, 2, "A") }
 
-      describe '#frequency' do
-        it 'has the frequency that we expect' do
-          expect(note.frequency).to eq(440)
-        end
-      end
-
-      describe '#pitch' do
-        it 'has the pitch that we expect,' do
-          expect(note.pitch).to eq(69)
-        end
-      end
-
-      describe '#player' do
-        it 'has a player,' do
-          expect(note.player).to be_a(Player)
-        end
-      end
-
-      # Don't run this test on travis since
-      # we don't have permissions.
-      unless(ENV['TRAVIS'].eql? "true")
-        describe '#play' do
-          it 'plays for 5 seconds' do
-            expect { note.play(5, 50) }.not_to raise_error
-          end
-        end
+    describe '#frequency' do
+      it 'raises a NotImplementedError' do
+        expect{ note.frequency }.to raise_error(NotImplementedError)
       end
     end
 
-    context "when a non number frequency is given" do
-      describe '.new' do
-        it 'raises an error' do
-          expect{ Note.new("Invalid frequency") }.to raise_error(ArgumentError)
-        end
+    describe '#index' do
+      it 'has the index we expect' do
+        expect(note.index).to eq(2)
       end
     end
 
-    context "when a negative number frequency is given" do
-      describe '.new' do
-        it 'raises an error' do
-          expect{ Note.new(-100) }.to raise_error(ArgumentError)
-        end
+    describe '#name' do
+      it 'has the name we expect' do
+        expect(note.name).to eq("A")
+      end
+    end
+
+    describe '#factor' do
+      it 'raises a NotImplementedError' do
+        expect{ note.factor }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#octave' do
+      it 'has the octave we expect' do
+        expect{ note.octave }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#octave_adjusted_denominator' do
+      it 'raises a NotImplementedError' do
+        expect{ note.octave_adjusted_denominator }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#octave_adjusted_factor' do
+      it 'raises a NotImplementedError' do
+        expect{ note.octave_adjusted_factor }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#octave_adjusted_frequency' do
+      it 'raises a NotImplementedError' do
+        expect{ note.octave_adjusted_frequency }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#octave_adjusted_tone' do
+      it 'raises a NotImplementedError' do
+        expect{ note.octave_adjusted_tone }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#to_s' do
+      it 'raises a NotImplementedError' do
+        expect{ note.to_s }.to raise_error(NotImplementedError)
       end
     end
   end

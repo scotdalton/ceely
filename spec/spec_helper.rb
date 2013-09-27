@@ -1,7 +1,7 @@
 # Wear coveralls.
 require 'coveralls'
 Coveralls.wear!
-# Include the ceely lib directory
+# Include the ceely lib directory in the load path
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'yaml'
 require 'pry'
