@@ -14,10 +14,12 @@ module Ceely
       @first_mode ||= sorted_notes(mode_size-1)
     end
 
-    def ith_mode(index)
+    def nth_mode(mode_index)
+      shift_factor = mode_index % mode_size
+      octave_factor = (mode_index / mode_size).floor
       # Get a local copy of the mode
-      mode_start = first_mode.collect { |note| note }
-      mode_end = mode_start.shift(index).collect { |note| note.in_octave(1) }
+      mode_start = first_mode.collect { |note| note.in_octave(octave_factor) }
+      mode_end = mode_start.shift(shift_factor).collect { |note| note.in_octave(1) }
       mode = (mode_start + mode_end) 
       # Add the octave
       mode << mode.first.in_octave(1)
@@ -31,11 +33,12 @@ module Ceely
     def notes
       @notes ||= ((0+offset)..(size+offset-1)).collect do |index|
         # Make notes of from the Scale module name
-        self.class.name.gsub("Scale", "Note").constantize.new(fundamental_frequency, index) 
+        self.class.name.gsub("Scale", "Note").constantize.
+          new(fundamental_frequency, index) 
       end
     end
 
-    def sorted_notes(size)
+    def sorted_notes(size=nil)
       # This looks disgusting
       i = -1
       size ||= self.size
@@ -45,30 +48,15 @@ module Ceely
       end
     end
 
-    # The tones of the scale
-    def tones
-      @tones ||= notes.collect { |note| note.octave_adjusted_tone }
-    end
-
-    # The tones of the ith mode
-    def ith_mode_tones(index)
-      ith_mode(index).collect { |note| note.octave_adjusted_tone }
-    end
-
     # Play the notes in the scale starting
     # with the fundamental tone
     def play(seconds, amplitude, &block)
-      tones.each do |tone| 
-        tone.play(seconds, amplitude) 
-        yield if block_given?
-      end
+      play_notes(notes, seconds, amplitude, &block)
     end
 
-    # Play the notes in the scale starting
-    # with the fundamental tone
-    def play_ith_mode(index, seconds, amplitude, &block)
-      ith_mode_tones(index).each do |tone| 
-        tone.play(seconds, amplitude) 
+    def play_notes(notes, seconds, amplitude, &block)
+      notes.each do |note| 
+        note.octave_adjusted_tone.play(seconds, amplitude) 
         yield if block_given?
       end
     end

@@ -15,6 +15,12 @@ module Ceely
       end
     end
 
+    describe '#mode_size' do
+      it 'has the mode_size we expect' do
+        expect(scale.mode_size).to eq(8)
+      end
+    end
+
     describe '#offset' do
       it 'has the offset we expect' do
         expect(scale.offset).to eq(0)
@@ -22,14 +28,18 @@ module Ceely
     end
 
     describe '#notes' do
-      it 'raises a NotImplementedError' do
-        expect{ scale.notes }.to raise_error(NotImplementedError)
+      it 'is an Array' do
+        expect(scale.notes).to be_a(Array)
+      end
+
+      it 'has the expected size' do
+        expect(scale.notes.size).to eq(3)
       end
     end
 
-    describe '#tones' do
+    describe '#sorted_notes' do
       it 'raises a NotImplementedError' do
-        expect{ scale.tones }.to raise_error(NotImplementedError)
+        expect{ scale.sorted_notes }.to raise_error(NotImplementedError)
       end
     end
 

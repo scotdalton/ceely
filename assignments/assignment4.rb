@@ -6,13 +6,13 @@ Ceely::Assignment.new("Assignment 4", 620, 620).run do
   @pythagorean = Ceely::Pythagorean::Scale.new
   def refresh_results
     @modes.choose("Ionian") if @modes.text.blank?
-    selected_mode = @modes.text
+    @selected_mode = @modes.text
     @mode = 
-      @pythagorean.send(selected_mode.downcase.to_sym, @octave.text.to_i)
+      @pythagorean.send(@selected_mode.downcase.to_sym, @octave.text.to_i)
     notes =  @mode.collect { |note| note.name }.join(", ")
     frequencies = 
       @mode.collect { |note| note.octave_adjusted_frequency }.join(", ")
-    @mode_para.replace "Mode: ", em(selected_mode)
+    @mode_para.replace "Mode: ", em(@selected_mode)
     @notes_para.replace "Notes: ", em(notes)
     @frequencies_para.replace "Frequencies: ", em(frequencies)
   end
@@ -48,8 +48,8 @@ Ceely::Assignment.new("Assignment 4", 620, 620).run do
         end
         button("Play the Selected Mode") do
           refresh_results
-          scale = @mode
-          scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          @pythagorean.play_mode(@selected_mode.downcase, @octave.text.to_i,
+            @duration.text.to_f, @amplitude.text.to_i) { sleep 1 }
         end
       end
     end

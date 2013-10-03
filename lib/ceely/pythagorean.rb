@@ -18,44 +18,45 @@ module Ceely
         super(fundamental_frequency, size, offset, note_names)
       end
 
-      # Return the ionian mode for the given octave
-      def ionian(octave=0)
-        ith_mode(0 + (octave*size))
+      def play_mode(mode, octave_index, seconds, amplitude, &block)
+        notes = send(mode.to_sym, octave_index)
+        play_notes(notes, seconds, amplitude, &block)
       end
 
-      def play_ionian(octave=0)
-        play_ith_mode(0 + (octave*size))
+      # Return the ionian mode for the given octave
+      def ionian(octave_index=0)
+        nth_mode(0 + (octave_index*mode_size))
       end
 
       # Return the dorian mode for the given octave
-      def dorian(octave=0)
-        ith_mode(1 + (octave*size))
+      def dorian(octave_index)
+        nth_mode(1 + (octave_index*mode_size))
       end
 
       # Return the phrygian mode for the given octave
-      def phrygian(octave=0)
-        ith_mode(2 + (octave*size))
+      def phrygian(octave_index=0)
+        nth_mode(2 + (octave_index*mode_size))
       end
 
       # Return the lydian mode for the given octave
-      def lydian(octave=0)
-        ith_mode(3 + (octave*size))
+      def lydian(octave_index=0)
+        nth_mode(3 + (octave_index*mode_size))
       end
 
       # Return the mixolydian mode for the given octave
-      def mixolydian(octave=0)
-        ith_mode(4 + (octave*size))
+      def mixolydian(octave_index=0)
+        nth_mode(4 + (octave_index*mode_size))
       end
 
       # Return the aeolian mode for the given octave
-      def aeolian(octave=0)
-        ith_mode(5 + (octave*size))
+      def aeolian(octave_index=0)
+        nth_mode(5 + (octave_index*mode_size))
       end
 
       # Return the locrian mode for the given octave
-      def locrian(octave=0)
-        ith_mode(6 + (octave*size))
+      def locrian(octave_index=0)
+        nth_mode(6 + (octave_index*mode_size))
       end
-    end
+   end
   end
 end

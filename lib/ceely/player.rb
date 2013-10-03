@@ -28,7 +28,7 @@ module Ceely
       # Get a line
       line = self.line
       # Open it
-      open_line(line, rate*seconds*2)
+      open_line(line, rate*seconds*5)
       # Play the tone
       play_tone(tone, seconds, amplitude, line)
       # Close the line
