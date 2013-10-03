@@ -3,7 +3,7 @@ module Ceely
   module Pythagorean
     describe Ceely::Pythagorean::Scale do
       # Set the expected values
-      expected_display_tones = pythagoreans.collect { |index, expected_values|
+      expected_display_tones = pythagorean["notes"].collect { |index, expected_values|
         "Tone with frequency #{expected_values["octave_adjusted_frequency"]}" 
       }.join("\n\n")
 

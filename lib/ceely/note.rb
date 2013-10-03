@@ -10,6 +10,10 @@ module Ceely
       @fundamental_frequency, @index, @name = fundamental_frequency, index, name
     end
 
+    def in_octave(octave)
+      return self.class.new(octave_adjusted_frequency*(2**octave), 0, name)
+    end
+
     def frequency
       @frequency ||= (fundamental_frequency * factor).to_f
     end
@@ -54,7 +58,7 @@ module Ceely
     end
 
     def to_s
-      @s ||= "Note:\n"+
+      @s ||= "Note#{" " + name if name}:\n"+
         clean(%Q{
           Index: #{index}
           Factor: #{factor}

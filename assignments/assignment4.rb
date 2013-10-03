@@ -9,9 +9,9 @@ Ceely::Assignment.new("Assignment 4", 620, 620).run do
     selected_mode = @modes.text
     @mode = 
       @pythagorean.send(selected_mode.downcase.to_sym, @octave.text.to_i)
-    notes =  @mode.notes.collect { |note| note.name }.join(", ")
+    notes =  @mode.collect { |note| note.name }.join(", ")
     frequencies = 
-      @mode.notes.collect { |note| note.octave_adjusted_frequency }.join(", ")
+      @mode.collect { |note| note.octave_adjusted_frequency }.join(", ")
     @mode_para.replace "Mode: ", em(selected_mode)
     @notes_para.replace "Notes: ", em(notes)
     @frequencies_para.replace "Frequencies: ", em(frequencies)

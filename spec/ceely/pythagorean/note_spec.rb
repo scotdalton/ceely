@@ -2,7 +2,7 @@ require 'spec_helper'
 module Ceely
   module Pythagorean
     describe Ceely::Pythagorean::Note do
-      pythagoreans.each do |index, expected_values|
+      pythagorean["notes"].each do |index, expected_values|
         # Set the expected values
         expected_fundamental_frequency = 528.0
         expected_factor = expected_values["factor"]
