@@ -2,7 +2,7 @@ $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 require 'pry'
 MODES = %w{ Ionian Dorian Phrygian Lydian Mixolydian Aeolian Locrian }
-Ceely::Assignment.new("Assignment 4", 620, 620).run do
+Ceely::Assignment.new("Assignment 4", 620, 720).run do
   @pythagorean = Ceely::Pythagorean::Scale.new
   def refresh_results
     @modes.choose("Ionian") if @modes.text.blank?
