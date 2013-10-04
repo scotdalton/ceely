@@ -38,17 +38,17 @@ module Ceely
         end
       end
 
-      describe '#sorted_notes' do
+      describe '#sort_notes' do
         it 'is an Array' do
-          expect(scale.sorted_notes).to be_a(Array)
+          expect(scale.sort_notes).to be_a(Array)
         end
 
         it 'has the scale\'s size' do
-          expect(scale.sorted_notes.size).to eq(33)
+          expect(scale.sort_notes.size).to eq(33)
         end
 
         it 'has the given size' do
-          expect(scale.sorted_notes(3).size).to eq(3)
+          expect(scale.sort_notes(3).size).to eq(3)
         end
       end
 

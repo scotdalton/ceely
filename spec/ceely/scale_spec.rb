@@ -37,9 +37,9 @@ module Ceely
       end
     end
 
-    describe '#sorted_notes' do
+    describe '#sort_notes' do
       it 'raises a NotImplementedError' do
-        expect{ scale.sorted_notes }.to raise_error(NotImplementedError)
+        expect{ scale.sort_notes }.to raise_error(NotImplementedError)
       end
     end
 
