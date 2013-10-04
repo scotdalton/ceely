@@ -21,6 +21,17 @@ module Ceely
                 expect(frequencies).to eq(expected_frequencies)
               end
             end
+            describe "#alt_#{mode} in octave #{octave_index}" do
+              it 'has 8 elements' do
+                expect(scale.send("alt_#{mode}".to_sym, octave_index).size).to be(8)
+              end
+              it 'has the frequencies that we expect' do
+                frequencies = scale.send("alt_#{mode}".to_sym, octave_index).collect { |note| 
+                  note.octave_adjusted_frequency 
+                }
+                # expect(frequencies).to eq(expected_frequencies)
+              end
+            end
           end
         end
       end
@@ -90,6 +101,68 @@ module Ceely
           end
         end
 
+        describe '#first_mode' do
+          it 'is an Array' do
+            expect(scale.first_mode).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.first_mode.size).to eq(7)
+          end
+        end
+
+        describe '#nth_mode' do
+          it 'is an Array' do
+            expect(scale.nth_mode(0)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.nth_mode(0).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.nth_mode(0).first.name).to eq("C")
+          end
+
+          it 'is an Array' do
+            expect(scale.nth_mode(1)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.nth_mode(1).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.nth_mode(1).first.name).to eq("D")
+          end
+        end
+
+        describe '#alt_nth_mode' do
+          it 'is an Array' do
+            expect(scale.alt_nth_mode(0)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.alt_nth_mode(0).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.alt_nth_mode(0).first.name).to eq("C")
+          end
+
+          it 'is an Array' do
+            expect(scale.alt_nth_mode(1)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.alt_nth_mode(1).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.alt_nth_mode(1).first.name).to eq("D")
+          end
+        end
+
         describe '#offset' do
           it 'has the offset we expect' do
             expect(scale.offset).to eq(-1)
@@ -108,6 +181,12 @@ module Ceely
           describe '#play_mode' do
             it 'does not raises an error' do
               expect{ scale.play_mode("ionian", 0, 1, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_alt_mode' do
+            it 'does not raises an error' do
+              expect{ scale.play_alt_mode("ionian", 0, 1, 50) }.not_to raise_error
             end
           end
         end
@@ -174,6 +253,18 @@ module Ceely
           describe '#play' do
             it 'does not raises an error' do
               expect{ scale.play(1, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_mode' do
+            it 'does not raises an error' do
+              expect{ scale.play_mode("ionian", 0, 1, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_alt_mode' do
+            it 'does not raises an error' do
+              expect{ scale.play_alt_mode("ionian", 0, 1, 50) }.not_to raise_error
             end
           end
         end

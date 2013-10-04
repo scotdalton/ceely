@@ -43,6 +43,24 @@ module Ceely
       end
     end
 
+    describe '#first_mode' do
+      it 'raises a NotImplementedError' do
+        expect{ scale.first_mode }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#nth_mode' do
+      it 'raises a NotImplementedError' do
+        expect{ scale.nth_mode(0) }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#alt_nth_mode' do
+      it 'raises a NotImplementedError' do
+        expect{ scale.alt_nth_mode(0) }.to raise_error(NotImplementedError)
+      end
+    end
+
     describe '#play' do
       it 'raises a NotImplementedError' do
         expect{ scale.play(1, 50) }.to raise_error(NotImplementedError)
