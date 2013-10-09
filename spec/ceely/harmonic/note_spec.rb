@@ -2,7 +2,7 @@ require 'spec_helper'
 module Ceely
   module Harmonic
     describe Ceely::Harmonic::Note do
-      harmonics.each do |index, expected_values|
+      harmonics["notes"].each do |index, expected_values|
 
         # Set the expected values
         expected_fundamental_frequency = 528.0
@@ -92,6 +92,8 @@ module Ceely
           end
         end
       end
+      # context "when it's the just scale," do
+      # end
     end
   end
 end

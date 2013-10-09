@@ -90,6 +90,52 @@ module Ceely
           # end
         end
       end
+
+      context "when it's the natural pitches," do
+        subject(:c) { Ceely::Pythagorean::Note.new(528.0, 0, "C") }
+        subject(:d) { Ceely::Pythagorean::Note.new(528.0, 2, "D") }
+        subject(:e) { Ceely::Pythagorean::Note.new(528.0, 4, "E") }
+        subject(:f) { Ceely::Pythagorean::Note.new(528.0, -1, "F") }
+        subject(:g) { Ceely::Pythagorean::Note.new(528.0, 1, "G") }
+        subject(:a) { Ceely::Pythagorean::Note.new(528.0, 3, "A") }
+        subject(:b) { Ceely::Pythagorean::Note.new(528.0, 5, "B") }
+        
+        describe '#interval from c to d' do
+          it 'has the interval that we expect' do
+            expect(c.interval(d)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from d to e' do
+          it 'has the interval that we expect' do
+            expect(d.interval(e)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from e to f' do
+          it 'has the interval that we expect' do
+            expect(e.interval(f)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from f to g' do
+          it 'has the interval that we expect' do
+            expect(f.interval(g)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from g to a' do
+          it 'has the interval that we expect' do
+            expect(g.interval(a)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from a to b' do
+          it 'has the interval that we expect' do
+            expect(a.interval(b)).to eq(Rational(9, 8))
+          end
+        end
+      end
     end
   end
 end

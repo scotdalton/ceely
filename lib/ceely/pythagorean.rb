@@ -1,6 +1,6 @@
 module Ceely
   module Pythagorean
-    # A Pythagorean is an Note with the factor equal to 3/2
+    # A Pythagorean::Note is an Note with the factor equal to 3/2
     class Note < Ceely::Note
 
       # A pythagorean note has a factor equal to 3/2
@@ -15,7 +15,7 @@ module Ceely
       MODE_NAMES = %w{ ionian dorian phrygian lydian mixolydian aeolian locrian }
       NOTE_NAMES = %w{ C D E F G A B }
       
-      def initialize(fundamental_frequency=528.0, size=12, offset=-1, note_names=NOTE_NAMES)
+      def initialize(fundamental_frequency=528.0, size=14, offset=-1, note_names=NOTE_NAMES)
         super(fundamental_frequency, size, offset, note_names)
       end
 
@@ -42,6 +42,6 @@ module Ceely
         notes = send("alt_#{mode}".to_sym, octave_index)
         play_notes(notes, seconds, amplitude, &block)
       end
-   end
+    end
   end
 end

@@ -67,7 +67,7 @@ module Ceely
 
         describe '#size' do
           it 'has the size we expect' do
-            expect(scale.size).to eq(12)
+            expect(scale.size).to eq(14)
           end
         end
 
@@ -83,7 +83,7 @@ module Ceely
           end
 
           it 'has the expected size' do
-            expect(scale.notes.size).to eq(12)
+            expect(scale.notes.size).to eq(14)
           end
         end
 
@@ -93,7 +93,7 @@ module Ceely
           end
 
           it 'has the scale\'s size' do
-            expect(scale.sort_notes.size).to eq(12)
+            expect(scale.sort_notes.size).to eq(14)
           end
 
           it 'has the given size' do

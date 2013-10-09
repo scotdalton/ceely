@@ -10,7 +10,7 @@ module Ceely
       end
     end
 
-    # A Harmonic::Scale is a Scale with the set of Harmonic notes
+    # A Harmonic::Scale is a Scale with the set of Harmonic::Notes
     class Scale < Ceely::Scale
     end
   end

@@ -57,6 +57,26 @@ module Ceely
       octave_adjusted_tone <=> other_note.octave_adjusted_tone
     end
 
+    # Cents is the interval between the fundamental note and this note
+    def cents
+      @cents ||= 
+        interval_in_cents(self.class.new(fundamental_frequency, 0))
+    end
+
+    # If we know the frequencies a and b of two notes, 
+    # the number of cents measuring the interval from a to b may be calculated
+    # by the following formula: 1200*log2(b/a)
+    # http://en.wikipedia.org/wiki/Cent_(music)
+    def interval_in_cents(other_note)
+      1200*Math.log2(Rational(1.0, interval(other_note)))
+    end
+
+    # Returns the interval between this note and another note.
+    def interval(other_note)
+      # TODO: Handle the octave
+      Rational(other_note.octave_adjusted_factor, self.octave_adjusted_factor)
+    end
+
     def to_s
       @s ||= "Note#{" " + name if name}:\n"+
         clean(%Q{
