@@ -1,10 +1,11 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 require 'pry'
-Ceely::Assignment.new("Assignment 3", 620, 620).run do
+Ceely::Assignment.new("Assignment 3", 620, 670).run do
   def refresh_results
     @pythagorean = Ceely::Pythagorean::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
     @index_para.replace "Index: ", em(@pythagorean.index)
+    @cents_para.replace "Cents: ", em(@pythagorean.cents)
     @frequency_para.replace "Frequency: ", em(@pythagorean.frequency)
     @octave_para.replace "Octave: ", em(@pythagorean.octave)
     @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@pythagorean.octave_adjusted_factor)
@@ -17,7 +18,7 @@ Ceely::Assignment.new("Assignment 3", 620, 620).run do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
       stack margin: 10 do
-        subtitle "The Pythagorean Interval"
+        subtitle "Pythagorean Scale"
       end
       stack margin: 10 do
         para "Base Frequency: "
@@ -61,7 +62,7 @@ Ceely::Assignment.new("Assignment 3", 620, 620).run do
           scale = Ceely::Pythagorean::Scale.new(
             @fundamental_frequency.text.to_i, @scale_size.text.to_i, 
               @scale_offset.text.to_i)
-          scale.play(@duration.text.to_f, @amplitude.text.to_i) { sleep 1 }
+          scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end
     end
@@ -73,6 +74,9 @@ Ceely::Assignment.new("Assignment 3", 620, 620).run do
       end
       flow margin: 10 do
         @index_para = para ""
+      end
+      flow margin: 10 do
+        @cents_para = para ""
       end
       flow margin: 10 do
         @frequency_para = para ""

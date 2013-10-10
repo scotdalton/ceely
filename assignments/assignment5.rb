@@ -1,24 +1,24 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 require 'pry'
-Ceely::Assignment.new("Assignment 2", 620, 670).run do
+Ceely::Assignment.new("Assignment 5", 620, 670).run do
   def refresh_results
-    @harmonic = Ceely::Harmonic::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
-    @index_para.replace "Index: ", em(@harmonic.index)
-    @cents_para.replace "Cents: ", em(@harmonic.cents)
-    @frequency_para.replace "Frequency: ", em(@harmonic.frequency)
-    @octave_para.replace "Octave: ", em(@harmonic.octave)
-    @octave_adjusted_factor_para.replace "Octave Ratio: ", em(@harmonic.octave_adjusted_factor)
-    @octave_adjusted_frequency_para.replace "Octave Adjusted Frequency: ", em(@harmonic.octave_adjusted_frequency)
+    @even_tempered = Ceely::EvenTempered::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
+    @index_para.replace "Index: ", em(@even_tempered.index)
+    @cents_para.replace "Cents: ", em(@even_tempered.cents)
+    @frequency_para.replace "Frequency: ", em(@even_tempered.frequency)
+    @octave_para.replace "Octave: ", em(@even_tempered.octave)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@even_tempered.octave_adjusted_factor)
+    @octave_adjusted_frequency_para.replace "Octave Adjusted Frequency: ", em(@even_tempered.octave_adjusted_frequency)
   end
   fundamental_frequency, index  = 528, 1
   scale_size, scale_offset, duration, amplitude = 12, 0, 0.5, 50
-  flow width: 800, height: 800 do
+  flow width: 800, height: 850 do
     flow margin: 20, width: 350, height: 375 do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
       stack margin: 10 do
-        subtitle "Harmonic Scale"
+        subtitle "Even Tempered Scale"
       end
       stack margin: 10 do
         para "Base Frequency: "
@@ -29,7 +29,7 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
         @index = edit_line(index)
       end
       stack margin: 10 do
-        button("Show the Stats") do
+        button("Refresh the Stats") do
           refresh_results
         end
       end
@@ -57,10 +57,11 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
         @amplitude = edit_line(amplitude)
       end
       stack margin: 10 do
-        button("Play the Harmonic Scale") do
+        button("Play the Even Tempered Scale") do
           refresh_results
-          scale = Ceely::Harmonic::Scale.new(
-            @fundamental_frequency.text.to_i, @scale_size.text.to_i)
+          scale = Ceely::EvenTempered::Scale.new(
+            @fundamental_frequency.text.to_i, @scale_size.text.to_i, 
+              @scale_offset.text.to_i)
           scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end
