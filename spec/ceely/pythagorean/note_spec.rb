@@ -14,6 +14,8 @@ module Ceely
         expected_octave_adjusted_denominator = expected_values["octave_adjusted_denominator"]
         expected_octave_adjusted_factor = expected_values["octave_adjusted_factor"]
         expected_octave_adjusted_frequency = expected_values["octave_adjusted_frequency"]
+        # expected_cents = expected_values["cents"]
+
         context "when it's the #{index} note note," do
           subject(:note) { Ceely::Pythagorean::Note.new(528.0, index) }
 
@@ -74,18 +76,9 @@ module Ceely
             end
           end
 
-          # describe '#to_s' do
-          #   it 'goes to string as we expect' do
-          #     expect(note.to_s).to eql("Note:\n" + %Q{
-          #       Index: #{index}
-          #       Factor: #{expected_factor}
-          #       Fundamental Frequency: #{expected_fundamental_frequency}
-          #       Frequency: #{expected_frequency}
-          #       Octave: #{expected_octave}
-          #       Octave Adjusted Denominator: #{expected_octave_adjusted_denominator}
-          #       Octave Adjusted Factor: #{expected_octave_adjusted_factor}
-          #       Octave Adjusted Frequency: #{expected_octave_adjusted_frequency}
-          #     }.strip.gsub(/^\s*/, "\t"))
+          # describe '#cents' do
+          #   it 'has the cents that we expect' do
+          #     expect(note.cents).to be_within(0.01).of(expected_cents)
           #   end
           # end
         end

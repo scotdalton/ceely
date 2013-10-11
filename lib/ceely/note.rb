@@ -67,7 +67,7 @@ module Ceely
     # by the following formula: 1200*log2(b/a)
     # http://en.wikipedia.org/wiki/Cent_(music)
     def interval_in_cents(other_note=nil)
-      1200*Math.log2(Rational(1.0, interval(other_note)))
+      (1200*Math.log2(Rational(1.0, interval(other_note)))).abs
     end
 
     # Returns the interval between this note and another note.
