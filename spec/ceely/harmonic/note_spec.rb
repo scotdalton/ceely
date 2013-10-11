@@ -92,8 +92,43 @@ module Ceely
           end
         end
       end
-      # context "when it's the just scale," do
-      # end
+      context "when it's the just scale," do
+        subject(:unison) { Ceely::Harmonic::Note.new(528.0, 0) }
+        subject(:major_second) { Ceely::Harmonic::Note.new(528.0, 8) }
+        subject(:major_third) { Ceely::Harmonic::Note.new(528.0, 4) }
+        subject(:perfect_fifth) { Ceely::Harmonic::Note.new(528.0, 2) }
+        subject(:octave) { Ceely::Harmonic::Note.new(528.0, 1) }
+
+        describe '#cents for the unison' do
+          it 'has the cents we expect' do
+            expect(unison.cents).to eq(0)
+          end
+        end
+
+        describe '#cents for the major second' do
+          it 'has the cents we expect' do
+            expect(major_second.cents).to be_within(0.01).of(203.91)
+          end
+        end
+
+        describe '#cents for the major third' do
+          it 'has the cents we expect' do
+            expect(major_third.cents).to be_within(0.01).of(386.31)
+          end
+        end
+
+        describe '#cents for the perfect fifth' do
+          it 'has the cents we expect' do
+            expect(perfect_fifth.cents).to be_within(0.01).of(701.95)
+          end
+        end
+
+        describe '#cents for the octave' do
+          it 'has the cents we expect' do
+            expect(octave.cents).to be_within(0.01).of(1200)
+          end
+        end
+      end
     end
   end
 end
