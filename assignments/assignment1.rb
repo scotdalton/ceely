@@ -22,8 +22,8 @@ Ceely::Assignment.new("Assignment 1", 500, 400).run do
     end
     stack margin: 10 do
       button("Crash, Bang, Boom") do
-        tone = Ceely::Tone.new(@frequency.text.to_i)
-        tone.play(@duration.text.to_i, @amplitude.text.to_i)
+        tone = Ceely::Tone.new(@frequency.text.to_i, @duration.text.to_i)
+        tone.play(@amplitude.text.to_i)
       end
     end
   end

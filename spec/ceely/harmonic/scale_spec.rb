@@ -2,11 +2,6 @@ require 'spec_helper'
 module Ceely
   module Harmonic
     describe Ceely::Harmonic::Scale do
-      # Set the expected values
-      expected_display_tones = harmonics["notes"].collect { |index, expected_values|
-        "Tone with frequency #{expected_values["octave_adjusted_frequency"]}" 
-      }.join("\n\n")
-
       context "when it's a 33 note scale," do
         subject(:scale) { Ceely::Harmonic::Scale.new(528.0, 33) }
 
@@ -22,12 +17,6 @@ module Ceely
           end
         end
 
-        describe '#mode_size' do
-          it 'has the mode_size we expect' do
-            expect(scale.mode_size).to eq(8)
-          end
-        end
-
         describe '#notes' do
           it 'is an Array' do
             expect(scale.notes).to be_a(Array)
@@ -38,17 +27,17 @@ module Ceely
           end
         end
 
-        describe '#sort_notes' do
+        describe '#sort' do
           it 'is an Array' do
-            expect(scale.sort_notes).to be_a(Array)
+            expect(scale.sort).to be_a(Array)
           end
 
           it 'has the scale\'s size' do
-            expect(scale.sort_notes.size).to eq(33)
+            expect(scale.sort.size).to eq(33)
           end
 
           it 'has the given size' do
-            expect(scale.sort_notes(3).size).to eq(3)
+            expect(scale.sort(3).size).to eq(3)
           end
         end
 
@@ -72,10 +61,6 @@ module Ceely
           it 'does not raises an error' do
             expect{ scale.to_s }.not_to raise_error
           end
-
-          # it 'displays the expected tones' do
-          #   expect(scale.to_s).to eql(expected_display_tones)
-          # end
         end
       end
     end

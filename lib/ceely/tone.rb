@@ -4,19 +4,20 @@ module Ceely
     include Comparable
 
     attr_reader :frequency
+    attr_accessor :duration
 
     # Frequency in Hz
     # Raises an error if it's not a valid number
-    def initialize(frequency)
+    def initialize(frequency, duration)
       raise ArgumentError.new("Must be a number") unless frequency.is_a? Numeric
       raise ArgumentError.new("Must be a positive number") unless frequency >= 0
-      @frequency = frequency
+      @frequency, @duration = frequency, duration
     end
 
     # Play the tone for the given number of seconds
     # at the specified amplitude
-    def play(seconds, amplitude)
-      player.play(self, seconds, amplitude)
+    def play(amplitude)
+      player.play_tone(self, amplitude)
     end
 
     # Angular frequency of the tone
@@ -36,7 +37,9 @@ module Ceely
 
     # Tones are equal if they have the same frequency
     def ==(other_tone)
-      (other_tone.is_a? self.class and frequency == other_tone.frequency)
+      (other_tone.is_a? self.class and 
+        frequency == other_tone.frequency and
+          duration == other_tone.duration)
     end
     alias :eql? :==
 

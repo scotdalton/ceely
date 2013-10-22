@@ -21,6 +21,12 @@ module Ceely
       end
     end
 
+    describe '#duration' do
+      it 'has the duration we expect' do
+        expect(note.duration).to eq(0.5)
+      end
+    end
+
     describe '#factor' do
       it 'raises a NotImplementedError' do
         expect{ note.factor }.to raise_error(NotImplementedError)
@@ -60,6 +66,12 @@ module Ceely
     describe '#to_s' do
       it 'raises a NotImplementedError' do
         expect{ note.to_s }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#becomes' do
+      it 'becomes a Pythagorean' do
+        expect(note.becomes(Ceely::Pythagorean::Note)).to be_a(Ceely::Pythagorean::Note)
       end
     end
   end

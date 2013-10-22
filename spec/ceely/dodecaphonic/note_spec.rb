@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Ceely
-  module Pythagorean
-    describe Ceely::Pythagorean::Note do
-      pythagorean["notes"].each do |index, expected_values|
+  module Dodecaphonic
+    describe Ceely::Dodecaphonic::Note do
+      dodecaphonic["notes"].each do |index, expected_values|
         # Set the expected values
         expected_fundamental_frequency = 528.0
         expected_factor = expected_values["factor"]
@@ -17,7 +17,7 @@ module Ceely
         # expected_cents = expected_values["cents"]
 
         context "when it's the #{index} note note," do
-          subject(:note) { Ceely::Pythagorean::Note.new(528.0, index) }
+          subject(:note) { Ceely::Dodecaphonic::Note.new(528.0, index) }
 
           describe '#index' do
             it 'has the index that we expect' do
@@ -78,20 +78,20 @@ module Ceely
         end
       end
 
-      context "when it's the pythagorean natural and chromatic pitches," do
-        subject(:c) { Ceely::Pythagorean::Note.new(528.0, 0, "C") }
-        subject(:c_sharp) { Ceely::Pythagorean::Note.new(528.0, 7, "C#") }
-        subject(:d) { Ceely::Pythagorean::Note.new(528.0, 2, "D") }
-        subject(:d_sharp) { Ceely::Pythagorean::Note.new(528.0, 9, "D#") }
-        subject(:e) { Ceely::Pythagorean::Note.new(528.0, 4, "E") }
-        subject(:f) { Ceely::Pythagorean::Note.new(528.0, -1, "F") }
-        subject(:g_flat) { Ceely::Pythagorean::Note.new(528.0, 11, "Gb") }
-        subject(:f_sharp) { Ceely::Pythagorean::Note.new(528.0, 6, "F#") }
-        subject(:g) { Ceely::Pythagorean::Note.new(528.0, 1, "G") }
-        subject(:g_sharp) { Ceely::Pythagorean::Note.new(528.0, 8, "G#") }
-        subject(:a) { Ceely::Pythagorean::Note.new(528.0, 3, "A") }
-        subject(:a_sharp) { Ceely::Pythagorean::Note.new(528.0, 10, "A#") }
-        subject(:b) { Ceely::Pythagorean::Note.new(528.0, 5, "B") }
+      context "when it's the dodecaphonic pitches," do
+        subject(:c) { Ceely::Dodecaphonic::Note.new(528.0, 0, "C") }
+        subject(:d_flat) { Ceely::Dodecaphonic::Note.new(528.0, 7, "Db") }
+        subject(:d) { Ceely::Dodecaphonic::Note.new(528.0, 2, "D") }
+        subject(:e_flat) { Ceely::Dodecaphonic::Note.new(528.0, 9, "Eb") }
+        subject(:e) { Ceely::Dodecaphonic::Note.new(528.0, 4, "E") }
+        subject(:f) { Ceely::Dodecaphonic::Note.new(528.0, -1, "F") }
+        subject(:g_flat) { Ceely::Dodecaphonic::Note.new(528.0, 11, "Gb") }
+        subject(:f_sharp) { Ceely::Dodecaphonic::Note.new(528.0, 6, "F#") }
+        subject(:g) { Ceely::Dodecaphonic::Note.new(528.0, 1, "G") }
+        subject(:a_flat) { Ceely::Dodecaphonic::Note.new(528.0, 8, "Ab") }
+        subject(:a) { Ceely::Dodecaphonic::Note.new(528.0, 3, "A") }
+        subject(:b_flat) { Ceely::Dodecaphonic::Note.new(528.0, 10, "Bb") }
+        subject(:b) { Ceely::Dodecaphonic::Note.new(528.0, 5, "B") }
         
         describe '#interval from c to d' do
           it 'has the interval that we expect' do

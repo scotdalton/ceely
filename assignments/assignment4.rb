@@ -3,25 +3,18 @@ require 'ceely'
 require 'pry'
 MODES = %w{ Ionian Dorian Phrygian Lydian Mixolydian Aeolian Locrian }
 Ceely::Assignment.new("Assignment 4", 620, 720).run do
-  @pythagorean = Ceely::Pythagorean::Scale.new
+  @natural = Ceely::Natural::Scale.new
   def refresh_results
     @modes.choose("Ionian") if @modes.text.blank?
     @selected_mode = @modes.text
     @mode = 
-      @pythagorean.send(@selected_mode.downcase.to_sym, @octave.text.to_i)
+      @natural.send(@selected_mode.downcase.to_sym, @octave.text.to_i)
     notes =  @mode.collect { |note| note.name }.join(", ")
     frequencies = 
       @mode.collect { |note| note.octave_adjusted_frequency }.join(", ")
     @mode_para.replace "Mode: ", em(@selected_mode)
     @notes_para.replace "Notes: ", em(notes)
     @frequencies_para.replace "Frequencies: ", em(frequencies)
-    @alt_mode = 
-      @pythagorean.send("alt_#{@selected_mode.downcase}".to_sym, @octave.text.to_i)
-    alt_notes =  @alt_mode.collect { |note| note.name }.join(", ")
-    alt_frequencies = 
-      @alt_mode.collect { |note| note.octave_adjusted_frequency }.join(", ")
-    @alt_notes_para.replace "Alternative Notes: ", em(alt_notes)
-    @alt_frequencies_para.replace "Alternative Frequencies: ", em(alt_frequencies)
   end
   octave, duration, pause, amplitude = 0, 0.5, 1, 50
   flow width: 800, height: 900 do
@@ -29,7 +22,7 @@ Ceely::Assignment.new("Assignment 4", 620, 720).run do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
       flow margin: 10 do
-        subtitle "Pythagorean Modes"
+        subtitle "Natural Modes"
       end
       flow margin: 10 do
         para "Choose the Mode: "
@@ -57,22 +50,15 @@ Ceely::Assignment.new("Assignment 4", 620, 720).run do
         button("Refresh the Stats") do
           refresh_results
         end
-        button("Play the Scale") do
+        button("Play the Natural Scale") do
           refresh_results
-          @pythagorean.play(@duration.text.to_f, @amplitude.text.to_i) do
+          @natural.play(@duration.text.to_f, @amplitude.text.to_i) do
             sleep @pause.text.to_f
           end
         end
         button("Play the Mode") do
           refresh_results
-          @pythagorean.play_mode(@selected_mode.downcase, @octave.text.to_i,
-            @duration.text.to_f, @amplitude.text.to_i) do
-              sleep @pause.text.to_f
-            end
-        end
-        button("Play the Alternative Mode") do
-          refresh_results
-          @pythagorean.play_alt_mode(@selected_mode.downcase, @octave.text.to_i,
+          @natural.play_mode(@selected_mode.downcase, @octave.text.to_i,
             @duration.text.to_f, @amplitude.text.to_i) do
               sleep @pause.text.to_f
             end
@@ -96,12 +82,6 @@ Ceely::Assignment.new("Assignment 4", 620, 720).run do
       end
       flow margin: 10 do
         @frequencies_para = para ""
-      end
-      flow margin: 10 do
-        @alt_notes_para = para ""
-      end
-      flow margin: 10 do
-        @alt_frequencies_para = para ""
       end
     end
   end

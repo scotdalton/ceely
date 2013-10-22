@@ -41,7 +41,7 @@ module Ceely
 
           describe '#tone' do
             it 'has the tone that we expect' do
-              expect(note.tone).to eq(Tone.new expected_frequency)
+              expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
             end
           end
 
@@ -72,7 +72,7 @@ module Ceely
 
           describe '#octave_adjusted_tone' do
             it 'has the octave_adjusted_tone that we expect' do
-              expect(note.octave_adjusted_tone).to eq(Tone.new expected_octave_adjusted_frequency)
+              expect(note.octave_adjusted_tone).to eq(Tone.new(expected_octave_adjusted_frequency, 0.5))
             end
           end
 

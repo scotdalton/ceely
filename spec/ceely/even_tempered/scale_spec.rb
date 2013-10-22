@@ -17,12 +17,6 @@ module Ceely
           end
         end
 
-        describe '#mode_size' do
-          it 'has the mode_size we expect' do
-            expect(scale.mode_size).to eq(8)
-          end
-        end
-
         describe '#notes' do
           it 'is an Array' do
             expect(scale.notes).to be_a(Array)
@@ -33,17 +27,17 @@ module Ceely
           end
         end
 
-        describe '#sort_notes' do
+        describe '#sort' do
           it 'is an Array' do
-            expect(scale.sort_notes).to be_a(Array)
+            expect(scale.sort).to be_a(Array)
           end
 
           it 'has the scale\'s size' do
-            expect(scale.sort_notes.size).to eq(12)
+            expect(scale.sort.size).to eq(12)
           end
 
           it 'has the given size' do
-            expect(scale.sort_notes(3).size).to eq(3)
+            expect(scale.sort(3).size).to eq(3)
           end
         end
 

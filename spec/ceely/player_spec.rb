@@ -4,11 +4,11 @@ module Ceely
   describe Player do
     context 'when the defaults are used,' do
       subject(:player) { Player.new }
-      subject(:tone) { Tone.new(800) }
+      subject(:tone) { Tone.new(800, 0.5) }
 
       describe '#sine_wave' do
         it 'does not error on the sine wave' do
-          expect{ player.sine_wave(tone, 5, 50) }.not_to raise_error
+          expect{ player.sine_wave(tone, 50) }.not_to raise_error
         end
       end
 
@@ -34,8 +34,8 @@ module Ceely
       # we don't have permissions.
       unless(ENV['TRAVIS'].eql? "true")
         describe '#play' do
-          it 'plays for 2 seconds' do
-            expect { player.play(tone, 2, 50) }.not_to raise_error
+          it 'plays for 0.5 seconds' do
+            expect { player.play_tone(tone, 50) }.not_to raise_error
           end
         end
       end

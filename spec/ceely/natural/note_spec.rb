@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Ceely
-  module Pythagorean
-    describe Ceely::Pythagorean::Note do
-      pythagorean["notes"].each do |index, expected_values|
+  module Natural
+    describe Ceely::Natural::Note do
+      natural["notes"].each do |index, expected_values|
         # Set the expected values
         expected_fundamental_frequency = 528.0
         expected_factor = expected_values["factor"]
@@ -17,7 +17,7 @@ module Ceely
         # expected_cents = expected_values["cents"]
 
         context "when it's the #{index} note note," do
-          subject(:note) { Ceely::Pythagorean::Note.new(528.0, index) }
+          subject(:note) { Ceely::Natural::Note.new(528.0, index) }
 
           describe '#index' do
             it 'has the index that we expect' do
@@ -75,23 +75,23 @@ module Ceely
               expect(note.octave_adjusted_tone).to eq(Tone.new(expected_octave_adjusted_frequency, 0.5))
             end
           end
+
+          # describe '#cents' do
+          #   it 'has the cents that we expect' do
+          #     expect(note.cents).to be_within(0.01).of(expected_cents)
+          #   end
+          # end
         end
       end
 
-      context "when it's the pythagorean natural and chromatic pitches," do
-        subject(:c) { Ceely::Pythagorean::Note.new(528.0, 0, "C") }
-        subject(:c_sharp) { Ceely::Pythagorean::Note.new(528.0, 7, "C#") }
-        subject(:d) { Ceely::Pythagorean::Note.new(528.0, 2, "D") }
-        subject(:d_sharp) { Ceely::Pythagorean::Note.new(528.0, 9, "D#") }
-        subject(:e) { Ceely::Pythagorean::Note.new(528.0, 4, "E") }
-        subject(:f) { Ceely::Pythagorean::Note.new(528.0, -1, "F") }
-        subject(:g_flat) { Ceely::Pythagorean::Note.new(528.0, 11, "Gb") }
-        subject(:f_sharp) { Ceely::Pythagorean::Note.new(528.0, 6, "F#") }
-        subject(:g) { Ceely::Pythagorean::Note.new(528.0, 1, "G") }
-        subject(:g_sharp) { Ceely::Pythagorean::Note.new(528.0, 8, "G#") }
-        subject(:a) { Ceely::Pythagorean::Note.new(528.0, 3, "A") }
-        subject(:a_sharp) { Ceely::Pythagorean::Note.new(528.0, 10, "A#") }
-        subject(:b) { Ceely::Pythagorean::Note.new(528.0, 5, "B") }
+      context "when it's the natural pitches," do
+        subject(:c) { Ceely::Natural::Note.new(528.0, 0, "C") }
+        subject(:d) { Ceely::Natural::Note.new(528.0, 2, "D") }
+        subject(:e) { Ceely::Natural::Note.new(528.0, 4, "E") }
+        subject(:f) { Ceely::Natural::Note.new(528.0, -1, "F") }
+        subject(:g) { Ceely::Natural::Note.new(528.0, 1, "G") }
+        subject(:a) { Ceely::Natural::Note.new(528.0, 3, "A") }
+        subject(:b) { Ceely::Natural::Note.new(528.0, 5, "B") }
         
         describe '#interval from c to d' do
           it 'has the interval that we expect' do

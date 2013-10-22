@@ -4,10 +4,15 @@ module Ceely
     include Comparable
 
     attr_reader :fundamental_frequency, :index
-    attr_accessor :name
+    attr_accessor :name, :duration
 
-    def initialize(fundamental_frequency, index=0, name=nil)
-      @fundamental_frequency, @index, @name = fundamental_frequency, index, name
+    def initialize(fundamental_frequency, index=0, name=nil, duration=0.5)
+      @fundamental_frequency, @index = fundamental_frequency, index
+      @name, @duration = name, duration
+    end
+
+    def becomes(note_class)
+      note_class.new(fundamental_frequency, index, name)
     end
 
     def in_octave(octave)
@@ -20,7 +25,7 @@ module Ceely
 
     # Get the tone for this note
     def tone
-      @tone ||= Tone.new(frequency)
+      @tone ||= Tone.new(frequency, duration)
     end
 
     # "Basic miracle of music"
@@ -33,7 +38,7 @@ module Ceely
 
     # Intended to be overridden by subclasses
     def factor
-      raise NotImplementedError.new("You should implement factor denominator, stretch.")
+      raise NotImplementedError.new("You should implement factor, stretch.")
     end
 
     def octave_adjusted_denominator
@@ -50,7 +55,7 @@ module Ceely
     end
 
     def octave_adjusted_tone
-      @octave_adjusted_tone ||= Tone.new(octave_adjusted_frequency)
+      @octave_adjusted_tone ||= Tone.new(octave_adjusted_frequency, duration)
     end
 
     def <=>(other_note)
