@@ -3,9 +3,9 @@ module Ceely
   describe Ceely::Note do
     subject(:note) { Ceely::Note.new(528.0, 2, "A") }
 
-    describe '#frequency' do
+    describe '#raw_frequency' do
       it 'raises a NotImplementedError' do
-        expect{ note.frequency }.to raise_error(NotImplementedError)
+        expect{ note.raw_frequency }.to raise_error(NotImplementedError)
       end
     end
 
@@ -51,15 +51,15 @@ module Ceely
       end
     end
 
-    describe '#octave_adjusted_frequency' do
+    describe '#frequency' do
       it 'raises a NotImplementedError' do
-        expect{ note.octave_adjusted_frequency }.to raise_error(NotImplementedError)
+        expect{ note.frequency }.to raise_error(NotImplementedError)
       end
     end
 
-    describe '#octave_adjusted_tone' do
+    describe '#tone' do
       it 'raises a NotImplementedError' do
-        expect{ note.octave_adjusted_tone }.to raise_error(NotImplementedError)
+        expect{ note.tone }.to raise_error(NotImplementedError)
       end
     end
 

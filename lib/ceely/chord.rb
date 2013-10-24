@@ -15,7 +15,7 @@ module Ceely
     end
 
     def tones
-      @tones ||= notes.collect { |note| note.octave_adjusted_tone }
+      @tones ||= notes.collect { |note| note.tone }
     end
 
     # New player with default settings

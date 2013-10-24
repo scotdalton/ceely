@@ -10,11 +10,11 @@ module Ceely
         expected_factor_array = expected_factor.split("/")
         expected_factor_num = expected_factor_array.first
         expected_factor_den = expected_factor_array.last
-        expected_frequency = expected_values["frequency"]
+        expected_raw_frequency = expected_values["raw_frequency"]
         expected_octave = expected_values["octave"]
         expected_octave_adjusted_denominator = expected_values["octave_adjusted_denominator"]
         expected_octave_adjusted_factor = expected_values["octave_adjusted_factor"]
-        expected_octave_adjusted_frequency = expected_values["octave_adjusted_frequency"]
+        expected_frequency = expected_values["frequency"]
 
         context "when it's the #{index} note note," do
           subject(:note) { Ceely::Harmonic::Note.new(528.0, index) }
@@ -25,9 +25,9 @@ module Ceely
             end
           end
 
-          describe '#frequency' do
-            it 'has the frequency that we expect' do
-              expect(note.frequency).to eq(expected_frequency)
+          describe '#raw_frequency' do
+            it 'has the raw frequency that we expect' do
+              expect(note.raw_frequency).to eq(expected_raw_frequency)
             end
           end
 
@@ -39,9 +39,9 @@ module Ceely
             end
           end
 
-          describe '#tone' do
-            it 'has the tone that we expect' do
-              expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
+          describe '#raw_tone' do
+            it 'has the raw tone that we expect' do
+              expect(note.raw_tone).to eq(Tone.new(expected_raw_frequency, 0.5))
             end
           end
 
@@ -64,15 +64,15 @@ module Ceely
             end
           end
 
-          describe '#octave_adjusted_frequency' do
-            it 'has the octave_adjusted_frequency that we expect' do
-              expect(note.octave_adjusted_frequency).to eq(expected_octave_adjusted_frequency)
+          describe '#frequency' do
+            it 'has the frequency that we expect' do
+              expect(note.frequency).to eq(expected_frequency)
             end
           end
 
-          describe '#octave_adjusted_tone' do
-            it 'has the octave_adjusted_tone that we expect' do
-              expect(note.octave_adjusted_tone).to eq(Tone.new(expected_octave_adjusted_frequency, 0.5))
+          describe '#tone' do
+            it 'has the tone that we expect' do
+              expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
             end
           end
 
@@ -83,10 +83,6 @@ module Ceely
                 Factor: #{expected_factor}
                 Fundamental Frequency: #{expected_fundamental_frequency}
                 Frequency: #{expected_frequency}
-                Octave: #{expected_octave}
-                Octave Adjusted Denominator: #{expected_octave_adjusted_denominator}
-                Octave Adjusted Factor: #{expected_octave_adjusted_factor}
-                Octave Adjusted Frequency: #{expected_octave_adjusted_frequency}
               }.strip.gsub(/^\s*/, "\t"))
             end
           end

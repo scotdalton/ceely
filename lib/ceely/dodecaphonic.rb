@@ -12,6 +12,10 @@ module Ceely
       def initialize(fundamental_frequency=528.0)
         super(fundamental_frequency, 13, -6, NOTE_NAMES)
       end
+
+      def circle_of_fifths
+        super("F#")
+      end
     end
   end
 end

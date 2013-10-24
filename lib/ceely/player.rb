@@ -3,6 +3,7 @@ module Ceely
   
   class Player
     include_package 'javax.sound.sampled'
+    include_package 'java.io'
     RATE = 1024*32
     SIZE = 8
     CHANNELS = 1
@@ -26,42 +27,44 @@ module Ceely
     # at the specified amplitude
     def play_tone(tone, amplitude)
       # Play the tone
-      play(tone, tone.duration, amplitude, line)
+      open_clip(tone, tone.duration, amplitude, clip)
+      clip.start
+      clip.drain
+      clip.close
     end
 
     # Play the given tones as a chord
     def play_tones(tones, amplitude)
-      tones.each do |tone|
-        # Play the tone
-        play(tone, tone.duration, amplitude, new_line)
+      clips = tones.collect { |tone| new_clip }
+      if mixer.synchronization_supported?(clips, true)
+        # Synchronize playback
+        mixer.synchronize(clips, true)
+        # Play the first tone, the others will follow
+        tone, clip = tones.first, clips.first
+        open_clip(tone, tone.duration, amplitude, clip)
+        clip.start()
+        clip.drain()
+        clip.close()
+        mixer.unsynchronize(lines)
+      else
+        tones.each_with_index do |tone, index|
+          open_clip(tone, tone.duration, amplitude, clips[index])
+        end
+        clips.each { |clip| clip.start }
+        clips.each { |clip| clip.drain }
+        clips.each { |clip| clip.close }
       end
     end
 
-    def play(tone, seconds, amplitude, line)
-      # Open the line
-      open_line(line, rate*seconds*100)
+    def open_clip(tone, seconds, amplitude, clip)
       # Get the sine wave for the number of seconds at the given amplitude,
       # converted to byte string representations
       # http://ruby-doc.org/core-1.9.3/Array.html#method-i-pack
       sine_wave = sine_wave(tone, amplitude).pack("c*")
-      # Unpack the string into bytes and 
-      # play it for the given number of seconds
-      # http://www.ruby-doc.org/core-1.9.3/String.html#method-i-unpack
-      line.write(sine_wave.unpack('c*'), 0, seconds*rate)
-      # Close the line
-      close_line(line)
-    end
-
-    def open_line(line, buffer)
-      # Open the line and start it
-      line.open(format, buffer)
-      line.start();
-    end
-
-    def close_line(a_line)
-      # Drain the line and close it
-      line.drain();
-      line.close();
+      # Unpack the string into Java bytes
+      java_bytes = sine_wave.to_java_bytes
+      # Open the clip
+      clip.open(format, java_bytes, 0, seconds*rate)
     end
 
     # Returns an array of integers, representing the tone's sine wave
@@ -87,14 +90,28 @@ module Ceely
         AudioFormat.new(encoding, rate, size, channels, 1, rate, false)
     end
 
-    # Method to return a source data line
-    # for the player's Audio Format
-    def line
-      @line ||= new_line
+    def clip
+      @clip ||= new_clip
     end
 
-    def new_line
-      AudioSystem.get_source_data_line(format)
+    def mixer
+      @mixer ||= new_mixer(mixer_info)
+    end
+
+    def mixer_info
+      @mixer_info ||= mixer_infos.first
+    end
+
+    def mixer_infos
+      @mixer_infos ||= AudioSystem.get_mixer_info
+    end
+
+    def new_clip
+      AudioSystem.get_clip(mixer_info)
+    end
+
+    def new_mixer(mixer_info)
+      AudioSystem.get_mixer(mixer_info)
     end
   end
 end

@@ -6,10 +6,10 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
     @even_tempered = Ceely::EvenTempered::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
     @index_para.replace "Index: ", em(@even_tempered.index)
     @cents_para.replace "Cents: ", em(@even_tempered.cents)
-    @frequency_para.replace "Frequency: ", em(@even_tempered.frequency)
+    @raw_frequency_para.replace "Raw Frequency: ", em(@even_tempered.raw_frequency)
     @octave_para.replace "Octave: ", em(@even_tempered.octave)
     @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@even_tempered.octave_adjusted_factor)
-    @octave_adjusted_frequency_para.replace "Octave Adjusted Frequency: ", em(@even_tempered.octave_adjusted_frequency)
+    @frequency_para.replace "Frequency: ", em(@even_tempered.frequency)
   end
   fundamental_frequency, index  = 528, 1
   scale_size, scale_offset, duration, amplitude = 12, 0, 0.5, 50
@@ -79,7 +79,7 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
         @cents_para = para ""
       end
       flow margin: 10 do
-        @frequency_para = para ""
+        @raw_frequency_para = para ""
       end
       flow margin: 10 do
         @octave_para = para ""
@@ -88,7 +88,7 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
         @octave_adjusted_factor_para = para ""
       end
       flow margin: 10 do
-        @octave_adjusted_frequency_para = para ""
+        @frequency_para = para ""
       end
       refresh_results
     end

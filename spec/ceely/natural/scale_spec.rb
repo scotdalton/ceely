@@ -12,7 +12,7 @@ module Ceely
               end
               it 'has the frequencies that we expect' do
                 frequencies = scale.send(mode.to_sym, octave_index).collect { |note| 
-                  note.octave_adjusted_frequency 
+                  note.frequency 
                 }
                 expect(frequencies).to eq(expected_frequencies)
               end
@@ -229,6 +229,95 @@ module Ceely
         describe '#to_s' do
           it 'does not raises an error' do
             expect{ scale.to_s }.not_to raise_error
+          end
+        end
+      end
+
+      context "when the natural pitches come from the scale," do
+        scale = Ceely::Natural::Scale.new
+        subject(:c) { scale.sort.find { |note| note.name.eql? "C" } }
+        subject(:d) { scale.sort.find { |note| note.name.eql? "D" } }
+        subject(:e) { scale.sort.find { |note| note.name.eql? "E" } }
+        subject(:f) { scale.sort.find { |note| note.name.eql? "F" } }
+        subject(:g) { scale.sort.find { |note| note.name.eql? "G" } }
+        subject(:a) { scale.sort.find { |note| note.name.eql? "A" } }
+        subject(:b) { scale.sort.find { |note| note.name.eql? "B" } }
+
+        describe '#note_type C' do
+          it 'has the type that we expect' do
+            expect(c.type).to eq("1")
+          end
+        end
+
+        describe '#note_type D' do
+          it 'has the type that we expect' do
+            expect(d.type).to eq("2")
+          end
+        end
+
+        describe '#note_type E' do
+          it 'has the type that we expect' do
+            expect(e.type).to eq("M3")
+          end
+        end
+
+        describe '#note_type F' do
+          it 'has the type that we expect' do
+            expect(f.type).to eq("4")
+          end
+        end
+
+        describe '#note_type G' do
+          it 'has the type that we expect' do
+            expect(g.type).to eq("5")
+          end
+        end
+
+        describe '#note_type A' do
+          it 'has the type that we expect' do
+            expect(a.type).to eq("M6")
+          end
+        end
+
+        describe '#note_type B' do
+          it 'has the type that we expect' do
+            expect(b.type).to eq("M7")
+          end
+        end
+
+        describe '#interval from C to D' do
+          it 'has the interval that we expect' do
+            expect(c.interval(d)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from D to E' do
+          it 'has the interval that we expect' do
+            expect(d.interval(e)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from E to F' do
+          it 'has the interval that we expect' do
+            expect(e.interval(f)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from F to G' do
+          it 'has the interval that we expect' do
+            expect(f.interval(g)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from G to A' do
+          it 'has the interval that we expect' do
+            expect(g.interval(a)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from A to B' do
+          it 'has the interval that we expect' do
+            expect(a.interval(b)).to eq(Rational(9, 8))
           end
         end
       end

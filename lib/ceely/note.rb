@@ -4,11 +4,15 @@ module Ceely
     include Comparable
 
     attr_reader :fundamental_frequency, :index
-    attr_accessor :name, :duration
+    attr_accessor :name, :type, :duration
 
-    def initialize(fundamental_frequency, index=0, name=nil, duration=0.5)
+    def initialize(fundamental_frequency, *args)
+      index = (args.shift || 0)
+      name = args.shift
+      type = args.shift
+      duration = (args.shift || 0.5)
       @fundamental_frequency, @index = fundamental_frequency, index
-      @name, @duration = name, duration
+      @name, @type, @duration = name, type, duration
     end
 
     def becomes(note_class)
@@ -16,16 +20,16 @@ module Ceely
     end
 
     def in_octave(octave)
-      return self.class.new(octave_adjusted_frequency*(2**octave), 0, name)
+      return self.class.new(frequency*(2**octave), 0, name)
     end
 
-    def frequency
-      @frequency ||= (fundamental_frequency * factor).to_f
+    def raw_frequency
+      @raw_frequency ||= (fundamental_frequency * factor).to_f
     end
 
-    # Get the tone for this note
-    def tone
-      @tone ||= Tone.new(frequency, duration)
+    # Get the raw tone for this note
+    def raw_tone
+      @raw_tone ||= Tone.new(raw_frequency, duration)
     end
 
     # "Basic miracle of music"
@@ -33,7 +37,7 @@ module Ceely
     # Returns the number of the octave that the frequency is in
     # First octave is 0
     def octave
-      @octave ||= Math.log2(frequency/fundamental_frequency).floor
+      @octave ||= Math.log2(raw_frequency/fundamental_frequency).floor
     end
 
     # Intended to be overridden by subclasses
@@ -49,17 +53,17 @@ module Ceely
       @octave_adjusted_factor ||= Rational(factor, octave_adjusted_denominator)
     end
 
-    def octave_adjusted_frequency
-      @octave_adjusted_frequency ||= 
+    def frequency
+      @frequency ||= 
         octave_adjusted_factor.to_f * fundamental_frequency
     end
 
-    def octave_adjusted_tone
-      @octave_adjusted_tone ||= Tone.new(octave_adjusted_frequency, duration)
+    def tone
+      @tone ||= Tone.new(frequency, duration)
     end
 
     def <=>(other_note)
-      octave_adjusted_tone <=> other_note.octave_adjusted_tone
+      tone <=> other_note.tone
     end
 
     # Cents is the interval between the fundamental note and this note
@@ -79,13 +83,13 @@ module Ceely
     def interval(other_note=nil)
       other_note ||= self.class.new(fundamental_frequency, 0)
       # Handle the octave
-      # If the octave adjusted frequencies are the same
-      # we're either dealing with the same note or the note in
-      # a different octave. Either way let's just deal with the 
-      # factors, not the octave adjusted factors.  If they're the 
-      # same, it'll just be 1, so no harm, no foul.  If they're
-      # different, this should give us the proper interval.
-      if octave_adjusted_frequency.to_i == other_note.octave_adjusted_frequency.to_i
+      # If the frequencies are the same we're either dealing with
+      # the same note or the note in a different octave. Either way 
+      # let's just deal with thefactors, not the octave adjusted
+      # factors.  If they're the same, it'll just be 1, so no harm,
+      # no foul.  If they're different, this should give us the proper
+      # interval.
+      if frequency.to_i == other_note.frequency.to_i
         Rational(other_note.factor, self.factor)
       else
         Rational(other_note.octave_adjusted_factor, self.octave_adjusted_factor)
@@ -99,10 +103,6 @@ module Ceely
           Factor: #{factor}
           Fundamental Frequency: #{fundamental_frequency}
           Frequency: #{frequency}
-          Octave: #{octave}
-          Octave Adjusted Denominator: #{octave_adjusted_denominator}
-          Octave Adjusted Factor: #{octave_adjusted_factor}
-          Octave Adjusted Frequency: #{octave_adjusted_frequency}
         })
     end
 

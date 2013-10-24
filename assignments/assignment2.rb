@@ -6,10 +6,10 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
     @harmonic = Ceely::Harmonic::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
     @index_para.replace "Index: ", em(@harmonic.index)
     @cents_para.replace "Cents: ", em(@harmonic.cents)
-    @frequency_para.replace "Frequency: ", em(@harmonic.frequency)
+    @raw_frequency_para.replace "Raw Frequency: ", em(@harmonic.raw_frequency)
     @octave_para.replace "Octave: ", em(@harmonic.octave)
-    @octave_adjusted_factor_para.replace "Octave Ratio: ", em(@harmonic.octave_adjusted_factor)
-    @octave_adjusted_frequency_para.replace "Octave Adjusted Frequency: ", em(@harmonic.octave_adjusted_frequency)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@harmonic.octave_adjusted_factor)
+    @frequency_para.replace "Frequency: ", em(@harmonic.frequency)
   end
   fundamental_frequency, index  = 528, 1
   scale_size, scale_offset, duration, amplitude = 12, 0, 0.5, 50
@@ -78,7 +78,7 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
         @cents_para = para ""
       end
       flow margin: 10 do
-        @frequency_para = para ""
+        @raw_frequency_para = para ""
       end
       flow margin: 10 do
         @octave_para = para ""
@@ -87,7 +87,7 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
         @octave_adjusted_factor_para = para ""
       end
       flow margin: 10 do
-        @octave_adjusted_frequency_para = para ""
+        @frequency_para = para ""
       end
       refresh_results
     end

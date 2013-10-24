@@ -1,24 +1,24 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 require 'pry'
-Ceely::Assignment.new("Assignment 3", 620, 670).run do
+Ceely::Assignment.new("Assignment 6", 620, 670).run do
   def refresh_results
-    @pythagorean = Ceely::Pythagorean::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
-    @index_para.replace "Index: ", em(@pythagorean.index)
-    @cents_para.replace "Cents: ", em(@pythagorean.cents)
-    @raw_frequency_para.replace "Raw Frequency: ", em(@pythagorean.raw_frequency)
-    @octave_para.replace "Octave: ", em(@pythagorean.octave)
-    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@pythagorean.octave_adjusted_factor)
-    @frequency_para.replace "Frequency: ", em(@pythagorean.frequency)
+    @dodecaphonic = Ceely::Dodecaphonic::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
+    @index_para.replace "Index: ", em(@dodecaphonic.index)
+    @cents_para.replace "Cents: ", em(@dodecaphonic.cents)
+    @raw_frequency_para.replace "Raw Frequency: ", em(@dodecaphonic.raw_frequency)
+    @octave_para.replace "Octave: ", em(@dodecaphonic.octave)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@dodecaphonic.octave_adjusted_factor)
+    @frequency_para.replace "Frequency: ", em(@dodecaphonic.frequency)
   end
   fundamental_frequency, index  = 528, 1
-  scale_size, scale_offset, duration, amplitude = 12, -1, 0.5, 50
+  duration, amplitude = 0.5, 50
   flow width: 800, height: 850 do
     flow margin: 20, width: 350, height: 375 do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
       stack margin: 10 do
-        subtitle "Pythagorean Scale"
+        subtitle "Dodecaphonic Scale"
       end
       stack margin: 10 do
         para "Base Frequency: "
@@ -41,14 +41,6 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
         subtitle("Play the Scale")
       end
       stack margin: 10 do
-        para "Number of Notes in the Scale: "
-        @scale_size = edit_line(scale_size)
-      end
-      stack margin: 10 do
-        para "Offset of the Scale: "
-        @scale_offset = edit_line(scale_offset)
-      end
-      stack margin: 10 do
         para "Duration: "
         @duration = edit_line(duration)
       end
@@ -57,11 +49,9 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
         @amplitude = edit_line(amplitude)
       end
       stack margin: 10 do
-        button("Play the Pythagorean Scale") do
+        button("Play the Dodecaphonic Scale") do
           refresh_results
-          scale = Ceely::Pythagorean::Scale.new(
-            @fundamental_frequency.text.to_i, @scale_size.text.to_i, 
-              @scale_offset.text.to_i)
+          scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_i)
           scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end

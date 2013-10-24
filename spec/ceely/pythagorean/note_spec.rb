@@ -9,11 +9,11 @@ module Ceely
         expected_factor_array = expected_factor.split("/")
         expected_factor_num = expected_factor_array.first
         expected_factor_den = expected_factor_array.last
-        expected_frequency = expected_values["frequency"]
+        expected_raw_frequency = expected_values["raw_frequency"]
         expected_octave = expected_values["octave"]
         expected_octave_adjusted_denominator = expected_values["octave_adjusted_denominator"]
         expected_octave_adjusted_factor = expected_values["octave_adjusted_factor"]
-        expected_octave_adjusted_frequency = expected_values["octave_adjusted_frequency"]
+        expected_frequency = expected_values["frequency"]
         # expected_cents = expected_values["cents"]
 
         context "when it's the #{index} note note," do
@@ -25,9 +25,9 @@ module Ceely
             end
           end
 
-          describe '#frequency' do
-            it 'has the frequency that we expect' do
-              expect(note.frequency).to eq(expected_frequency)
+          describe '#raw_frequency' do
+            it 'has the raw frequency that we expect' do
+              expect(note.raw_frequency).to eq(expected_raw_frequency)
             end
           end
 
@@ -39,9 +39,9 @@ module Ceely
             end
           end
 
-          describe '#tone' do
-            it 'has the tone that we expect' do
-              expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
+          describe '#raw_tone' do
+            it 'has the raw tone that we expect' do
+              expect(note.raw_tone).to eq(Tone.new(expected_raw_frequency, 0.5))
             end
           end
 
@@ -64,15 +64,15 @@ module Ceely
             end
           end
 
-          describe '#octave_adjusted_frequency' do
-            it 'has the octave_adjusted_frequency that we expect' do
-              expect(note.octave_adjusted_frequency).to eq(expected_octave_adjusted_frequency)
+          describe '#frequency' do
+            it 'has the frequency that we expect' do
+              expect(note.frequency).to eq(expected_frequency)
             end
           end
 
-          describe '#octave_adjusted_tone' do
-            it 'has the octave_adjusted_tone that we expect' do
-              expect(note.octave_adjusted_tone).to eq(Tone.new(expected_octave_adjusted_frequency, 0.5))
+          describe '#tone' do
+            it 'has the tone that we expect' do
+              expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
             end
           end
         end
@@ -99,9 +99,33 @@ module Ceely
           end
         end
 
+        describe '#interval from c to c sharp' do
+          it 'has the interval that we expect' do
+            expect(c.interval(c_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from c sharp to d' do
+          it 'has the interval that we expect' do
+            expect(c_sharp.interval(d)).to eq(Rational(256, 243))
+          end
+        end
+
         describe '#interval from d to e' do
           it 'has the interval that we expect' do
             expect(d.interval(e)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from d to d sharp' do
+          it 'has the interval that we expect' do
+            expect(d.interval(d_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from d sharp to e' do
+          it 'has the interval that we expect' do
+            expect(d_sharp.interval(e)).to eq(Rational(256, 243))
           end
         end
 
@@ -117,15 +141,57 @@ module Ceely
           end
         end
 
+        describe '#interval from f to g flat' do
+          it 'has the interval that we expect' do
+            expect(f.interval(g_flat)).to eq(Rational(531441, 524288))
+          end
+        end
+
+        describe '#interval from g flat to f sharp' do
+          it 'has the interval that we expect' do
+            expect(g_flat.interval(f_sharp)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from f sharp to g' do
+          it 'has the interval that we expect' do
+            expect(f_sharp.interval(g)).to eq(Rational(256, 243))
+          end
+        end
+
         describe '#interval from g to a' do
           it 'has the interval that we expect' do
             expect(g.interval(a)).to eq(Rational(9, 8))
           end
         end
 
+        describe '#interval from g to g sharp' do
+          it 'has the interval that we expect' do
+            expect(g.interval(g_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from g sharp to a' do
+          it 'has the interval that we expect' do
+            expect(g_sharp.interval(a)).to eq(Rational(256, 243))
+          end
+        end
+
         describe '#interval from a to b' do
           it 'has the interval that we expect' do
             expect(a.interval(b)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from a to a sharp' do
+          it 'has the interval that we expect' do
+            expect(a.interval(a_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from a sharp to b' do
+          it 'has the interval that we expect' do
+            expect(a_sharp.interval(b)).to eq(Rational(256, 243))
           end
         end
       end

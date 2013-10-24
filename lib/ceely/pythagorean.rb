@@ -13,9 +13,14 @@ module Ceely
     # A Pythagorean::Scale is a Scale with a set Pythagorean::Notes
     class Scale < Ceely::Scale
       NOTE_NAMES = %w{ C C# D D# E F Gb F# G G# A A# B }
+      NOTE_TYPES = %w{ 1 m2 2 m3 M3 4 b5(b) b5(#) 5 m6 M6 m7 M7 }
 
-      def initialize(fundamental_frequency=528.0, size=13, offset=-1, note_names=NOTE_NAMES)
-        super(fundamental_frequency, size, offset, note_names)
+      def initialize(fundamental_frequency=528.0, *args)
+        size = (args.shift || 13)
+        offset = (args.shift || -1)
+        note_names = (args.shift || NOTE_NAMES)
+        note_types = (args.shift || NOTE_TYPES)
+        super(fundamental_frequency, size, offset, note_names, note_types)
       end
 
       # Override the circle of fifths to reject 

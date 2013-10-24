@@ -42,6 +42,37 @@ module Ceely
           end
         end
 
+        describe '#note_type' do
+          it 'has the note type for the index' do
+            expect(scale.note_type(-13)).to eq("1")
+            expect(scale.note_type(-12)).to eq("m2")
+            expect(scale.note_type(-11)).to eq("2")
+            expect(scale.note_type(-10)).to eq("m3")
+            expect(scale.note_type(-9)).to eq("M3")
+            expect(scale.note_type(-8)).to eq("4")
+            expect(scale.note_type(-7)).to eq("b5(b)")
+            expect(scale.note_type(-6)).to eq("b5(#)")
+            expect(scale.note_type(-5)).to eq("5")
+            expect(scale.note_type(-4)).to eq("m6")
+            expect(scale.note_type(-3)).to eq("M6")
+            expect(scale.note_type(-2)).to eq("m7")
+            expect(scale.note_type(-1)).to eq("M7")
+            expect(scale.note_type(0)).to eq("1")
+            expect(scale.note_type(1)).to eq("m2")
+            expect(scale.note_type(2)).to eq("2")
+            expect(scale.note_type(3)).to eq("m3")
+            expect(scale.note_type(4)).to eq("M3")
+            expect(scale.note_type(5)).to eq("4")
+            expect(scale.note_type(6)).to eq("b5(b)")
+            expect(scale.note_type(7)).to eq("b5(#)")
+            expect(scale.note_type(8)).to eq("5")
+            expect(scale.note_type(9)).to eq("m6")
+            expect(scale.note_type(10)).to eq("M6")
+            expect(scale.note_type(11)).to eq("m7")
+            expect(scale.note_type(12)).to eq("M7")
+          end
+        end
+
         describe '#size' do
           it 'has the size we expect' do
             expect(scale.size).to eq(13)
@@ -92,9 +123,71 @@ module Ceely
           end
         end
 
+        describe '#note_types' do
+          it 'is an Array' do
+            expect(scale.note_types).to be_a(Array)
+          end
+
+          it 'isn\'t empty' do
+            expect(scale.note_types).not_to be_empty
+          end
+
+          it 'has the expected note types' do
+            expect(scale.note_types).to eq(%w{ 1 m2 2 m3 M3 4 b5(b) b5(#) 5 m6 M6 m7 M7 })
+          end
+        end
+
         describe '#circle_of_fifths' do
           it 'has 12 elements' do
             expect(scale.circle_of_fifths.size).to eq(12)
+          end
+
+          it 'has C first' do
+            expect(scale.circle_of_fifths.first.name).to eq("C")
+          end
+
+          it 'has G second' do
+            expect(scale.circle_of_fifths[1].name).to eq("G")
+          end
+
+          it 'has D third' do
+            expect(scale.circle_of_fifths[2].name).to eq("D")
+          end
+
+          it 'has A fourth' do
+            expect(scale.circle_of_fifths[3].name).to eq("A")
+          end
+
+          it 'has E fifth' do
+            expect(scale.circle_of_fifths[4].name).to eq("E")
+          end
+
+          it 'has B sixth' do
+            expect(scale.circle_of_fifths[5].name).to eq("B")
+          end
+
+          it 'has F# seventh' do
+            expect(scale.circle_of_fifths[6].name).to eq("F#")
+          end
+
+          it 'has C# eighth' do
+            expect(scale.circle_of_fifths[7].name).to eq("C#")
+          end
+
+          it 'has G# ninth' do
+            expect(scale.circle_of_fifths[8].name).to eq("G#")
+          end
+
+          it 'has D# tenth' do
+            expect(scale.circle_of_fifths[9].name).to eq("D#")
+          end
+
+          it 'has A# eleventh' do
+            expect(scale.circle_of_fifths[10].name).to eq("A#")
+          end
+
+          it 'has F twelfth' do
+            expect(scale.circle_of_fifths[11].name).to eq("F")
           end
         end
 
@@ -116,7 +209,7 @@ module Ceely
       end
 
       context 'when constructed with inputs,' do
-        subject(:scale) { Ceely::Pythagorean::Scale.new(594.0, 7, -1) }
+        subject(:scale) { Ceely::Pythagorean::Scale.new(594.0, 7, -1, [], []) }
 
         describe '#fundamental_frequency' do
           it 'has the fundamental frequency that we expect' do
@@ -173,6 +266,203 @@ module Ceely
         describe '#to_s' do
           it 'does not raises an error' do
             expect{ scale.to_s }.not_to raise_error
+          end
+        end
+      end
+
+      context "when the pythagorean natural and chromatic pitches come from the scale," do
+        scale = Ceely::Pythagorean::Scale.new
+        subject(:c) { scale.sort.find { |note| note.name.eql? "C" } }
+        subject(:c_sharp) { scale.sort.find { |note| note.name.eql? "C#" } }
+        subject(:d) { scale.sort.find { |note| note.name.eql? "D" } }
+        subject(:d_sharp) { scale.sort.find { |note| note.name.eql? "D#" } }
+        subject(:e) { scale.sort.find { |note| note.name.eql? "E" } }
+        subject(:f) { scale.sort.find { |note| note.name.eql? "F" } }
+        subject(:g_flat) { scale.sort.find { |note| note.name.eql? "Gb" } }
+        subject(:f_sharp) { scale.sort.find { |note| note.name.eql? "F#" } }
+        subject(:g) { scale.sort.find { |note| note.name.eql? "G" } }
+        subject(:g_sharp) { scale.sort.find { |note| note.name.eql? "G#" } }
+        subject(:a) { scale.sort.find { |note| note.name.eql? "A" } }
+        subject(:a_sharp) { scale.sort.find { |note| note.name.eql? "A#" } }
+        subject(:b) { scale.sort.find { |note| note.name.eql? "B" } }
+
+        describe '#note_type C' do
+          it 'has the type that we expect' do
+            expect(c.type).to eq("1")
+          end
+        end
+
+        describe '#note_type C#' do
+          it 'has the type that we expect' do
+            expect(c_sharp.type).to eq("m2")
+          end
+        end
+
+        describe '#note_type D' do
+          it 'has the type that we expect' do
+            expect(d.type).to eq("2")
+          end
+        end
+
+        describe '#note_type D#' do
+          it 'has the type that we expect' do
+            expect(d_sharp.type).to eq("m3")
+          end
+        end
+
+        describe '#note_type E' do
+          it 'has the type that we expect' do
+            expect(e.type).to eq("M3")
+          end
+        end
+
+        describe '#note_type F' do
+          it 'has the type that we expect' do
+            expect(f.type).to eq("4")
+          end
+        end
+
+        describe '#note_type Gb' do
+          it 'has the type that we expect' do
+            expect(g_flat.type).to eq("b5(b)")
+          end
+        end
+
+        describe '#note_type F#' do
+          it 'has the type that we expect' do
+            expect(f_sharp.type).to eq("b5(#)")
+          end
+        end
+
+        describe '#note_type G' do
+          it 'has the type that we expect' do
+            expect(g.type).to eq("5")
+          end
+        end
+
+        describe '#note_type G#' do
+          it 'has the type that we expect' do
+            expect(g_sharp.type).to eq("m6")
+          end
+        end
+
+        describe '#note_type A' do
+          it 'has the type that we expect' do
+            expect(a.type).to eq("M6")
+          end
+        end
+
+        describe '#note_type A#' do
+          it 'has the type that we expect' do
+            expect(a_sharp.type).to eq("m7")
+          end
+        end
+
+        describe '#note_type B' do
+          it 'has the type that we expect' do
+            expect(b.type).to eq("M7")
+          end
+        end
+
+        describe '#interval from C to D' do
+          it 'has the interval that we expect' do
+            expect(c.interval(d)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from C to C#' do
+          it 'has the interval that we expect' do
+            expect(c.interval(c_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from C# to D' do
+          it 'has the interval that we expect' do
+            expect(c_sharp.interval(d)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from D to E' do
+          it 'has the interval that we expect' do
+            expect(d.interval(e)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from D to D#' do
+          it 'has the interval that we expect' do
+            expect(d.interval(d_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from D# to E' do
+          it 'has the interval that we expect' do
+            expect(d_sharp.interval(e)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from E to F' do
+          it 'has the interval that we expect' do
+            expect(e.interval(f)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from F to G' do
+          it 'has the interval that we expect' do
+            expect(f.interval(g)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from F to Gb' do
+          it 'has the interval that we expect' do
+            expect(f.interval(g_flat)).to eq(Rational(531441, 524288))
+          end
+        end
+
+        describe '#interval from Gb to F#' do
+          it 'has the interval that we expect' do
+            expect(g_flat.interval(f_sharp)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from F# to G' do
+          it 'has the interval that we expect' do
+            expect(f_sharp.interval(g)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from G to A' do
+          it 'has the interval that we expect' do
+            expect(g.interval(a)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from G to G#' do
+          it 'has the interval that we expect' do
+            expect(g.interval(g_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from G# to A' do
+          it 'has the interval that we expect' do
+            expect(g_sharp.interval(a)).to eq(Rational(256, 243))
+          end
+        end
+
+        describe '#interval from A to B' do
+          it 'has the interval that we expect' do
+            expect(a.interval(b)).to eq(Rational(9, 8))
+          end
+        end
+
+        describe '#interval from A to A#' do
+          it 'has the interval that we expect' do
+            expect(a.interval(a_sharp)).to eq(Rational(2187, 2048))
+          end
+        end
+
+        describe '#interval from A# to B' do
+          it 'has the interval that we expect' do
+            expect(a_sharp.interval(b)).to eq(Rational(256, 243))
           end
         end
       end

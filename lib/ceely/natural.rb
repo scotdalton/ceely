@@ -9,9 +9,10 @@ module Ceely
     class Scale < Ceely::Pythagorean::Scale
       MODE_NAMES = %w{ ionian dorian phrygian lydian mixolydian aeolian locrian }
       NOTE_NAMES = %w{ C D E F G A B }
+      NOTE_TYPES = %w{ 1 2 M3 4 5 M6 M7 }
       
       def initialize(fundamental_frequency=528.0)
-        super(fundamental_frequency, 7, -1, NOTE_NAMES)
+        super(fundamental_frequency, 7, -1, NOTE_NAMES, NOTE_TYPES)
       end
 
       MODE_NAMES.each_with_index do |mode, index|

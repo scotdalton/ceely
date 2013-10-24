@@ -5,7 +5,7 @@ module Ceely
       even_tempered["notes"].each do |index, expected_values|
 
         # Set the expected values
-        expected_frequency = expected_values["frequency"]
+        expected_raw_frequency = expected_values["raw_frequency"]
         expected_cents = index*100
 
         context "when it's the #{index} even tempered note," do
@@ -17,9 +17,9 @@ module Ceely
             end
           end
 
-          describe '#frequency' do
-            it 'has the frequency that we expect' do
-              expect(note.frequency).to be_within(0.0001).of(expected_frequency)
+          describe '#raw_frequency' do
+            it 'has the rawfrequency that we expect' do
+              expect(note.raw_frequency).to be_within(0.0001).of(expected_raw_frequency)
             end
           end
 

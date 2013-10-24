@@ -2,13 +2,21 @@ module Ceely
   # A Scale is a NoteSet with Notes based on a fundamental frequency
   # and some note names and a mode size
   class Scale < Ceely::NoteSet
-    attr_reader :fundamental_frequency, :size, :offset, :note_names
+    attr_reader :fundamental_frequency, :size, :offset
+    attr_reader :note_names, :note_types
 
-    def initialize(fundamental_frequency, size=12, offset=0, note_names=[])
+    def initialize(fundamental_frequency, *args)
+      size = (args.shift || 12)
+      offset = (args.shift || 0)
+      note_names = (args.shift || [])
       # TODO: Raise an argument error if the note names don't match the size
       # unless of course they're empty, cuz that's OK
+      note_types = (args.shift || [])
+      # TODO: Raise an argument error if the interval type don't match the size
+      # unless of course they're empty, cuz that's OK
       @fundamental_frequency = fundamental_frequency
-      @size, @offset, @note_names = size, offset, note_names
+      @size, @offset = size, offset, note_names
+      @note_names, @note_types = note_names, note_types
       @notes ||= ((0+offset)..(size+offset-1)).collect do |index|
         name = self.class.name
         # Make notes of from the module name
@@ -38,6 +46,7 @@ module Ceely
     def sort(size=nil)
       super(size).each_with_index.collect do |note, index|
         note.name = note_name(index) 
+        note.type = note_type(index) 
         note
       end
     end
@@ -69,6 +78,10 @@ module Ceely
 
     def note_name(index)
       note_names[index % size] unless note_names.blank?
+    end
+
+    def note_type(index)
+      note_types[index % size] unless note_types.blank?
     end
 
     def mode_start_note_index(mode_index)
