@@ -168,6 +168,18 @@ module Ceely
               expect{ scale.play(1, 50) }.not_to raise_error
             end
           end
+
+          describe '#play_circle_of_fifths' do
+            it 'does not raises an error' do
+              expect{ scale.play_circle_of_fifths(0.5, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_circle_of_fifths_in_octave 1' do
+            it 'does not raises an error' do
+              expect{ scale.play_circle_of_fifths_in_octave(1, 0.5, 50) }.not_to raise_error
+            end
+          end
         end
 
         describe '#to_s' do
@@ -179,19 +191,19 @@ module Ceely
 
       context "when it's the dodecaphonic pitches from the scale," do
         scale = Ceely::Dodecaphonic::Scale.new
-        subject(:c) { scale.sort.find { |note| note.name.eql? "C" } }
-        subject(:d_flat) { scale.sort.find { |note| note.name.eql? "Db" } }
-        subject(:d) { scale.sort.find { |note| note.name.eql? "D" } }
-        subject(:e_flat) { scale.sort.find { |note| note.name.eql? "Eb" } }
-        subject(:e) { scale.sort.find { |note| note.name.eql? "E" } }
-        subject(:f) { scale.sort.find { |note| note.name.eql? "F" } }
-        subject(:g_flat) { scale.sort.find { |note| note.name.eql? "Gb" } }
-        subject(:f_sharp) { scale.sort.find { |note| note.name.eql? "F#" } }
-        subject(:g) { scale.sort.find { |note| note.name.eql? "G" } }
-        subject(:a_flat) { scale.sort.find { |note| note.name.eql? "Ab" } }
-        subject(:a) { scale.sort.find { |note| note.name.eql? "A" } }
-        subject(:b_flat) { scale.sort.find { |note| note.name.eql? "Bb" } }
-        subject(:b) { scale.sort.find { |note| note.name.eql? "B" } }
+        subject(:c) { scale.note_by_name("C") }
+        subject(:d_flat) { scale.note_by_name("Db") }
+        subject(:d) { scale.note_by_name("D") }
+        subject(:e_flat) { scale.note_by_name("Eb") }
+        subject(:e) { scale.note_by_name("E") }
+        subject(:f) { scale.note_by_name("F") }
+        subject(:g_flat) { scale.note_by_name("Gb") }
+        subject(:f_sharp) { scale.note_by_name("F#") }
+        subject(:g) { scale.note_by_name("G") }
+        subject(:a_flat) { scale.note_by_name("Ab") }
+        subject(:a) { scale.note_by_name("A") }
+        subject(:b_flat) { scale.note_by_name("Bb") }
+        subject(:b) { scale.note_by_name("B") }
 
 
         describe '#note_type C' do

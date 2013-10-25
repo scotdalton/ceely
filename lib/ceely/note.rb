@@ -62,6 +62,11 @@ module Ceely
       @tone ||= Tone.new(frequency, duration)
     end
 
+    def play(amplitude)
+      tone.duration = duration
+      tone.play(amplitude)
+    end
+
     def <=>(other_note)
       tone <=> other_note.tone
     end

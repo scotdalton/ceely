@@ -25,9 +25,9 @@ module Ceely
     # Play the given set of notes
     def play_notes(notes, seconds, amplitude, &block)
       notes.each do |note|
-        # Set the number of seconds for this tone.
-        note.tone.duration = seconds
-        note.tone.play(amplitude) 
+        # Set the number of seconds for this note.
+        note.duration = seconds
+        note.play(amplitude) 
         yield if block_given?
       end
     end

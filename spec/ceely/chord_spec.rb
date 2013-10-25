@@ -2,7 +2,7 @@ require 'spec_helper'
 module Ceely
   describe Ceely::Chord do
     context "when it's the default chord," do
-      subject(:chord) { Ceely::Chord.new }
+      subject(:chord) { Ceely::Chord.new(2) }
 
       describe '#notes' do
         it 'is empty' do
@@ -11,11 +11,12 @@ module Ceely
       end
     end
 
-    context "when it's the default chord," do
-      subject(:u) { Ceely::Pythagorean::Note.new(528.0) }
-      subject(:m3) { Ceely::Pythagorean::Note.new(668.25) }
-      subject(:p5) { Ceely::Pythagorean::Note.new(792.00) }
-      subject(:chord) { Ceely::Chord.new(u, m3, p5) }
+    context "when it's built from a Pythagorean scale," do
+      scale = Ceely::Pythagorean::Scale.new
+      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
+      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
+      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
 
       describe '#notes' do
         it 'isn\'t empty' do
@@ -32,7 +33,63 @@ module Ceely
       unless(ENV['TRAVIS'].eql? "true")
         describe '#play' do
           it 'plays for 2 seconds' do
-            expect { chord.play(2, 50) }.not_to raise_error
+            expect { chord.play(50) }.not_to raise_error
+          end
+        end
+      end
+    end
+
+    context "when it's built from an Even Tempered scale," do
+      scale = Ceely::EvenTempered::Scale.new
+      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
+      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
+      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
+
+      describe '#notes' do
+        it 'isn\'t empty' do
+          expect(chord.notes).not_to be_empty
+        end
+
+        it 'has 3 elements' do
+          expect(chord.notes.size).to eq(3)
+        end
+      end
+
+      # Don't run this test on travis since
+      # we don't have permissions.
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'plays for 2 seconds' do
+            expect { chord.play(50) }.not_to raise_error
+          end
+        end
+      end
+    end
+
+    context "when it's built from a Dodecaphonic scale," do
+      subject(:scale) { Ceely::Dodecaphonic::Scale.new }
+      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
+      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
+      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
+
+      describe '#notes' do
+        it 'isn\'t empty' do
+          expect(chord.notes).not_to be_empty
+        end
+
+        it 'has 3 elements' do
+          expect(chord.notes.size).to eq(3)
+        end
+      end
+
+      # Don't run this test on travis since
+      # we don't have permissions.
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'plays for 2 seconds' do
+            expect { chord.play(50) }.not_to raise_error
           end
         end
       end

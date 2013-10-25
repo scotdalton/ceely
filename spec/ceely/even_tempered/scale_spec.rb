@@ -134,7 +134,19 @@ module Ceely
         unless(ENV['TRAVIS'].eql? "true")
           describe '#play' do
             it 'does not raises an error' do
-              expect{ scale.play(1, 50) }.not_to raise_error
+              expect{ scale.play(0.5, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_circle_of_fifths' do
+            it 'does not raises an error' do
+              expect{ scale.play_circle_of_fifths(0.5, 50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_circle_of_fifths_in_octave 1' do
+            it 'does not raises an error' do
+              expect{ scale.play_circle_of_fifths_in_octave(1, 0.5, 50) }.not_to raise_error
             end
           end
         end
@@ -148,18 +160,18 @@ module Ceely
 
       context "when the notes come from the scale," do
         scale = Ceely::EvenTempered::Scale.new
-        subject(:c) { scale.sort.find { |note| note.name.eql? "C" } }
-        subject(:c_sharp) { scale.sort.find { |note| note.name.eql? "C#" } }
-        subject(:d) { scale.sort.find { |note| note.name.eql? "D" } }
-        subject(:d_sharp) { scale.sort.find { |note| note.name.eql? "D#" } }
-        subject(:e) { scale.sort.find { |note| note.name.eql? "E" } }
-        subject(:f) { scale.sort.find { |note| note.name.eql? "F" } }
-        subject(:f_sharp) { scale.sort.find { |note| note.name.eql? "F#" } }
-        subject(:g) { scale.sort.find { |note| note.name.eql? "G" } }
-        subject(:g_sharp) { scale.sort.find { |note| note.name.eql? "G#" } }
-        subject(:a) { scale.sort.find { |note| note.name.eql? "A" } }
-        subject(:a_sharp) { scale.sort.find { |note| note.name.eql? "A#" } }
-        subject(:b) { scale.sort.find { |note| note.name.eql? "B" } }
+        subject(:c) { scale.note_by_name("C") }
+        subject(:c_sharp) { scale.note_by_name("C#") }
+        subject(:d) { scale.note_by_name("D") }
+        subject(:d_sharp) { scale.note_by_name("D#") }
+        subject(:e) { scale.note_by_name("E") }
+        subject(:f) { scale.note_by_name("F") }
+        subject(:f_sharp) { scale.note_by_name("F#") }
+        subject(:g) { scale.note_by_name("G") }
+        subject(:g_sharp) { scale.note_by_name("G#") }
+        subject(:a) { scale.note_by_name("A") }
+        subject(:a_sharp) { scale.note_by_name("A#") }
+        subject(:b) { scale.note_by_name("B") }
 
         describe '#note_type C' do
           it 'has the type that we expect' do

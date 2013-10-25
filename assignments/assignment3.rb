@@ -1,15 +1,17 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-require 'pry'
 Ceely::Assignment.new("Assignment 3", 620, 670).run do
   def refresh_results
-    @pythagorean = Ceely::Pythagorean::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
-    @index_para.replace "Index: ", em(@pythagorean.index)
-    @cents_para.replace "Cents: ", em(@pythagorean.cents)
-    @raw_frequency_para.replace "Raw Frequency: ", em(@pythagorean.raw_frequency)
-    @octave_para.replace "Octave: ", em(@pythagorean.octave)
-    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@pythagorean.octave_adjusted_factor)
-    @frequency_para.replace "Frequency: ", em(@pythagorean.frequency)
+    @scale = Ceely::Pythagorean::Scale.new(@fundamental_frequency.text.to_i)
+    @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
+    @index_para.replace "Index: ", em(@note.index)
+    @cents_para.replace "Cents: ", em(@note.cents)
+    @raw_frequency_para.replace "Raw Frequency: ", em(@note.raw_frequency)
+    @octave_para.replace "Octave: ", em(@note.octave)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@note.octave_adjusted_factor)
+    @frequency_para.replace "Frequency: ", em(@note.frequency)
+    @name_para.replace "Name: ", em(@note.name)
+    @type_para.replace "Type: ", em(@note.type)
   end
   fundamental_frequency, index  = 528, 1
   scale_size, scale_offset, duration, amplitude = 12, -1, 0.5, 50
@@ -41,14 +43,6 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
         subtitle("Play the Scale")
       end
       stack margin: 10 do
-        para "Number of Notes in the Scale: "
-        @scale_size = edit_line(scale_size)
-      end
-      stack margin: 10 do
-        para "Offset of the Scale: "
-        @scale_offset = edit_line(scale_offset)
-      end
-      stack margin: 10 do
         para "Duration: "
         @duration = edit_line(duration)
       end
@@ -59,10 +53,7 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
       stack margin: 10 do
         button("Play the Pythagorean Scale") do
           refresh_results
-          scale = Ceely::Pythagorean::Scale.new(
-            @fundamental_frequency.text.to_i, @scale_size.text.to_i, 
-              @scale_offset.text.to_i)
-          scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          @scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end
     end
@@ -89,6 +80,12 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
       end
       flow margin: 10 do
         @frequency_para = para ""
+      end
+      flow margin: 10 do
+        @name_para = para ""
+      end
+      flow margin: 10 do
+        @type_para = para ""
       end
       refresh_results
     end

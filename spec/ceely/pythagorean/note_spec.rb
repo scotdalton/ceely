@@ -75,6 +75,16 @@ module Ceely
               expect(note.tone).to eq(Tone.new(expected_frequency, 0.5))
             end
           end
+
+          # Don't run this test on travis since
+          # we don't have permissions.
+          unless(ENV['TRAVIS'].eql? "true")
+            describe '#play' do
+              it 'does not raises an error' do
+                expect{ note.play(50) }.not_to raise_error
+              end
+            end
+          end
         end
       end
 

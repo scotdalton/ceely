@@ -1,10 +1,16 @@
 module Ceely
   # A Chord is a NoteSet
   class Chord < Ceely::NoteSet
+    attr_reader :duration
+
+    def initialize(duration, *notes)
+      @duration = duration
+      super(*notes)
+    end
 
     # Play the chord
-    def play(seconds, amplitude, &block)
-      play_chord(seconds, amplitude, &block)
+    def play(amplitude, &block)
+      play_chord(duration, amplitude, &block)
     end
 
     def play_chord(seconds, amplitude, &block)

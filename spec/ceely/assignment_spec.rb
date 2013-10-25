@@ -1,6 +1,5 @@
 require 'spec_helper'
 module Ceely
-  require 'pry'
   describe NoAssignmentError do
     subject(:error) { NoAssignmentError.new }
 

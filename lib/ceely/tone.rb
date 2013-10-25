@@ -1,5 +1,4 @@
 module Ceely
-  require 'pry'
   class Tone
     include Comparable
 

@@ -1,6 +1,6 @@
 module Ceely
   # A Scale is a NoteSet with Notes based on a fundamental frequency
-  # and some note names and a mode size
+  # and some note names and note types
   class Scale < Ceely::NoteSet
     attr_reader :fundamental_frequency, :size, :offset
     attr_reader :note_names, :note_types
@@ -25,6 +25,14 @@ module Ceely
       end
     end
 
+    def note_by_name(name)
+      sort.find { |note| note.name.eql? name }
+    end
+
+    def note_by_type(type)
+      sort.find { |note| note.type.eql? type }
+    end
+
     def circle_of_fifths
       return @circle_of_fifth if defined? @circle_of_fifths
       @circle_of_fifths = []
@@ -37,9 +45,35 @@ module Ceely
       @circle_of_fifths
     end
 
+    def circle_of_fifths_in_octave(octave)
+      circle_of_fifths.collect { |note| note.in_octave(octave) }
+    end
+
     # Play the notes in the scale from low to high
     def play(seconds, amplitude, &block)
       play_notes(notes.sort, seconds, amplitude, &block)
+    end
+
+    # Play the circle of fifths
+    def play_circle_of_fifths(seconds, amplitude, &block)
+      play_circle_of_fifths_in_octave(0, seconds, amplitude, &block)
+    end
+
+    # Play a slice of the circle of fifths
+    def play_circle_of_fifths_slice(slice, seconds, amplitude, &block)
+      play_circle_of_fifths_slice_in_octave(slice, 0, seconds, amplitude, &block)
+    end
+
+    # Play the circle of fifths in the given octave
+    def play_circle_of_fifths_in_octave(octave, seconds, amplitude, &block)
+      play_circle_of_fifths_slice_in_octave(nil, octave, seconds, amplitude, &block)
+    end
+
+    # Play the circle of fifths slice in the given octave
+    def play_circle_of_fifths_slice_in_octave(slice, octave, seconds, amplitude, &block)
+      notes = circle_of_fifths_in_octave(octave)
+      notes = notes.slice(slice) unless slice.blank?
+      play_notes(notes, seconds, amplitude, &block)
     end
 
     # Sort the Notes by frequency from low to high AND NAME THEM

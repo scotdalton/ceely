@@ -49,7 +49,19 @@ module Ceely
 
     describe '#play' do
       it 'raises a NotImplementedError' do
-        expect{ scale.play(1, 50) }.to raise_error(NotImplementedError)
+        expect{ scale.play(0.5, 50) }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#play_circle_of_fifths' do
+      it 'raises a NotImplementedError' do
+        expect{ scale.play_circle_of_fifths(0.5, 50) }.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe '#play_circle_of_fifths_in_octave' do
+      it 'raises a NotImplementedError' do
+        expect{ scale.play_circle_of_fifths_in_octave(1, 0.5, 50) }.to raise_error(NotImplementedError)
       end
     end
 

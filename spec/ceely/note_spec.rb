@@ -63,6 +63,12 @@ module Ceely
       end
     end
 
+    describe '#play' do
+      it 'raises a NotImplementedError' do
+        expect{ note.play(50) }.to raise_error(NotImplementedError)
+      end
+    end
+
     describe '#to_s' do
       it 'raises a NotImplementedError' do
         expect{ note.to_s }.to raise_error(NotImplementedError)

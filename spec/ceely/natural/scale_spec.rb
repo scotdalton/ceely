@@ -235,13 +235,13 @@ module Ceely
 
       context "when the natural pitches come from the scale," do
         scale = Ceely::Natural::Scale.new
-        subject(:c) { scale.sort.find { |note| note.name.eql? "C" } }
-        subject(:d) { scale.sort.find { |note| note.name.eql? "D" } }
-        subject(:e) { scale.sort.find { |note| note.name.eql? "E" } }
-        subject(:f) { scale.sort.find { |note| note.name.eql? "F" } }
-        subject(:g) { scale.sort.find { |note| note.name.eql? "G" } }
-        subject(:a) { scale.sort.find { |note| note.name.eql? "A" } }
-        subject(:b) { scale.sort.find { |note| note.name.eql? "B" } }
+        subject(:c) { scale.note_by_name("C") }
+        subject(:d) { scale.note_by_name("D") }
+        subject(:e) { scale.note_by_name("E") }
+        subject(:f) { scale.note_by_name("F") }
+        subject(:g) { scale.note_by_name("G") }
+        subject(:a) { scale.note_by_name("A") }
+        subject(:b) { scale.note_by_name("B") }
 
         describe '#note_type C' do
           it 'has the type that we expect' do

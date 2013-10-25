@@ -1,15 +1,17 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-require 'pry'
 Ceely::Assignment.new("Assignment 6", 620, 670).run do
   def refresh_results
-    @dodecaphonic = Ceely::Dodecaphonic::Note.new(@fundamental_frequency.text.to_f, @index.text.to_i)
-    @index_para.replace "Index: ", em(@dodecaphonic.index)
-    @cents_para.replace "Cents: ", em(@dodecaphonic.cents)
-    @raw_frequency_para.replace "Raw Frequency: ", em(@dodecaphonic.raw_frequency)
-    @octave_para.replace "Octave: ", em(@dodecaphonic.octave)
-    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@dodecaphonic.octave_adjusted_factor)
-    @frequency_para.replace "Frequency: ", em(@dodecaphonic.frequency)
+    @scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_i)
+    @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
+    @index_para.replace "Index: ", em(@note.index)
+    @cents_para.replace "Cents: ", em(@note.cents)
+    @raw_frequency_para.replace "Raw Frequency: ", em(@note.raw_frequency)
+    @octave_para.replace "Octave: ", em(@note.octave)
+    @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@note.octave_adjusted_factor)
+    @frequency_para.replace "Frequency: ", em(@note.frequency)
+    @name_para.replace "Name: ", em(@note.name)
+    @type_para.replace "Type: ", em(@note.type)
   end
   fundamental_frequency, index  = 528, 1
   duration, amplitude = 0.5, 50
@@ -51,8 +53,7 @@ Ceely::Assignment.new("Assignment 6", 620, 670).run do
       stack margin: 10 do
         button("Play the Dodecaphonic Scale") do
           refresh_results
-          scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_i)
-          scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          @scale.play(@duration.text.to_f, @amplitude.text.to_i)
         end
       end
     end
@@ -79,6 +80,12 @@ Ceely::Assignment.new("Assignment 6", 620, 670).run do
       end
       flow margin: 10 do
         @frequency_para = para ""
+      end
+      flow margin: 10 do
+        @name_para = para ""
+      end
+      flow margin: 10 do
+        @type_para = para ""
       end
       refresh_results
     end
