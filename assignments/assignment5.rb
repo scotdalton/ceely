@@ -2,7 +2,7 @@ $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 Ceely::Assignment.new("Assignment 5", 620, 670).run do
   def refresh_results
-    @scale = Ceely::EvenTempered::Scale.new(@fundamental_frequency.text.to_i)
+    @scale = Ceely::EvenTempered::Scale.new(@fundamental_frequency.text.to_f)
     @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
     @index_para.replace "Index: ", em(@note.index)
     @cents_para.replace "Cents: ", em(@note.cents)
@@ -53,7 +53,9 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
       stack margin: 10 do
         button("Play the Even Tempered Scale") do
           refresh_results
-          @scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          Thread.new do
+            @scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          end
         end
       end
     end

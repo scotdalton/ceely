@@ -2,7 +2,7 @@ $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 Ceely::Assignment.new("Assignment 3", 620, 670).run do
   def refresh_results
-    @scale = Ceely::Pythagorean::Scale.new(@fundamental_frequency.text.to_i)
+    @scale = Ceely::Pythagorean::Scale.new(@fundamental_frequency.text.to_f)
     @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
     @index_para.replace "Index: ", em(@note.index)
     @cents_para.replace "Cents: ", em(@note.cents)

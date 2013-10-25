@@ -120,6 +120,20 @@ module Ceely
         end
       end
 
+      describe '#pause!' do
+        it 'can add a pause' do
+          expect { song.pause!() }.not_to raise_error
+        end
+
+        it 'can add half a pause' do
+          expect { song.pause!(0.5) }.not_to raise_error
+        end
+
+        it 'returns self' do
+          expect(song.pause!()).to be(song)
+        end
+      end
+
       describe '#<<' do
         it 'can add playables' do
           expect { song << major_chord }.not_to raise_error

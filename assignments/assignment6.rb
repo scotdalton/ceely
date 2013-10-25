@@ -1,8 +1,8 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-Ceely::Assignment.new("Assignment 6", 620, 670).run do
+Ceely::Assignment.new("Assignment 6", 700, 750).run do
   def refresh_results
-    @scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_i)
+    @scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_f)
     @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
     @index_para.replace "Index: ", em(@note.index)
     @cents_para.replace "Cents: ", em(@note.cents)
@@ -15,7 +15,7 @@ Ceely::Assignment.new("Assignment 6", 620, 670).run do
   end
   fundamental_frequency, index  = 528, 1
   duration, amplitude = 0.5, 50
-  flow width: 800, height: 850 do
+  flow width: 700, height: 750 do
     flow margin: 20, width: 350, height: 375 do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
@@ -53,11 +53,16 @@ Ceely::Assignment.new("Assignment 6", 620, 670).run do
       stack margin: 10 do
         button("Play the Dodecaphonic Scale") do
           refresh_results
-          @scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          duration = @duration.text.to_f
+          amplitude = @amplitude.text.to_i
+          scale = @scale
+          Thread.new do
+            scale.play(duration, amplitude)
+          end
         end
       end
     end
-    flow margin: 20, width: 660, height: 375 do
+    flow margin: 20, width: 700, height: 375 do
       background lightgray, curve: 20
       border darkred, curve: 20, strokewidth: 1
       flow margin: 10 do

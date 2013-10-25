@@ -2,7 +2,11 @@ module Ceely
   class Song
     attr_reader :key, :tempo, :playables
 
-    def initialize(key, tempo)
+    def initialize(*args)
+      # Default to the even tempered scale
+      key = (args.shift || Ceely::EvenTempered::Scale.new)
+      # Default to 1 beat/second
+      tempo = (args.shift || 1)
       @key, @tempo = key, tempo
       @playables = []
     end
@@ -42,6 +46,11 @@ module Ceely
 
     def chords!(*chords)
       chords.each { |chord| self << chord }
+      self
+    end
+
+    def pause!(factor=1)
+      self << Ceely::Pause.new(tempo*factor)
       self
     end
 
