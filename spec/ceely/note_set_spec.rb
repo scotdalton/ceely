@@ -19,6 +19,16 @@ module Ceely
       end
     end
 
+    describe '#sorted_notes' do
+      it 'is an Array' do
+        expect(note_set.sorted_notes).to be_a(Array)
+      end
+
+      it 'has the expected size' do
+        expect(note_set.sorted_notes.size).to eq(0)
+      end
+    end
+
     describe '#sort' do
       it 'doesn\'t raise an error' do
         expect{ note_set.sort }.not_to raise_error

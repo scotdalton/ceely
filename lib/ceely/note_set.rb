@@ -1,6 +1,6 @@
 module Ceely
   class NoteSet
-    attr_reader :notes
+    attr_reader :notes, :sorted_notes
 
     def initialize(*notes)
       @notes = notes
@@ -8,6 +8,10 @@ module Ceely
 
     def size
       @size ||= notes.size
+    end
+
+    def sorted_notes
+      @sorted_notes ||= sort
     end
 
     # Sort the Notes by frequency from low to high

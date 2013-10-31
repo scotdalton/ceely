@@ -2,7 +2,7 @@ module Ceely
   # A Scale is a NoteSet with Notes based on a fundamental frequency
   # and some note names and note types
   class Scale < Ceely::NoteSet
-    attr_reader :fundamental_frequency, :size, :offset
+    attr_reader :fundamental_frequency, :size, :offset, :range
     attr_reader :note_names, :note_types
 
     def initialize(fundamental_frequency, *args)
@@ -17,26 +17,46 @@ module Ceely
       @fundamental_frequency = fundamental_frequency
       @size, @offset = size, offset, note_names
       @note_names, @note_types = note_names, note_types
-      @notes ||= ((0+offset)..(size+offset-1)).collect do |index|
-        name = self.class.name
-        # Make notes of from the module name
-        name.gsub(name.demodulize, "Note").constantize.
-          new(fundamental_frequency, index)
-      end
+      @range = (0+offset)..(size+offset-1)
+      @notes ||= range.collect { |index| note_by_index(index) }
+    end
+
+    def note_by_index(index)
+      return @notes[index] unless @notes.blank? or @notes[index].blank?
+      # Make notes of from the module name
+      name = self.class.name
+      name.gsub!(name.demodulize, "Note")
+      name.constantize.new(fundamental_frequency, index)
     end
 
     def note_by_name(name)
-      sort.find { |note| note.name.eql? name }
+      sorted_notes.find { |note| note.name.eql? name }
     end
 
     def note_by_type(type)
-      sort.find { |note| note.type.eql? type }
+      sorted_notes.find { |note| note.type.eql? type }
+    end
+
+    def note_name(index)
+      note_names[index % size] unless note_names.blank?
+    end
+
+    def note_type(index)
+      note_types[index % size] unless note_types.blank?
+    end
+
+    # Sort the Notes by frequency from low to high AND NAME THEM
+    def sort(size=nil)
+      super(size).each_with_index.collect do |note, index|
+        note.name = note_name(index) 
+        note.type = note_type(index) 
+        note
+      end
     end
 
     def circle_of_fifths
-      return @circle_of_fifth if defined? @circle_of_fifths
+      return @circle_of_fifths if defined? @circle_of_fifths
       @circle_of_fifths = []
-      sorted_notes = self.sort
       # Start at the beginning
       @circle_of_fifths << sorted_notes.first
       (1..(sorted_notes.size-1)).step do
@@ -76,15 +96,6 @@ module Ceely
       play_notes(notes, seconds, amplitude, &block)
     end
 
-    # Sort the Notes by frequency from low to high AND NAME THEM
-    def sort(size=nil)
-      super(size).each_with_index.collect do |note, index|
-        note.name = note_name(index) 
-        note.type = note_type(index) 
-        note
-      end
-    end
-
     # Returns an Array of Notes that represents the first mode
     # Doesn't contain the octave.
     def first_mode
@@ -108,14 +119,6 @@ module Ceely
       mode = (mode_head + mode_tail) 
       # Add the octave of the first note to the end
       mode << mode.first.in_octave(1)
-    end
-
-    def note_name(index)
-      note_names[index % size] unless note_names.blank?
-    end
-
-    def note_type(index)
-      note_types[index % size] unless note_types.blank?
     end
 
     def mode_start_note_index(mode_index)

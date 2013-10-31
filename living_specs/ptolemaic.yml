@@ -1,0 +1,37 @@
+notes:
+  -5:
+    octave_adjusted_numerator: 16
+    octave_adjusted_denominator: 15
+  -4:
+    octave_adjusted_numerator: 8
+    octave_adjusted_denominator: 5
+  -3:
+    octave_adjusted_numerator: 6
+    octave_adjusted_denominator: 5
+  -2:
+    octave_adjusted_numerator: 16
+    octave_adjusted_denominator: 9
+  -1:
+    octave_adjusted_numerator: 4
+    octave_adjusted_denominator: 3
+  0:
+    octave_adjusted_numerator: 1
+    octave_adjusted_denominator: 1
+  1:
+    octave_adjusted_numerator: 3
+    octave_adjusted_denominator: 2
+  2:
+    octave_adjusted_numerator: 9
+    octave_adjusted_denominator: 8
+  3:
+    octave_adjusted_numerator: 5
+    octave_adjusted_denominator: 3
+  4:
+    octave_adjusted_numerator: 5
+    octave_adjusted_denominator: 4
+  5:
+    octave_adjusted_numerator: 15
+    octave_adjusted_denominator: 8
+  6:
+    octave_adjusted_numerator: 64
+    octave_adjusted_denominator: 45

@@ -5,6 +5,7 @@ module Ceely
 
     attr_reader :fundamental_frequency, :index
     attr_accessor :name, :type, :duration
+    attr_writer :octave
 
     def initialize(fundamental_frequency, *args)
       index = (args.shift || 0)
@@ -16,15 +17,15 @@ module Ceely
     end
 
     def becomes(note_class)
-      note_class.new(fundamental_frequency, index, name)
+      note_class.new(fundamental_frequency, index, name, type)
     end
 
     def in_octave(octave)
-      return self.class.new(frequency*(2**octave), 0, name)
+      self.class.new(frequency*(2**octave), 0, name, type)
     end
 
     def raw_frequency
-      @raw_frequency ||= (fundamental_frequency * factor).to_f
+      @raw_frequency ||= (fundamental_frequency * factor)
     end
 
     # Get the raw tone for this note
@@ -54,8 +55,7 @@ module Ceely
     end
 
     def frequency
-      @frequency ||= 
-        octave_adjusted_factor.to_f * fundamental_frequency
+      @frequency ||= octave_adjusted_factor * fundamental_frequency
     end
 
     def tone
@@ -90,12 +90,12 @@ module Ceely
       # Handle the octave
       # If the frequencies are the same we're either dealing with
       # the same note or the note in a different octave. Either way 
-      # let's just deal with thefactors, not the octave adjusted
+      # let's just deal with the raw frequencies, not the octave adjusted
       # factors.  If they're the same, it'll just be 1, so no harm,
       # no foul.  If they're different, this should give us the proper
       # interval.
       if frequency.to_i == other_note.frequency.to_i
-        Rational(other_note.factor, self.factor)
+        Rational(other_note.raw_frequency, self.raw_frequency)
       else
         Rational(other_note.octave_adjusted_factor, self.octave_adjusted_factor)
       end

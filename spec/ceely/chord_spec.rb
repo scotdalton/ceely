@@ -13,9 +13,9 @@ module Ceely
 
     context "when it's built from a Pythagorean scale," do
       scale = Ceely::Pythagorean::Scale.new
-      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
-      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
-      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:u) { scale.note_by_type("1") }
+      subject(:m3) { scale.note_by_type("M3") }
+      subject(:p5) { scale.note_by_type("5") }
       subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
 
       describe '#notes' do
@@ -41,9 +41,9 @@ module Ceely
 
     context "when it's built from an Even Tempered scale," do
       scale = Ceely::EvenTempered::Scale.new
-      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
-      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
-      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:u) { scale.note_by_type("1") }
+      subject(:m3) { scale.note_by_type("M3") }
+      subject(:p5) { scale.note_by_type("5") }
       subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
 
       describe '#notes' do
@@ -69,9 +69,9 @@ module Ceely
 
     context "when it's built from a Dodecaphonic scale," do
       subject(:scale) { Ceely::Dodecaphonic::Scale.new }
-      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
-      subject(:m3) { scale.sort.find { |note| note.type.eql? "M3" } }
-      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:u) { scale.note_by_type("1") }
+      subject(:m3) { scale.note_by_type("M3") }
+      subject(:p5) { scale.note_by_type("5") }
       subject(:chord) { Ceely::Chord.new(2, u, m3, p5) }
 
       describe '#notes' do

@@ -1,9 +1,9 @@
 require 'spec_helper'
 module Ceely
   module Harmonic
-    describe Ceely::Harmonic::Scale do
-      context "when it's a 33 note scale," do
-        subject(:scale) { Ceely::Harmonic::Scale.new(528.0, 33) }
+    describe Ceely::Ptolemaic::Scale do
+      context "when constructed with defaults," do
+        subject(:scale) { Ceely::Ptolemaic::Scale.new }
 
         describe '#fundamental_frequency' do
           it 'has the fundamental frequency that we expect' do
@@ -13,7 +13,7 @@ module Ceely
 
         describe '#size' do
           it 'has the size we expect' do
-            expect(scale.size).to eq(33)
+            expect(scale.size).to eq(12)
           end
         end
 
@@ -23,7 +23,7 @@ module Ceely
           end
 
           it 'has the expected size' do
-            expect(scale.notes.size).to eq(33)
+            expect(scale.notes.size).to eq(12)
           end
         end
 
@@ -33,7 +33,7 @@ module Ceely
           end
 
           it 'has the expected size' do
-            expect(scale.sorted_notes.size).to eq(33)
+            expect(scale.sorted_notes.size).to eq(12)
           end
         end
 
@@ -43,7 +43,7 @@ module Ceely
           end
 
           it 'has the scale\'s size' do
-            expect(scale.sort.size).to eq(33)
+            expect(scale.sort.size).to eq(12)
           end
 
           it 'has the given size' do
@@ -53,7 +53,7 @@ module Ceely
 
         describe '#offset' do
           it 'has the offset we expect' do
-            expect(scale.offset).to eq(0)
+            expect(scale.offset).to eq(-5)
           end
         end
 

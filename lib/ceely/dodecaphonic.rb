@@ -9,7 +9,7 @@ module Ceely
     class Scale < Ceely::Pythagorean::Scale
       NOTE_NAMES = %w{ C Db D Eb E F Gb F# G Ab A Bb B }
 
-      def initialize(fundamental_frequency=528.0)
+      def initialize(fundamental_frequency=528.0, *args)
         super(fundamental_frequency, 13, -6, NOTE_NAMES)
       end
 

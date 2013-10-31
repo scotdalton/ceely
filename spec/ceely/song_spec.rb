@@ -5,10 +5,10 @@ module Ceely
       subject(:scale) { Ceely::Pythagorean::Scale.new }
       subject(:tempo) { 1 }
       subject(:song) { Ceely::Song.new(scale, tempo) }
-      subject(:u) { scale.sort.find { |note| note.type.eql? "1" } }
-      subject(:minor_3) { scale.sort.find { |note| note.type.eql? "m3" } }
-      subject(:major_3) { scale.sort.find { |note| note.type.eql? "M3" } }
-      subject(:p5) { scale.sort.find { |note| note.type.eql? "5" } }
+      subject(:u) { scale.note_by_type("1") }
+      subject(:minor_3) { scale.note_by_type("m3") }
+      subject(:major_3) { scale.note_by_type("M3") }
+      subject(:p5) { scale.note_by_type("5") }
       subject(:minor_chord) { Ceely::Chord.new(u, minor_3, p5) }
       subject(:major_chord) { Ceely::Chord.new(u, major_3, p5) }
 

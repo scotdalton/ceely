@@ -23,13 +23,24 @@ module Ceely
         super(fundamental_frequency, size, offset, note_names, note_types)
       end
 
+      def naturals
+        @naturals ||= %w{ 1 2 M3 4 5 M6 M7 }.collect do |type|
+          note_by_type(type)
+        end
+      end
+
+      def accidentals
+        @accidentals ||= %w{ m2 m3 b5(b) b5(#) m6 m7 }.collect do |type|
+          note_by_type(type)
+        end
+      end
+
       # Override the circle of fifths to reject 
       # one of the diminished fifths, default to Gb
       def circle_of_fifths(diminished_fifth_reject="Gb")
         return @circle_of_fifth if defined? @circle_of_fifths
         @circle_of_fifths = []
-        sorted_notes = self.sort
-        # Reject one of the dimished fifths
+        # Reject one of the diminished fifths
         sorted_notes.reject! { |note| note.name.eql? diminished_fifth_reject }
         # Start at the beginning
         @circle_of_fifths << sorted_notes.first

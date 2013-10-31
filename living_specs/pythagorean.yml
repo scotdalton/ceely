@@ -6,6 +6,7 @@ notes:
     octave_adjusted_denominator: 0.5
     octave_adjusted_factor: 1.3333333333333333
     frequency: 704.00
+    cents: 498
   0:
     factor: 1/1
     raw_frequency: 528.00
@@ -13,6 +14,7 @@ notes:
     octave_adjusted_denominator: 1
     octave_adjusted_factor: 1
     frequency: 528.00
+    cents: 0
   1:
     factor: 3/2
     raw_frequency: 792.00
@@ -20,6 +22,7 @@ notes:
     octave_adjusted_denominator: 1
     octave_adjusted_factor: 1.5
     frequency: 792.00
+    cents: 702
   2:
     factor: 9/4
     raw_frequency: 1188.00
@@ -27,6 +30,7 @@ notes:
     octave_adjusted_denominator: 2
     octave_adjusted_factor: 1.125
     frequency: 594.00
+    cents: 204
   3:
     factor: 27/8
     raw_frequency: 1782.00
@@ -34,6 +38,7 @@ notes:
     octave_adjusted_denominator: 2
     octave_adjusted_factor: 1.6875
     frequency: 891.00
+    cents: 906
   4:
     factor: 81/16
     raw_frequency: 2673.00
@@ -41,6 +46,7 @@ notes:
     octave_adjusted_denominator: 4
     octave_adjusted_factor: 1.265625
     frequency: 668.25
+    cents: 408
   5:
     factor: 243/32
     raw_frequency: 4009.5
@@ -48,6 +54,7 @@ notes:
     octave_adjusted_denominator: 4
     octave_adjusted_factor: 1.8984375
     frequency: 1002.375
+    cents: 1110
   6:
     factor: 729/64
     raw_frequency: 6014.25
@@ -55,6 +62,7 @@ notes:
     octave_adjusted_denominator: 8
     octave_adjusted_factor: 1.423828125
     frequency: 751.78125
+    cents: 612
   7:
     factor: 2187/128
     raw_frequency: 9021.375
@@ -62,6 +70,7 @@ notes:
     octave_adjusted_denominator: 16
     octave_adjusted_factor: 1.06787109375
     frequency: 563.8359375
+    cents: 114
   8:
     factor: 6561/256
     raw_frequency: 13532.0625
@@ -69,6 +78,7 @@ notes:
     octave_adjusted_denominator: 16
     octave_adjusted_factor: 1.601806640625
     frequency: 845.75390625
+    cents: 816
   9:
     factor: 19683/512
     raw_frequency: 20298.09375
@@ -76,6 +86,7 @@ notes:
     octave_adjusted_denominator: 32
     octave_adjusted_factor: 1.20135498046875
     frequency: 634.3154296875
+    cents: 318
   10:
     factor: 59049/1024
     raw_frequency: 30447.140625
@@ -83,6 +94,7 @@ notes:
     octave_adjusted_denominator: 32
     octave_adjusted_factor: 1.802032470703125
     frequency: 951.47314453125
+    cents: 1020
   11:
     factor: 177147/2048
     raw_frequency: 45670.7109375
@@ -90,6 +102,7 @@ notes:
     octave_adjusted_denominator: 64
     octave_adjusted_factor: 1.3515243530273438
     frequency: 713.6048583984375
+    cents: 522
   12:
     factor: 531441/4096
     raw_frequency: 68506.06640625
@@ -97,3 +110,4 @@ notes:
     octave_adjusted_denominator: 128
     octave_adjusted_factor: 1.0136432647705078
     frequency: 535.2036437988281
+    cents: 23
