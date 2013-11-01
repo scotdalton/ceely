@@ -1,5 +1,6 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
+INDEXES = %w{ 0 1 2 3 4 5 6 7 8 9 10 11 }
 Ceely::Assignment.new("Assignment 5", 620, 670).run do
   def refresh_results
     @scale = Ceely::EvenTempered::Scale.new(@fundamental_frequency.text.to_f)
@@ -14,7 +15,7 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
     @type_para.replace "Type: ", em(@note.type)
   end
   fundamental_frequency, index  = 528, 1
-  scale_size, scale_offset, duration, amplitude = 12, 0, 0.5, 50
+  duration, amplitude = 0.5, 50
   flow width: 800, height: 850 do
     flow margin: 20, width: 350, height: 375 do
       background lightgray, curve: 20
@@ -28,7 +29,9 @@ Ceely::Assignment.new("Assignment 5", 620, 670).run do
       end
       stack margin: 10 do
         para "Index: "
-        @index = edit_line(index)
+        @index = list_box items: INDEXES, choose: "1" do |list|
+          refresh_results
+        end
       end
       stack margin: 10 do
         button("Refresh the Stats") do

@@ -3,7 +3,7 @@ require 'ceely'
 Ceely::Assignment.new("Assignment 2", 620, 670).run do
   def refresh_results
     @scale = Ceely::Harmonic::Scale.new(@fundamental_frequency.text.to_f)
-    @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
+    @note = @scale.note_by_index(@index.text.to_i)
     @index_para.replace "Index: ", em(@note.index)
     @cents_para.replace "Cents: ", em(@note.cents)
     @raw_frequency_para.replace "Raw Frequency: ", em(@note.raw_frequency)

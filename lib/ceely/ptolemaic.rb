@@ -11,7 +11,7 @@ module Ceely
             (1/syntonic_comma) * super
           when 6
             diminished_fifth_factor
-          else 
+          else
             super
           end
       end

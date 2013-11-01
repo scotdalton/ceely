@@ -1,5 +1,6 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
+INDEXES = %w{ -1 0 1 2 3 4 5 6 7 8 9 10 11 }
 Ceely::Assignment.new("Assignment 3", 620, 670).run do
   def refresh_results
     @scale = Ceely::Pythagorean::Scale.new(@fundamental_frequency.text.to_f)
@@ -28,7 +29,9 @@ Ceely::Assignment.new("Assignment 3", 620, 670).run do
       end
       stack margin: 10 do
         para "Index: "
-        @index = edit_line(index)
+        @index = list_box items: INDEXES, choose: "1" do |list|
+          refresh_results
+        end
       end
       stack margin: 10 do
         button("Refresh the Stats") do

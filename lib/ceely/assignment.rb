@@ -1,4 +1,5 @@
 require 'shoes'
+require 'pry'
 module Ceely
   class Assignment
     attr_reader :name, :width, :height
