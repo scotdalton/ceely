@@ -1,7 +1,7 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 INDEXES = %w{ -5 -4 -3 -2 -1 0 1 2 3 4 5 6 }
-Ceely::Assignment.new("Assignment 7", 700, 750).run do
+Ceely::Gui::Assignment.new("Assignment 7", 700, 750).run do
   def refresh_results
     @index.choose("1") if @index.text.blank?
     @scale = Ceely::Ptolemaic::Scale.new(@fundamental_frequency.text.to_f)
@@ -61,7 +61,8 @@ Ceely::Assignment.new("Assignment 7", 700, 750).run do
           amplitude = @amplitude.text.to_i
           scale = @scale
           Thread.new do
-            scale.play(duration, amplitude)
+            scale.duration = duration
+            scale.play(amplitude)
           end
         end
       end

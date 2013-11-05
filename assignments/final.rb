@@ -1,7 +1,7 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 SCALES = %w{ EvenTempered Pythagorean Dodecaphonic }
-Ceely::Assignment.new("Final", 350, 375).run do
+Ceely::Gui::Assignment.new("Final", 350, 375).run do
   def refresh()
     @scales.choose("EvenTempered") if @scales.text.blank?
   end
@@ -48,7 +48,7 @@ Ceely::Assignment.new("Final", 350, 375).run do
             scale = @scales.text
             key = "Ceely::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
             tempo = @tempo.text.to_f
-            songs << Ceely::MaryHadALittleLamb.new(key, tempo)
+            songs << Ceely::Songbook::MaryHadALittleLamb.new(key, tempo)
           end
           songs.each do |song|
             Thread.new do

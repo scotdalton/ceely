@@ -1,6 +1,6 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-Ceely::Assignment.new("Assignment 2", 620, 670).run do
+Ceely::Gui::Assignment.new("Assignment 2", 620, 670).run do
   def refresh_results
     @scale = Ceely::Harmonic::Scale.new(@fundamental_frequency.text.to_f)
     @note = @scale.note_by_index(@index.text.to_i)
@@ -51,8 +51,13 @@ Ceely::Assignment.new("Assignment 2", 620, 670).run do
       stack margin: 10 do
         button("Play the Harmonic Scale") do
           refresh_results
-          scale = Ceely::Harmonic::Scale.new(@fundamental_frequency.text.to_i)
-          scale.play(@duration.text.to_f, @amplitude.text.to_i)
+          duration = @duration.text.to_f
+          amplitude = @amplitude.text.to_i
+          scale = @scale
+          Thread.new do
+            scale.duration = duration
+            scale.play(amplitude)
+          end
         end
       end
     end

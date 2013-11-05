@@ -1,6 +1,6 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-Ceely::Assignment.new("Assignment 1", 500, 400).run do
+Ceely::Gui::Assignment.new("Assignment 1", 500, 400).run do
   frequency, duration, amplitude = 440, 5, 50
   background lightgray, curve: 20
   border darkred, curve: 20, strokewidth: 1
