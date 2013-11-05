@@ -43,9 +43,10 @@ module Ceely
     # adjusted by Ptolemy for consonance.
     class Scale < Ceely::Pythagorean::Scale
       NOTE_NAMES = %w{ C Db D Eb E F F# G Ab A Bb B }
+      NOTE_TYPES = %w{ 1 m2 2 m3 M3 4 b5 5 m6 M6 m7 M7 }
 
       def initialize(fundamental_frequency=528.0, *args)
-        super(fundamental_frequency, 12, -5, NOTE_NAMES)
+        super(fundamental_frequency, 12, -5, NOTE_NAMES, NOTE_TYPES)
       end
     end
   end

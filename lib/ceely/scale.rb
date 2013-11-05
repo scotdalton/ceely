@@ -2,21 +2,22 @@ module Ceely
   # A Scale is a NoteSet with Notes based on a fundamental frequency
   # and some note names and note types
   class Scale < Ceely::NoteSet
+    NATURALS = %w{ 1 2 M3 4 5 M6 M7 }
+
     attr_reader :fundamental_frequency, :size, :offset, :range
     attr_reader :note_names, :note_types
 
     def initialize(fundamental_frequency, *args)
-      size = (args.shift || 12)
-      offset = (args.shift || 0)
-      note_names = (args.shift || [])
+      @fundamental_frequency = fundamental_frequency
+      @size = (args.shift || 12)
+      @offset = (args.shift || 0)
+      @note_names = (args.shift || [])
       # TODO: Raise an argument error if the note names don't match the size
       # unless of course they're empty, cuz that's OK
-      note_types = (args.shift || [])
+      @note_types = (args.shift || [])
       # TODO: Raise an argument error if the interval type don't match the size
       # unless of course they're empty, cuz that's OK
-      @fundamental_frequency = fundamental_frequency
-      @size, @offset = size, offset, note_names
-      @note_names, @note_types = note_names, note_types
+      @duration = (args.shift || 0.5)
       @range = (0+offset)..(size+offset-1)
       @notes ||= range.collect { |index| note_by_index(index) }
     end
@@ -54,6 +55,10 @@ module Ceely
       end
     end
 
+    def naturals
+      @naturals ||= NATURALS.collect { |type| note_by_type(type) }
+    end
+
     def circle_of_fifths
       return @circle_of_fifths if defined? @circle_of_fifths
       @circle_of_fifths = []
@@ -70,36 +75,36 @@ module Ceely
     end
 
     # Play the notes in the scale from low to high
-    def play(seconds, amplitude, &block)
-      play_notes(notes.sort, seconds, amplitude, &block)
+    def play(amplitude, &block)
+      play_notes(notes.sort, amplitude, &block)
     end
 
     # Play the circle of fifths
-    def play_circle_of_fifths(seconds, amplitude, &block)
-      play_circle_of_fifths_in_octave(0, seconds, amplitude, &block)
+    def play_circle_of_fifths(amplitude, &block)
+      play_circle_of_fifths_in_octave(0, amplitude, &block)
     end
 
     # Play a slice of the circle of fifths
-    def play_circle_of_fifths_slice(slice, seconds, amplitude, &block)
-      play_circle_of_fifths_slice_in_octave(slice, 0, seconds, amplitude, &block)
+    def play_circle_of_fifths_slice(slice, amplitude, &block)
+      play_circle_of_fifths_slice_in_octave(slice, 0, amplitude, &block)
     end
 
     # Play the circle of fifths in the given octave
-    def play_circle_of_fifths_in_octave(octave, seconds, amplitude, &block)
-      play_circle_of_fifths_slice_in_octave(nil, octave, seconds, amplitude, &block)
+    def play_circle_of_fifths_in_octave(octave, amplitude, &block)
+      play_circle_of_fifths_slice_in_octave(nil, octave, amplitude, &block)
     end
 
     # Play the circle of fifths slice in the given octave
-    def play_circle_of_fifths_slice_in_octave(slice, octave, seconds, amplitude, &block)
+    def play_circle_of_fifths_slice_in_octave(slice, octave, amplitude, &block)
       notes = circle_of_fifths_in_octave(octave)
       notes = notes.slice(slice) unless slice.blank?
-      play_notes(notes, seconds, amplitude, &block)
+      play_notes(notes, amplitude, &block)
     end
 
     # Returns an Array of Notes that represents the first mode
     # Doesn't contain the octave.
     def first_mode
-      @first_mode ||= sort
+      @first_mode ||= naturals
     end
 
     # Returns an Array of Notes that represent the Nth mode

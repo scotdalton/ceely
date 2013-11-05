@@ -14,6 +14,7 @@ module Ceely
     class Scale < Ceely::Scale
       NOTE_NAMES = %w{ C C# D D# E F Gb F# G G# A A# B }
       NOTE_TYPES = %w{ 1 m2 2 m3 M3 4 b5(b) b5(#) 5 m6 M6 m7 M7 }
+      MODE_NAMES = %w{ ionian dorian phrygian lydian mixolydian aeolian locrian }
 
       def initialize(fundamental_frequency=528.0, *args)
         size = (args.shift || 13)
@@ -23,16 +24,18 @@ module Ceely
         super(fundamental_frequency, size, offset, note_names, note_types)
       end
 
-      def naturals
-        @naturals ||= %w{ 1 2 M3 4 5 M6 M7 }.collect do |type|
-          note_by_type(type)
+      MODE_NAMES.each_with_index do |mode, index|
+        define_method(mode) do |octave_index|
+          mode_index = index + (octave_index*(size+1))
+          nth_mode(mode_index)
         end
       end
 
-      def accidentals
-        @accidentals ||= %w{ m2 m3 b5(b) b5(#) m6 m7 }.collect do |type|
-          note_by_type(type)
-        end
+      # Play the named mode in the given octave
+      def play_mode(mode, octave_index, amplitude, &block)
+        raise ArgumentError.new("Don't know that mode") unless MODE_NAMES.include?(mode)
+        notes = send(mode.to_sym, octave_index)
+        play_notes(notes, amplitude, &block)
       end
 
       # Override the circle of fifths to reject 

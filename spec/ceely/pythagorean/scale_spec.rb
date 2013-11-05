@@ -2,6 +2,25 @@ require 'spec_helper'
 module Ceely
   module Pythagorean
     describe Ceely::Pythagorean::Scale do
+      pythagorean["modes"].each do |mode, octaves|
+        octaves.each do |octave_index, expected_frequencies|
+          context "when we get the #{mode} mode" do
+            subject(:scale) { Ceely::Pythagorean::Scale.new }
+            describe "##{mode} in octave #{octave_index}" do
+              it 'has 8 elements' do
+                expect(scale.send(mode.to_sym, octave_index).size).to be(8)
+              end
+              it 'has the frequencies that we expect' do
+                frequencies = scale.send(mode.to_sym, octave_index).collect { |note| 
+                  note.frequency 
+                }
+                expect(frequencies).to eq(expected_frequencies)
+              end
+            end
+          end
+        end
+      end
+
       context 'when constructed with defaults,' do
         subject(:scale) { Ceely::Pythagorean::Scale.new }
 
@@ -147,6 +166,42 @@ module Ceely
           end
         end
 
+        describe '#first_mode' do
+          it 'is an Array' do
+            expect(scale.first_mode).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.first_mode.size).to eq(7)
+          end
+        end
+
+        describe '#nth_mode' do
+          it 'is an Array' do
+            expect(scale.nth_mode(0)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.nth_mode(0).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.nth_mode(0).first.name).to eq("C")
+          end
+
+          it 'is an Array' do
+            expect(scale.nth_mode(1)).to be_a(Array)
+          end
+
+          it 'has the expected size' do
+            expect(scale.nth_mode(1).size).to eq(8)
+          end
+
+          it 'has the expected first name' do
+            expect(scale.nth_mode(1).first.name).to eq("D")
+          end
+        end
+
         describe '#circle_of_fifths' do
           it 'has 12 elements' do
             expect(scale.circle_of_fifths.size).to eq(12)
@@ -206,19 +261,25 @@ module Ceely
         unless(ENV['TRAVIS'].eql? "true")
           describe '#play' do
             it 'does not raises an error' do
-              expect{ scale.play(0.5, 50) }.not_to raise_error
+              expect{ scale.play(50) }.not_to raise_error
+            end
+          end
+
+          describe '#play_mode' do
+            it 'does not raises an error' do
+              expect{ scale.play_mode("ionian", 0, 50) }.not_to raise_error
             end
           end
 
           describe '#play_circle_of_fifths' do
             it 'does not raises an error' do
-              expect{ scale.play_circle_of_fifths(0.5, 50) }.not_to raise_error
+              expect{ scale.play_circle_of_fifths(50) }.not_to raise_error
             end
           end
 
           describe '#play_circle_of_fifths_in_octave 1' do
             it 'does not raises an error' do
-              expect{ scale.play_circle_of_fifths_in_octave(1, 0.5, 50) }.not_to raise_error
+              expect{ scale.play_circle_of_fifths_in_octave(1, 50) }.not_to raise_error
             end
           end
         end
@@ -290,7 +351,7 @@ module Ceely
         unless(ENV['TRAVIS'].eql? "true")
           describe '#play' do
             it 'does not raises an error' do
-              expect{ scale.play(0.5, 50) }.not_to raise_error
+              expect{ scale.play(50) }.not_to raise_error
             end
           end
         end

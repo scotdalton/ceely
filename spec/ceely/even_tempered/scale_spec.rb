@@ -144,19 +144,19 @@ module Ceely
         unless(ENV['TRAVIS'].eql? "true")
           describe '#play' do
             it 'does not raises an error' do
-              expect{ scale.play(0.5, 50) }.not_to raise_error
+              expect{ scale.play(50) }.not_to raise_error
             end
           end
 
           describe '#play_circle_of_fifths' do
             it 'does not raises an error' do
-              expect{ scale.play_circle_of_fifths(0.5, 50) }.not_to raise_error
+              expect{ scale.play_circle_of_fifths(50) }.not_to raise_error
             end
           end
 
           describe '#play_circle_of_fifths_in_octave 1' do
             it 'does not raises an error' do
-              expect{ scale.play_circle_of_fifths_in_octave(1, 0.5, 50) }.not_to raise_error
+              expect{ scale.play_circle_of_fifths_in_octave(1, 50) }.not_to raise_error
             end
           end
         end

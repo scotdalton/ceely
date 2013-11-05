@@ -62,7 +62,7 @@ module Ceely
         unless(ENV['TRAVIS'].eql? "true")
           describe '#play' do
             it 'does not raises an error' do
-              expect{ scale.play(1, 50) }.not_to raise_error
+              expect{ scale.play(50) }.not_to raise_error
             end
           end
         end

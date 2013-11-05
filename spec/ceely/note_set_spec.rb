@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Ceely::NoteSet do
-    subject(:note_set) { Ceely::NoteSet.new() }
+    subject(:note_set) { Ceely::NoteSet.new(0.5) }
 
     describe '#size' do
       it 'has the size we expect' do
@@ -37,7 +37,7 @@ module Ceely
 
     describe '#play' do
       it 'doesn\'t raise an error' do
-        expect{ note_set.play(1, 50) }.not_to raise_error
+        expect{ note_set.play(50) }.not_to raise_error
       end
     end
 

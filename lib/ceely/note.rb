@@ -2,9 +2,10 @@ module Ceely
   # An Note takes a fundamental frequency, an index and an optional name
   class Note
     include Comparable
+    include Ceely::Playable
 
     attr_reader :fundamental_frequency, :index
-    attr_accessor :name, :type, :duration
+    attr_accessor :name, :type
     attr_writer :octave
 
     def initialize(fundamental_frequency, *args)

@@ -1,8 +1,11 @@
 module Ceely
   class NoteSet
+    include Ceely::Playable
+
     attr_reader :notes, :sorted_notes
 
-    def initialize(*notes)
+    def initialize(duration, *notes)
+      @duration = duration
       @notes = notes
     end
 
@@ -22,15 +25,15 @@ module Ceely
     end
 
     # Play the notes in the set
-    def play(seconds, amplitude, &block)
-      play_notes(notes, seconds, amplitude, &block)
+    def play(amplitude, &block)
+      play_notes(notes, amplitude, &block)
     end
 
     # Play the given set of notes
-    def play_notes(notes, seconds, amplitude, &block)
+    def play_notes(notes, amplitude, &block)
       notes.each do |note|
         # Set the number of seconds for this note.
-        note.duration = seconds
+        note.duration = duration
         note.play(amplitude) 
         yield if block_given?
       end

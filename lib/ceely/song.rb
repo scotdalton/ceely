@@ -1,13 +1,15 @@
 module Ceely
   class Song
+    include Ceely::Playable
+
     attr_reader :key, :tempo, :playables
 
     def initialize(*args)
+      @key, @tempo = args
       # Default to the even tempered scale
-      key = (args.shift || Ceely::EvenTempered::Scale.new)
+      @key ||= Ceely::EvenTempered::Scale.new
       # Default to 1 beat/second
-      tempo = (args.shift || 1)
-      @key, @tempo = key, tempo
+      @tempo ||= 1
       @playables = []
     end
 

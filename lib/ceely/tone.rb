@@ -1,6 +1,7 @@
 module Ceely
   class Tone
     include Comparable
+    include Ceely::Playable
 
     attr_reader :frequency
     attr_accessor :duration
