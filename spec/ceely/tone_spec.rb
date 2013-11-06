@@ -50,7 +50,7 @@ module Ceely
       # we don't have permissions.
       unless(ENV['TRAVIS'].eql? "true")
         describe '#play' do
-          it 'plays for 0.5 seconds' do
+          it 'plays' do
             expect { tone.play(50) }.not_to raise_error
           end
         end

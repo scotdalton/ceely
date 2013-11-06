@@ -14,7 +14,7 @@ Shoes.app width: 800, height: 800, title: "Ceely" do
   end
 
   def scale()
-    Ceely::Ptolemaic::Scale.new
+    Ceely::Scales::Ptolemaic::Scale.new
   end
 
   strokewidth 1

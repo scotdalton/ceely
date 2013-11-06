@@ -23,11 +23,17 @@ module Ceely
       @rate, @size, @channels = rate, size, channels
     end
 
-    # Play the tone for the given number of seconds
+    def play_noise(noise, amplitude)
+      open_noise_clip(noise, amplitude, clip)
+      clip.start
+      clip.drain
+      clip.close
+    end
+
+    # Play the tone
     # at the specified amplitude
     def play_tone(tone, amplitude)
-      # Play the tone
-      open_clip(tone, tone.duration, amplitude, clip)
+      open_tone_clip(tone, amplitude, clip)
       clip.start
       clip.drain
       clip.close
@@ -41,14 +47,14 @@ module Ceely
         mixer.synchronize(clips, true)
         # Play the first tone, the others will follow
         tone, clip = tones.first, clips.first
-        open_clip(tone, tone.duration, amplitude, clip)
+        open_tone_clip(tone, amplitude, clip)
         clip.start()
         clip.drain()
         clip.close()
         mixer.unsynchronize(lines)
       else
         tones.each_with_index do |tone, index|
-          open_clip(tone, tone.duration, amplitude, clips[index])
+          open_tone_clip(tone, amplitude, clips[index])
         end
         clips.each { |clip| clip.start }
         clips.each { |clip| clip.drain }
@@ -56,15 +62,21 @@ module Ceely
       end
     end
 
-    def open_clip(tone, seconds, amplitude, clip)
-      # Get the sine wave for the number of seconds at the given amplitude,
+    def open_noise_clip(noise, amplitude, clip)
+      file = java.io.File.new(noise.filename)
+      audio_input = AudioSystem.getAudioInputStream(file)
+      clip.open(audio_input)
+    end
+
+    def open_tone_clip(tone, amplitude, clip)
+      # Get the sine wave for the tone at the given amplitude,
       # converted to byte string representations
       # http://ruby-doc.org/core-1.9.3/Array.html#method-i-pack
       sine_wave = sine_wave(tone, amplitude).pack("c*")
       # Unpack the string into Java bytes
       java_bytes = sine_wave.to_java_bytes
       # Open the clip
-      clip.open(format, java_bytes, 0, seconds*rate)
+      clip.open(format, java_bytes, 0, tone.duration*rate)
     end
 
     # Returns an array of integers, representing the tone's sine wave

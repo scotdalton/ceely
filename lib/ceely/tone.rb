@@ -1,10 +1,9 @@
 module Ceely
   class Tone
     include Comparable
-    include Ceely::Playable
+    include Ceely::Mixins::Playable
 
     attr_reader :frequency
-    attr_accessor :duration
 
     # Frequency in Hz
     # Raises an error if it's not a valid number
@@ -14,21 +13,16 @@ module Ceely
       @frequency, @duration = frequency, duration
     end
 
-    # Play the tone for the given number of seconds
+    # Play the tone
     # at the specified amplitude
     def play(amplitude)
-      player.play_tone(self, amplitude)
+      play_tone(self, amplitude)
     end
 
     # Angular frequency of the tone
     # http://en.wikipedia.org/wiki/Angular_frequency
     def angular_frequency
       @angular_frequency ||= 2.0 * Math::PI * frequency
-    end
-
-    # New player with default settings
-    def player
-      @player ||= Player.new
     end
 
     def to_s

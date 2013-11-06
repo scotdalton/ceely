@@ -12,7 +12,7 @@ module Ceely
     end
 
     context "when it's built from a Pythagorean scale," do
-      scale = Ceely::Pythagorean::Scale.new
+      scale = Ceely::Scales::Pythagorean::Scale.new
       subject(:u) { scale.note_by_type("1") }
       subject(:m3) { scale.note_by_type("M3") }
       subject(:p5) { scale.note_by_type("5") }
@@ -40,7 +40,7 @@ module Ceely
     end
 
     context "when it's built from an Even Tempered scale," do
-      scale = Ceely::EvenTempered::Scale.new
+      scale = Ceely::Scales::EvenTempered::Scale.new
       subject(:u) { scale.note_by_type("1") }
       subject(:m3) { scale.note_by_type("M3") }
       subject(:p5) { scale.note_by_type("5") }
@@ -68,7 +68,7 @@ module Ceely
     end
 
     context "when it's built from a Dodecaphonic scale," do
-      subject(:scale) { Ceely::Dodecaphonic::Scale.new }
+      subject(:scale) { Ceely::Scales::Dodecaphonic::Scale.new }
       subject(:u) { scale.note_by_type("1") }
       subject(:m3) { scale.note_by_type("M3") }
       subject(:p5) { scale.note_by_type("5") }

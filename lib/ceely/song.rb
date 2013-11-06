@@ -1,16 +1,16 @@
 module Ceely
   class Song
-    include Ceely::Playable
+    include Ceely::Mixins::PlayableSet
+    # Alias the << method from PlayableSet
+    alias :note! :<<
+    alias :chord! :<<
 
-    attr_reader :key, :tempo, :playables
+    attr_reader :key
 
     def initialize(*args)
-      @key, @tempo = args
       # Default to the even tempered scale
-      @key ||= Ceely::EvenTempered::Scale.new
-      # Default to 1 beat/second
-      @tempo ||= 1
-      @playables = []
+      @key = (args.shift || Ceely::Scales::EvenTempered::Scale.new)
+      super(*args)
     end
 
     def note_by_name!(name)
@@ -49,31 +49,6 @@ module Ceely
     def chords!(*chords)
       chords.each { |chord| self << chord }
       self
-    end
-
-    def pause!(factor=1)
-      self << Ceely::Pause.new(tempo*factor)
-      self
-    end
-
-    def <<(playable)
-      raise ArgumentError.new("#{playable} is not playable") unless playable.respond_to?(:play)
-      @playables << playable
-      self
-    end
-    alias :note! :<<
-    alias :chord! :<<
-
-    def play(amplitude, &block)
-      @playables.each do |playable|
-        playable.play(amplitude)
-        yield if block_given?
-      end
-    end
-
-    # Display the playables in the song
-    def to_s
-      @s ||= (playables.map { |playable| "#{playable}" }).join("\n\n")
     end
   end
 end

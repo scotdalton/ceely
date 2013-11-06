@@ -1,6 +1,6 @@
 module Ceely
   class Pause
-    include Ceely::Playable
+    include Ceely::Mixins::Playable
 
     def initialize(duration)
       @duration = duration

@@ -4,7 +4,7 @@ INDEXES = %w{ -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 }
 Ceely::Gui::Assignment.new("Assignment 6", 700, 750).run do
   def refresh_results
     @index.choose("1") if @index.text.blank?
-    @scale = Ceely::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_f)
+    @scale = Ceely::Scales::Dodecaphonic::Scale.new(@fundamental_frequency.text.to_f)
     @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
     @index_para.replace "Index: ", em(@note.index)
     @cents_para.replace "Cents: ", em(@note.cents)

@@ -77,7 +77,7 @@ module Ceely
 
     describe '#becomes' do
       it 'becomes a Pythagorean' do
-        expect(note.becomes(Ceely::Pythagorean::Note)).to be_a(Ceely::Pythagorean::Note)
+        expect(note.becomes(Ceely::Scales::Pythagorean::Note)).to be_a(Ceely::Scales::Pythagorean::Note)
       end
     end
   end

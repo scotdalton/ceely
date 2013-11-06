@@ -2,7 +2,7 @@ require 'spec_helper'
 module Ceely
   describe Ceely::Song do
     context "when it's a Pythagorean song," do
-      subject(:scale) { Ceely::Pythagorean::Scale.new }
+      subject(:scale) { Ceely::Scales::Pythagorean::Scale.new }
       subject(:tempo) { 1 }
       subject(:song) { Ceely::Song.new(scale, tempo) }
       subject(:u) { scale.note_by_type("1") }
@@ -14,7 +14,7 @@ module Ceely
 
       describe '#key' do
         it 'has the Pythagorean key' do
-          expect(song.key).to be_a(Ceely::Pythagorean::Scale)
+          expect(song.key).to be_a(Ceely::Scales::Pythagorean::Scale)
         end
       end
 
@@ -154,7 +154,7 @@ module Ceely
     end
 
     context "when it's Mary as a Pythagorean song," do
-      subject(:scale) { Ceely::Pythagorean::Scale.new }
+      subject(:scale) { Ceely::Scales::Pythagorean::Scale.new }
       subject(:tempo) { 1 }
       subject(:song) { Ceely::Song.new(scale, tempo) }
       subject(:d) { scale.note_by_name("D") }

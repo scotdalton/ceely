@@ -1,6 +1,6 @@
 module Ceely
   class NoteSet
-    include Ceely::Playable
+    include Ceely::Mixins::Playable
 
     attr_reader :notes, :sorted_notes
 

@@ -5,6 +5,7 @@ module Ceely
     context 'when the defaults are used,' do
       subject(:player) { Player.new }
       subject(:tone) { Tone.new(800, 0.5) }
+      subject(:noise) { Noise.new("bass", 0.5) }
       subject(:tones) { [Tone.new(528, 1), Tone.new(792, 1), Tone.new(594, 1)] }
 
       describe '#sine_wave' do
@@ -46,14 +47,20 @@ module Ceely
       # Don't run this test on travis since
       # we don't have permissions.
       unless(ENV['TRAVIS'].eql? "true")
-        describe '#play' do
-          it 'plays the tone for 0.5 seconds' do
+        describe '#play_tone' do
+          it 'plays the tone seconds' do
             expect { player.play_tone(tone, 50) }.not_to raise_error
           end
         end
 
+        describe '#play_noise' do
+          it 'plays the noise' do
+            expect { player.play_noise(noise, 50) }.not_to raise_error
+          end
+        end
+
         describe '#play_tones' do
-          it 'plays the tones for 0.5 seconds' do
+          it 'plays the tones seconds' do
             expect { player.play_tones(tones, 50) }.not_to raise_error
           end
         end
