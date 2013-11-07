@@ -41,12 +41,31 @@ module Ceely
       cycles.first
     end
 
-    def play(amplitude)
-      current_cycle.each { |playable| playable.play(amplitude) }
+    def play(amplitude, n=1)
+      n.times do
+        current_cycle.each { |playable| playable.play(amplitude) }
+      end
     end
 
-    def loop(n, amplitude)
-      n.times { play(amplitude) }
+    def jam(amplitude, n=1)
+      n.times do
+        current_cycle.size.times do |index|
+          noises = self.noises(index)
+          unless(noises.empty?)
+            player.play_noises(noises, amplitude)
+          else
+            current_cycle[index].play(amplitude)
+          end
+        end
+      end
+    end
+
+    def noises(index)
+      playables = cycles.collect { |cycle| cycle[index] }
+      noises = playables.collect do |playable| 
+        playable.noise if playable.is_a?(Ceely::Beat)
+      end
+      noises.compact
     end
 
     # Display the playables in the song

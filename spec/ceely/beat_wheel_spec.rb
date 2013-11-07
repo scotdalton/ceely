@@ -17,15 +17,19 @@ module Ceely
         end
       end
 
-      describe '#play' do
-        it 'plays without error' do
-          expect{ beat_wheel.play(50) }.not_to raise_error
+      # Don't run these tests on travis since
+      # we don't have permissions.
+      unless(ENV['TRAVIS'].eql? "true")
+        describe '#play' do
+          it 'plays without error' do
+            expect{ beat_wheel.play(50) }.not_to raise_error
+          end
         end
-      end
 
-      describe '#loop' do
-        it 'loops without error' do
-          expect{ beat_wheel.loop(2, 50) }.not_to raise_error
+        describe '#jam' do
+          it 'jams without error' do
+            expect{ beat_wheel.jam(50) }.not_to raise_error
+          end
         end
       end
 
@@ -39,28 +43,32 @@ module Ceely
     rhythms.each_with_index do |rhythm, index|
       context "when it's the #{index} cycle," do
         subject(:beat_wheel) { Ceely::BeatWheel.new.rotate!(index) }
-    
+
         describe '#tempo' do
           it 'has the tempo we expect' do
             expect(beat_wheel.tempo).to eq(0.5)
           end
         end
-    
+
         describe '#current_cycle' do
           it 'has the current cycle we expect' do
             expect(beat_wheel.current_cycle.collect{ |beat| beat.to_s }.join(" ")).to eq(rhythm)
           end
         end
-    
-        describe '#play' do
-          it 'plays without error' do
-            expect{ beat_wheel.play(50) }.not_to raise_error
+
+        # Don't run these tests on travis since
+        # we don't have permissions.
+        unless(ENV['TRAVIS'].eql? "true")
+          describe '#play' do
+            it 'plays without error' do
+              expect{ beat_wheel.play(50) }.not_to raise_error
+            end
           end
-        end
-    
-        describe '#loop' do
-          it 'loops without error' do
-            expect{ beat_wheel.loop(2, 50) }.not_to raise_error
+
+          describe '#jam' do
+            it 'jams without error' do
+              expect{ beat_wheel.jam(50) }.not_to raise_error
+            end
           end
         end
       end

@@ -1,6 +1,9 @@
 module Ceely
   module Mixins
     module PlayableSet
+
+      include Ceely::Mixins::Playable
+
       attr_accessor :tempo, :playables
 
       def initialize(*args)
