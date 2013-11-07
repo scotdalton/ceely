@@ -7,7 +7,7 @@ module Ceely
     attr_reader :filename
 
     def initialize(type, duration)
-      filename = "#{NOISEDIR}/#{type}.wav"
+      filename = "#{NOISEDIR}/#{type}.aiff"
       raise NotImplementedError.new("#{filename} doesn't exist") unless File.exist?(filename)
       @filename, @duration = filename, duration
     end

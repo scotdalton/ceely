@@ -9,9 +9,12 @@ module Ceely
         @playables = []
       end
 
-      def pause!(factor=1)
-        self << Ceely::Pause.new(tempo*factor)
-        self
+      def pause(factor=1)
+        Ceely::Pause.new(tempo*factor)
+      end
+
+      def pause!(*args)
+        self << pause(*args)
       end
 
       def <<(playable)
@@ -20,7 +23,7 @@ module Ceely
         self
       end
 
-      def play(amplitude, &block)
+      def play(amplitude)
         @playables.each do |playable|
           playable.play(amplitude)
         end
@@ -28,7 +31,7 @@ module Ceely
 
       # Display the playables in the song
       def to_s
-        @s ||= (playables.map { |playable| "#{playable}" }).join("\n\n")
+        @s ||= (playables.map { |playable| "#{playable}" }).join(" ")
       end
     end
   end

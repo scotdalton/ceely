@@ -15,5 +15,9 @@ module Ceely
     def noise
       @noise ||= Ceely::Noise.new(self.class.name.demodulize.downcase, duration)
     end
+
+    def to_s
+      "X"
+    end
   end
 end

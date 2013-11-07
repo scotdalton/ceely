@@ -103,13 +103,7 @@ module Ceely
     end
 
     def to_s
-      @s ||= "Note#{" " + name if name}:\n"+
-        clean(%Q{
-          Index: #{index}
-          Factor: #{factor}
-          Fundamental Frequency: #{fundamental_frequency}
-          Frequency: #{frequency}
-        })
+      @s ||= (type || name || index)
     end
 
     def clean(string)

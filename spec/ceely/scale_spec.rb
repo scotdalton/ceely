@@ -72,8 +72,8 @@ module Ceely
     end
 
     describe '#to_s' do
-      it 'raises a NotImplementedError' do
-        expect{ scale.to_s }.to raise_error(NotImplementedError)
+      it 'does not raises an error' do
+        expect{ scale.to_s }.not_to raise_error
       end
     end
   end

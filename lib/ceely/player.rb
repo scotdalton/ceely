@@ -30,6 +30,16 @@ module Ceely
       clip.close
     end
 
+    def play_noises(noises, amplitude)
+      clips = noises.collect { |tone| new_clip }
+      noises.each_with_index do |noise, index|
+        open_noise_clip(noise, amplitude, clips[index])
+      end
+      clips.each { |clip| clip.start }
+      clips.each { |clip| clip.drain }
+      clips.each { |clip| clip.close }
+    end
+
     # Play the tone
     # at the specified amplitude
     def play_tone(tone, amplitude)

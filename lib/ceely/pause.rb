@@ -5,5 +5,9 @@ module Ceely
     def initialize(duration)
       @duration = duration
     end
+
+    def to_s
+      "."
+    end
   end
 end

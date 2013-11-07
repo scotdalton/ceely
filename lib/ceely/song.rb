@@ -36,14 +36,18 @@ module Ceely
       self
     end
 
+    def chord(*notes)
+      Ceely::Chord.new(tempo, *notes)
+    end
+
     def chord_by_names!(*names)
       notes = names.collect { |name| key.note_by_name(name) }
-      chord!(Ceely::Chord.new(tempo, *notes))
+      chord!(chord(*notes))
     end
 
     def chord_by_types!(*types)
       notes = types.collect { |type| key.note_by_type(type) }
-      chord!(Ceely::Chord.new(tempo, *notes))
+      chord!(chord(*notes))
     end
 
     def chords!(*chords)

@@ -1,2 +1,6 @@
 # Ignore coverage folder.
 coverage
+
+noises/*.wav
+noises/*.aup
+noises/*data
