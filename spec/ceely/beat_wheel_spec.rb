@@ -13,7 +13,7 @@ module Ceely
 
       describe '#current_cycle' do
         it 'has the current cycle we expect' do
-          expect(beat_wheel.current_cycle.collect{ |beat| beat.to_s }.join(" ")).to eq(expected_rhythms.first)
+          expect(beat_wheel.current_cycle_to_s).to eq(expected_rhythms.first)
         end
       end
 
@@ -52,7 +52,7 @@ module Ceely
 
         describe '#current_cycle' do
           it 'has the current cycle we expect' do
-            expect(beat_wheel.current_cycle.collect{ |beat| beat.to_s }.join(" ")).to eq(rhythm)
+            expect(beat_wheel.current_cycle_to_s).to eq(rhythm)
           end
         end
 

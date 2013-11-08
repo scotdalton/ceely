@@ -4,7 +4,7 @@ module Ceely
 
     include Ceely::Mixins::PlayableSet
 
-    attr_reader :cycles
+    attr_reader :ordered_cycles, :cycles
 
     def initialize(*args)
       super(0.5)
@@ -12,18 +12,19 @@ module Ceely
       self << beat << pause << beat << pause << beat << beat
       self << pause << beat << pause << beat << pause << beat
       # Collect a playable for the
-      @cycles = playables.each_index.collect { |index| playables.rotate(index) }
+      @ordered_cycles = playables.each_index.collect { |index| playables.rotate(index) }
       # Select only cycles that start with a beat
-      @cycles.select! { |cycle| cycle.first.is_a?(Ceely::Beat) }
-      raise RuntimeError.new("WTF? There should only be 7 cycles") unless @cycles.size == 7
+      @ordered_cycles.select! { |cycle| cycle.first.is_a?(Ceely::Beat) }
+      raise RuntimeError.new("WTF? There should only be 7 cycles") unless @ordered_cycles.size == 7
       # Play each cycle as a different Beat noises
-      @cycles.each_with_index do |cycle, index|
+      @ordered_cycles.each_with_index do |cycle, index|
         beat = self.beat(index)
         cycle.collect! do |playable|
           # If it's a Beat, get the next Beat noise
           (playable.is_a?(Ceely::Beat)) ? beat : playable
         end
       end
+      @cycles = @ordered_cycles.collect{ |cycle| cycle}
     end
 
     # Rotates the wheel and returns self.
@@ -46,6 +47,7 @@ module Ceely
         current_cycle.each { |playable| playable.play(amplitude) }
       end
     end
+    alias :play_current_cycle :play
 
     def jam(amplitude, n=1)
       n.times do
@@ -68,9 +70,17 @@ module Ceely
       noises.compact
     end
 
+    def cycle_to_s(cycle)
+      cycle.collect{ |playable| playable.to_s }.join(" ")
+    end
+
+    def current_cycle_to_s
+      cycle_to_s(current_cycle)
+    end
+
     # Display the playables in the song
     def to_s
-      @s ||= cycles.map { |cycle| cycle.map { |playable| "#{playable}" }.join(" ") }.join("\n")
+      @s ||= cycles.map { |cycle| cycle_to_s(cycle) }.join("\n")
     end
   end
 end

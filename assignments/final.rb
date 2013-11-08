@@ -32,9 +32,9 @@ Ceely::Gui::Assignment.new("Final", 350, 375).run do
           refresh
           fundamental_frequency = @fundamental_frequency.text.to_f
           scale = @scales.text
-          key = "Ceely::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
           tempo = @tempo.text.to_f
-          song = Ceely::MaryHadALittleLamb.new(key, tempo)
+          key = "Ceely::Scales::#{scale}::Scale".safe_constantize.new(fundamental_frequency, tempo)
+          song = Ceely::SongBook::MaryHadALittleLamb.new(key, tempo)
           Thread.new do
             song.play(50)
           end
@@ -46,9 +46,9 @@ Ceely::Gui::Assignment.new("Final", 350, 375).run do
           SCALES.each do |scale|
             fundamental_frequency = @fundamental_frequency.text.to_f
             scale = @scales.text
-            key = "Ceely::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
+            key = "Ceely::Scales::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
             tempo = @tempo.text.to_f
-            songs << Ceely::Songbook::MaryHadALittleLamb.new(key, tempo)
+            songs << Ceely::SongBook::MaryHadALittleLamb.new(key, tempo)
           end
           songs.each do |song|
             Thread.new do

@@ -23,6 +23,7 @@ module Ceely
       @duration = (args.shift || 0.5)
       @range = (0+offset)..(size+offset-1)
       @notes ||= range.collect { |index| note_by_index(index) }
+      @notes.each { |note| note.duration = duration }
     end
 
     # Make notes from the module name
