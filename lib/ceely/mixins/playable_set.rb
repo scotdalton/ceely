@@ -28,6 +28,7 @@ module Ceely
 
       def play(amplitude)
         @playables.each do |playable|
+          p playable
           playable.play(amplitude)
         end
       end

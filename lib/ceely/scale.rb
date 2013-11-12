@@ -33,8 +33,8 @@ module Ceely
     end
 
     def note_by_index(index)
-      return @notes[index] unless @notes.blank? or @notes[index].blank?
-      new_note(index)
+      note = @notes.find { |note| note.index.eql? index } unless @notes.blank?
+      (note.blank?) ? new_note(index) : note 
     end
 
     def note_by_name(name)
