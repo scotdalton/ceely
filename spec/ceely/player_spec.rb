@@ -6,11 +6,13 @@ module Ceely
       subject(:player) { Player.new }
       subject(:tone) { Tone.new(800, 0.5) }
       subject(:noise) { Noise.new("bass", 0.5) }
-      subject(:tones) { [Tone.new(528, 1), Tone.new(792, 1), Tone.new(594, 1)] }
+      subject(:tones) { [Tone.new(528, 1), Tone.new(594, 1), Tone.new(792, 1)] }
+      subject(:amplitude) { 50 }
+      subject(:amplitudes) { [50, 40] }
 
       describe '#sine_wave' do
         it 'does not error on the sine wave' do
-          expect{ player.sine_wave(tone, 50) }.not_to raise_error
+          expect{ player.sine_wave(tone, amplitude) }.not_to raise_error
         end
       end
 
@@ -49,19 +51,23 @@ module Ceely
       unless(ENV['TRAVIS'].eql? "true")
         describe '#play_tone' do
           it 'plays the tone seconds' do
-            expect { player.play_tone(tone, 50) }.not_to raise_error
+            expect { player.play_tone(tone, amplitude) }.not_to raise_error
           end
         end
 
         describe '#play_noise' do
           it 'plays the noise' do
-            expect { player.play_noise(noise, 50) }.not_to raise_error
+            expect { player.play_noise(noise, amplitude) }.not_to raise_error
           end
         end
 
         describe '#play_tones' do
-          it 'plays the tones seconds' do
-            expect { player.play_tones(tones, 50) }.not_to raise_error
+          it 'plays the tones' do
+            expect { player.play_tones(tones, amplitude) }.not_to raise_error
+          end
+
+          it 'plays the tones at different amplitudes' do
+            expect { player.play_tones(tones, *amplitudes) }.not_to raise_error
           end
         end
       end

@@ -25,6 +25,14 @@ module Ceely
       self.class.new(frequency*(2**octave), 0, name, type)
     end
 
+    def flatten(interval)
+      self.class.new(frequency*(1/interval), 0, "#{name} b")
+    end
+
+    def sharpen(interval)
+      self.class.new(frequency*interval, 0, "#{name} #")
+    end
+
     def raw_frequency
       @raw_frequency ||= (fundamental_frequency * factor)
     end

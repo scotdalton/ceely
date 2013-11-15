@@ -50,26 +50,17 @@ module Ceely
     end
 
     # Play the given tones as a chord
-    def play_tones(tones, amplitude)
+    def play_tones(tones, *amplitudes)
       clips = tones.collect { |tone| new_clip }
-      if mixer.synchronization_supported?(clips, true)
-        # Synchronize playback
-        mixer.synchronize(clips, true)
-        # Play the first tone, the others will follow
-        tone, clip = tones.first, clips.first
-        open_tone_clip(tone, amplitude, clip)
-        clip.start()
-        clip.drain()
-        clip.close()
-        mixer.unsynchronize(lines)
-      else
-        tones.each_with_index do |tone, index|
-          open_tone_clip(tone, amplitude, clips[index])
-        end
-        clips.each { |clip| clip.start }
-        clips.each { |clip| clip.drain }
-        clips.each { |clip| clip.close }
+      tones.each_index do |index|
+        amplitudes << amplitudes.last if amplitudes[index].blank?
       end
+      tones.each_with_index do |tone, index|
+        open_tone_clip(tone, amplitudes[index], clips[index])
+      end
+      clips.each { |clip| clip.start }
+      clips.each { |clip| clip.drain }
+      clips.each { |clip| clip.close }
     end
 
     def open_noise_clip(noise, amplitude, clip)

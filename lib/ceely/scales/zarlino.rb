@@ -45,6 +45,14 @@ module Ceely
         def in_octave(octave)
           self.class.new({}, frequency*(2**octave), 0, name, type)
         end
+
+        def flatten(interval)
+          self.class.new({}, frequency*(1/interval), 0, "#{name} b")
+        end
+
+        def sharpen(interval)
+          self.class.new({}, frequency*interval, 0, "#{name} #")
+        end
       end
 
       # A Zarlino::Scale is a Scale with a set Pythagorean::Notes
@@ -81,6 +89,7 @@ module Ceely
             note
           end
           super(fundamental_frequency, 7, 0, NOTE_NAMES, NOTE_TYPES)
+          @naturals = NOTE_TYPES.collect { |type| note_by_type(type) }
         end
       end
     end

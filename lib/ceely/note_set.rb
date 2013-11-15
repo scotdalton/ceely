@@ -25,18 +25,21 @@ module Ceely
     end
 
     # Play the notes in the set
-    def play(amplitude, &block)
-      play_notes(notes, amplitude, &block)
+    def play(amplitude)
+      play_notes(notes, amplitude)
     end
 
     # Play the given set of notes
-    def play_notes(notes, amplitude, &block)
+    def play_notes(notes, amplitude)
       notes.each do |note|
         # Set the number of seconds for this note.
         note.duration = duration
         note.play(amplitude) 
-        yield if block_given?
       end
+    end
+
+    def tones
+      @tones ||= notes.collect { |note| note.tone }
     end
 
     # Display the notes in the scale starting
