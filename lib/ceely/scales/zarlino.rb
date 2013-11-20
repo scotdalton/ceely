@@ -7,9 +7,10 @@ module Ceely
       class Note < Ceely::Note
         FOURS = [0, 3, 4]
         
-        attr_reader :parent, :grandparent, :child, :grandchild, :doppelganger
+        attr_reader :relations, :parent, :grandparent, :child, :grandchild, :doppelganger
 
         def initialize(relations, *args)
+          @relations = relations
           @parent = relations[:parent]
           @child = relations[:child]
           @grandchild = child.child if child
@@ -43,7 +44,7 @@ module Ceely
         end
 
         def in_octave(octave)
-          self.class.new({}, frequency*(2**octave), 0, name, type)
+          self.class.new(relations, fundamental_frequency, index, octave, name, type, duration)
         end
 
         def flatten(interval)

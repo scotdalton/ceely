@@ -17,11 +17,12 @@ module Ceely
         head = first_mode.collect { |note| note.in_octave(octave_index) }
         # Take off everything before the start note and increase it an octave
         # This will be the mode's tail
-        tail = head.shift(start_index).collect { |note| note.in_octave(1) }
+        tail = head.shift(start_index).collect { |note| note.in_octave(note.octave + 1) }
         # Pin the tail on the head
         mode = (head + tail) 
         # Add the octave of the first note to the end
-        mode << mode.first.in_octave(1)
+        first = mode.first
+        mode << first.in_octave(first.octave + 1)
       end
     end
   end

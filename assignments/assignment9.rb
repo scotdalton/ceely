@@ -10,7 +10,7 @@ Ceely::Gui::Assignment.new("Assignment 9", 800, 800).run do
     @note = @scale.sort.find { |note| note.index.eql? @index.text.to_i }
     @index_para.replace "Index: ", em(@note.index)
     @raw_frequency_para.replace "Raw Frequency: ", em(@note.raw_frequency)
-    @octave_para.replace "Octave: ", em(@note.octave)
+    @octave_para.replace "Octave: ", em(@note.raw_octave)
     @octave_adjusted_factor_para.replace "Octave Adjusted Factor: ", em(@note.octave_adjusted_factor)
     @frequency_para.replace "Frequency: ", em(@note.frequency)
     @name_para.replace "Name: ", em(@note.name)

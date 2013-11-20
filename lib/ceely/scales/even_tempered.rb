@@ -4,6 +4,15 @@ module Ceely
       # An EvenTempered::Note is a Note with the factor equal to 3/2
       class Note < Ceely::Note
 
+        def initialize(fundamental_frequency, *args)
+          @fundamental_frequency = fundamental_frequency
+          @index = (args.shift || 0)
+          @octave = (args.shift || index/12)
+          @name = args.shift
+          @type = args.shift
+          @duration = (args.shift || 0.5)
+        end
+
         # A even tempered note has a factor equal to 12 root 2
         # raised to the power of the index
         def factor

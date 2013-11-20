@@ -4,6 +4,7 @@ module Ceely
       # A Ptolemaic::Note is a Pythagorean Note
       # but tweaked
       class Note < Ceely::Scales::Pythagorean::Note
+
         def octave_adjusted_factor
           @octave_adjusted_factor ||= case index
             when -5, -4, -3
@@ -22,21 +23,6 @@ module Ceely
           pythagorean_f = pythagorean.note_by_name("F")
           harmonic_b = harmonic.note_by_name("B")
           @diminished_fifth_factor = harmonic_b.interval(pythagorean_f ) * 2
-        end
-
-        def syntonic_comma
-          return @syntonic_comma if defined? @syntonic_comma
-          harmonic_third = harmonic.note_by_type("M3")
-          pythagorean_third = pythagorean.note_by_type("M3")
-          @syntonic_comma = harmonic_third.interval(pythagorean_third)
-        end
-
-        def harmonic
-          @harmonic ||= Ceely::Scales::Harmonic::Scale.new
-        end
-
-        def pythagorean
-          @pythgorean ||= Ceely::Scales::Pythagorean::Scale.new
         end
       end
 

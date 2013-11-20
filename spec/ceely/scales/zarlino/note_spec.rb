@@ -11,7 +11,7 @@ module Ceely
           expected_factor_num = expected_factor_array.first
           expected_factor_den = expected_factor_array.last
           expected_raw_frequency = expected_values["raw_frequency"]
-          expected_octave = expected_values["octave"]
+          expected_raw_octave = expected_values["raw_octave"]
           expected_frequency = expected_values["frequency"]
 
           context "when it's the #{index} note note," do
@@ -44,9 +44,9 @@ module Ceely
               end
             end
 
-            describe '#octave' do
-              it 'is the octave we expect' do
-                expect(note.octave).to eq(expected_octave)
+            describe '#raw_octave' do
+              it 'has #{expected_raw_octave} as the raw octave' do
+                expect(note.raw_octave).to eq(expected_raw_octave)
               end
             end
 

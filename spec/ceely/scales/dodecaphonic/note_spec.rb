@@ -11,7 +11,7 @@ module Ceely
           expected_factor_num = expected_factor_array.first
           expected_factor_den = expected_factor_array.last
           expected_raw_frequency = expected_values["raw_frequency"]
-          expected_octave = expected_values["octave"]
+          expected_raw_octave = expected_values["raw_octave"]
           expected_octave_adjusted_denominator = expected_values["octave_adjusted_denominator"]
           expected_octave_adjusted_factor = expected_values["octave_adjusted_factor"]
           expected_frequency = expected_values["frequency"]
@@ -46,9 +46,9 @@ module Ceely
               end
             end
 
-            describe '#octave' do
-              it 'is the octave we expect' do
-                expect(note.octave).to eq(expected_octave)
+            describe '#raw_octave' do
+              it 'has #{expected_raw_octave} as the raw octave' do
+                expect(note.raw_octave).to eq(expected_raw_octave)
               end
             end
 
@@ -90,19 +90,19 @@ module Ceely
         end
 
         context "when it's the dodecaphonic pitches," do
-          subject(:c) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 0, "C") }
-          subject(:d_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -5, "Db") }
-          subject(:d) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 2, "D") }
-          subject(:e_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -3, "Eb") }
-          subject(:e) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 4, "E") }
-          subject(:f) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -1, "F") }
-          subject(:g_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -6, "Gb") }
-          subject(:f_sharp) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 6, "F#") }
-          subject(:g) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 1, "G") }
-          subject(:a_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -4, "Ab") }
-          subject(:a) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 3, "A") }
-          subject(:b_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -2, "Bb") }
-          subject(:b) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 5, "B") }
+          subject(:c) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 0, 0, "C") }
+          subject(:d_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -5, 0, "Db") }
+          subject(:d) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 2, 0, "D") }
+          subject(:e_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -3, 0, "Eb") }
+          subject(:e) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 4, 0, "E") }
+          subject(:f) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -1, 0, "F") }
+          subject(:g_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -6, 0, "Gb") }
+          subject(:f_sharp) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 6, 0, "F#") }
+          subject(:g) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 1, 0, "G") }
+          subject(:a_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -4, 0, "Ab") }
+          subject(:a) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 3, 0, "A") }
+          subject(:b_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -2, 0, "Bb") }
+          subject(:b) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 5, 0, "B") }
         
           describe '#interval from c to d' do
             it 'has the interval that we expect' do

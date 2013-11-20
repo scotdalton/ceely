@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Ceely::Note do
-    subject(:note) { Ceely::Note.new(528.0, 2, "A") }
+    subject(:note) { Ceely::Note.new(528.0, 2, 0, "A") }
 
     describe '#raw_frequency' do
       it 'raises a NotImplementedError' do
@@ -33,9 +33,9 @@ module Ceely
       end
     end
 
-    describe '#octave' do
+    describe '#raw_octave' do
       it 'has the octave we expect' do
-        expect{ note.octave }.to raise_error(NotImplementedError)
+        expect{ expect(note.raw_octave) }.to raise_error(NotImplementedError)
       end
     end
 

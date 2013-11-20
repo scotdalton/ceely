@@ -11,6 +11,14 @@ module Ceely
       # Default to the even tempered scale
       @key = (args.shift || Ceely::Scales::EvenTempered::Scale.new)
       super(*args)
+      @key.duration = tempo
+      @key.notes.each { |note| note.duration = tempo }
+    end
+
+    def duration
+      duration = 0
+      playables.each { |playable| duration += playable.duration }
+      duration
     end
 
     def note_by_name!(name)

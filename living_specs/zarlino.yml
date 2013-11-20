@@ -2,7 +2,7 @@ notes:
   0:
     factor: 1/1
     raw_frequency: 528.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 1/1
     frequency: 528.0
     name: C
@@ -10,7 +10,7 @@ notes:
   1:
     factor: 9/8
     raw_frequency: 594.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 9/8
     frequency: 594.0
     name: D
@@ -18,7 +18,7 @@ notes:
   2:
     factor: 5/4
     raw_frequency: 660.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 5/4
     frequency: 660.0
     name: E
@@ -26,7 +26,7 @@ notes:
   3:
     factor: 4/3
     raw_frequency: 704.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 4/3
     frequency: 704.0
     name: F
@@ -34,7 +34,7 @@ notes:
   4:
     factor: 3/2
     raw_frequency: 792.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 3/2
     frequency: 792.0
     name: G
@@ -42,7 +42,7 @@ notes:
   5:
     factor: 5/3
     raw_frequency: 880.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 5/3
     frequency: 880
     name: A
@@ -50,7 +50,7 @@ notes:
   6:
     factor: 15/8
     raw_frequency: 990.0
-    octave: 0
+    raw_octave: 0
     octave_adjusted_factor: 15/8
     frequency: 990.0
     name: B
@@ -58,7 +58,7 @@ notes:
   7:
     factor: 2/1
     raw_frequency: 1056.0
-    octave: 1
+    raw_octave: 1
     octave_adjusted_factor: 2/1
     frequency: 528.0
     name: C

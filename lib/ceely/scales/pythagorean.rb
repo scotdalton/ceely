@@ -3,6 +3,7 @@ module Ceely
     module Pythagorean
       # A Pythagorean::Note is a Note with the factor equal to 3/2
       class Note < Ceely::Note
+        include Ceely::Mixins::SyntonicComma
 
         # A pythagorean note has a factor equal to 3/2
         # raised to the power of the index
@@ -26,16 +27,16 @@ module Ceely
         end
 
         MODE_NAMES.each_with_index do |mode, index|
-          define_method(mode) do |octave_index|
-            mode_index = index + (octave_index*(size+1))
+          define_method(mode) do |octave|
+            mode_index = index + (octave*(size+1))
             nth_mode(mode_index)
           end
         end
 
         # Play the named mode in the given octave
-        def play_mode(mode, octave_index, amplitude, &block)
+        def play_mode(mode, octave, amplitude, &block)
           raise ArgumentError.new("Don't know that mode") unless MODE_NAMES.include?(mode)
-          notes = send(mode.to_sym, octave_index)
+          notes = send(mode.to_sym, octave)
           play_notes(notes, amplitude, &block)
         end
 

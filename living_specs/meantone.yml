@@ -1,0 +1,33 @@
+notes:
+  -6:
+    octave_adjusted_factor: 1.43108350559987
+  -5:
+    octave_adjusted_factor: 1.06998448796228
+  -4:
+    octave_adjusted_factor: 1.6
+  -3:
+    octave_adjusted_factor: 1.196279024976980
+  -2:
+    octave_adjusted_factor: 1.788854381999830
+  -1:
+    octave_adjusted_factor: 1.337480609952840
+  0:
+    octave_adjusted_factor: 1
+  1:
+    octave_adjusted_factor: 1.495348781221220
+  2:
+    octave_adjusted_factor: 1.118033988749890
+  3:
+    octave_adjusted_factor: 1.671850762441060
+  4:
+    octave_adjusted_factor: 1.25
+  5:
+    octave_adjusted_factor: 1.869185976526530
+  6:
+    octave_adjusted_factor: 1.397542485937370
+  7:
+    octave_adjusted_factor: 1.044906726525660
+  8:
+    octave_adjusted_factor: 1.562500000000000
+  9:
+    octave_adjusted_factor: 1.168241235329080

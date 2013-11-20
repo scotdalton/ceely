@@ -153,9 +153,9 @@ module Ceely
       end
     end
 
-    context "when it's Mary as a Pythagorean song," do
-      subject(:scale) { Ceely::Scales::Pythagorean::Scale.new }
-      subject(:tempo) { 1 }
+    context "when it's Mary as a Harmonic song," do
+      subject(:scale) { Ceely::Scales::Harmonic::Scale.new }
+      subject(:tempo) { 0.5 }
       subject(:song) { Ceely::Song.new(scale, tempo) }
       subject(:d) { scale.note_by_name("D") }
       subject(:c) { scale.note_by_name("C") }
@@ -173,6 +173,7 @@ module Ceely
             song.notes_by_name!(*%w{ B A A B A })
             # End with a power chord
             song.chord_by_names!("C", "G")
+            expect(song.duration).to eq(13.0)
             expect { song.play(50) }.not_to raise_error
           end
         end

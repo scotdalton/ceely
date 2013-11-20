@@ -2,91 +2,91 @@ notes:
   -6:
     factor: 64/729
     raw_frequency: 46.35390946502057
-    octave: -4
+    raw_octave: -4
     octave_adjusted_denominator: 0.0625
     octave_adjusted_factor: 1.4046639231824416
     frequency: 741.6625514403291
   -5:
     factor: 32/243
     raw_frequency: 69.53086419753087
-    octave: -3
+    raw_octave: -3
     octave_adjusted_denominator: 0.125
     octave_adjusted_factor: 1.0534979423868314
     frequency: 556.246913580247
   -4:
     factor: 16/81
     raw_frequency: 104.29629629629629
-    octave: -3
+    raw_octave: -3
     octave_adjusted_denominator: 0.125
     octave_adjusted_factor: 1.5802469135802468
     frequency: 834.3703703703703
   -3:
     factor: 8/27
     raw_frequency: 156.44444444444443
-    octave: -2
+    raw_octave: -2
     octave_adjusted_denominator: 0.25
     octave_adjusted_factor: 1.1851851851851851
     frequency: 625.7777777777777
   -2:
     factor: 4/9
     raw_frequency: 234.66666666666666
-    octave: -2
+    raw_octave: -2
     octave_adjusted_denominator: 0.25
     octave_adjusted_factor: 1.7777777777777777
     frequency: 938.6666666666666
   -1:
     factor: 2/3
     raw_frequency: 352.00
-    octave: -1
+    raw_octave: -1
     octave_adjusted_denominator: 0.5
     octave_adjusted_factor: 1.3333333333333333
     frequency: 704.00
   0:
     factor: 1/1
     raw_frequency: 528.00
-    octave: 0
+    raw_octave: 0
     octave_adjusted_denominator: 1
     octave_adjusted_factor: 1
     frequency: 528.00
   1:
     factor: 3/2
     raw_frequency: 792.00
-    octave: 0
+    raw_octave: 0
     octave_adjusted_denominator: 1
     octave_adjusted_factor: 1.5
     frequency: 792.00
   2:
     factor: 9/4
     raw_frequency: 1188.00
-    octave: 1
+    raw_octave: 1
     octave_adjusted_denominator: 2
     octave_adjusted_factor: 1.125
     frequency: 594.00
   3:
     factor: 27/8
     raw_frequency: 1782.00
-    octave: 1
+    raw_octave: 1
     octave_adjusted_denominator: 2
     octave_adjusted_factor: 1.6875
     frequency: 891.00
   4:
     factor: 81/16
     raw_frequency: 2673.00
-    octave: 2
+    raw_octave: 2
     octave_adjusted_denominator: 4
     octave_adjusted_factor: 1.265625
     frequency: 668.25
   5:
     factor: 243/32
     raw_frequency: 4009.5
-    octave: 2
+    raw_octave: 2
     octave_adjusted_denominator: 4
     octave_adjusted_factor: 1.8984375
     frequency: 1002.375
   6:
     factor: 729/64
     raw_frequency: 6014.25
-    octave: 3
+    raw_octave: 3
     octave_adjusted_denominator: 8
     octave_adjusted_factor: 1.423828125
     frequency: 751.78125
