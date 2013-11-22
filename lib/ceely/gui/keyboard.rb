@@ -10,6 +10,7 @@ module Ceely
         @scale, @octaves = scale, octaves
         @width ||= 800
         @height ||= 500
+        @top ||= 50
         @shoe = shoes.stack margin: 0, width: width, height: height do
           shoes.background shoes.darkslategray
           shoes.strokewidth 1
@@ -19,7 +20,6 @@ module Ceely
             # Draw the accidentals first
             @accidental_keys = notes.each_with_index.collect { |note, index|
               octave_index = index + (octave * keys.size)
-              p octave_index 
               accidental_key(octave_index, note.in_octave(octave)) unless scale.naturals.include?(note)
             }.compact
             @natural_keys = notes.each_with_index.collect { |note, index|
@@ -27,27 +27,27 @@ module Ceely
               natural_key(octave_index, note.in_octave(octave)) if scale.naturals.include?(note)
             }.compact
             @keys += @natural_keys + @accidental_keys
-            end
           end
-          @keys.sort!
-          @keys.each_with_index do |key, index|
-            next if index.eql? 0
-            # Get the previous "right"
-            previous_right = @keys[index-1].shoe.first.right
-            # and the current "left"
-            current_left = key.shoe.first.left
-            # and their difference
-            delta = current_left - previous_right
-            key.shoe.each do |element|
-              # Shift every element over
-              new_left = element.left - delta + 1
-              element.left = new_left
-            end
-            key.names.each do |name|
-              # Shift every name over
-              new_left = name.left - delta + 1
-              name.left = new_left
-            end
+        end
+        @keys.sort!
+        @keys.each_with_index do |key, index|
+          next if index.eql? 0
+          # Get the previous "right"
+          previous_right = @keys[index-1].shoe.first.right
+          # and the current "left"
+          current_left = key.shoe.first.left
+          # and their difference
+          delta = current_left - previous_right
+          key.shoe.each do |element|
+            # Shift every element over
+            new_left = element.left - delta + 1
+            element.left = new_left
+          end
+          key.names.each do |name|
+            # Shift every name over
+            new_left = name.left - delta + 1
+            name.left = new_left
+          end
         end
       end
 
@@ -83,12 +83,17 @@ module Ceely
         end
       end
 
+      def clear
+        keys.each { |key| key.clear }
+        shoe.clear
+      end
+
       def natural_key(position, note)
-        Ceely::Gui::WhiteKey.new(shoes, position, note, @accidental_keys)
+        Ceely::Gui::WhiteKey.new(shoes, position, note, @accidental_keys, {top: top + 100})
       end
 
       def accidental_key(position, note)
-        Ceely::Gui::BlackKey.new(shoes, position, note)
+        Ceely::Gui::BlackKey.new(shoes, position, note, {top: top + 100})
       end
     end
   end

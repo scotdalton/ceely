@@ -22,13 +22,12 @@ module Ceely
         shoe_opts = { left: left, top: top, fill: inactive_fill }.merge(opts)
         @shoe = (shoe || [shoes.rect(left, top, width, height, shoe_opts)])
         key = self
-        self.shoe.each { |element| element.click { click_action(key) } }
+        self.shoe.each { |rect| rect.click { click_action(key) } }
         text_color = opts[:text_color]
         text_left = self.shoe.first.left + (self.shoe.first.width/2 - 7)
-        text_top = self.shoe.first.top + 10
+        text_top = top - 50
         @names = [ 
-          shoes.para(note.name, { left: text_left, top: text_top, stroke: text_color }),
-          shoes.para(note.type, { left: text_left, top: text_top + 15, stroke: text_color })
+          shoes.para(note.name, { left: text_left, top: text_top, stroke: text_color })
         ]
       end
 
@@ -43,23 +42,30 @@ module Ceely
       end
 
       def press
-        shoe.each { |element| element.style(fill: active_fill, stroke: active_fill) }
+        shoe.each { |rect| rect.style(fill: active_fill, stroke: active_fill) }
       end
 
       def release
-        shoe.each { |element| element.style(fill: inactive_fill, stroke: inactive_fill) }
+        shoe.each { |rect| rect.style(fill: inactive_fill, stroke: inactive_fill) }
       end
 
       def <=>(other_key)
         shoe.first.left <=> other_key.shoe.first.left
       end
+
+      def clear
+        shoe.each { |rect| rect.unslot }
+        shoe.each { |rect| rect.remove }
+        names.each { |name| name.remove }
+      end
     end
 
     class WhiteKey < Key
-      def initialize(shoes, position, note, accidentals)
+      def initialize(shoes, position, note, accidentals, opts={})
         @accidentals = accidentals
-        accidental_height = accidentals.first.height
-        top = 50
+        accidental_height = accidentals.first.height unless accidentals.blank?
+        accidental_height ||= 0
+        top = (opts[:top] || 50)
         width = 50
         left = (50 + (position * width))
         height = 350
@@ -85,6 +91,7 @@ module Ceely
         end
         shoe << shoes.rect(left, bottom_top, width, bottom_height, shoe_opts)
         opts = {
+          top: top,
           left: left,
           width: width,
           height: height,
@@ -105,10 +112,12 @@ module Ceely
     end
 
     class BlackKey < Key
-      def initialize(shoes, position, note)
+      def initialize(shoes, position, note, opts={})
         width = 30
+        top = opts[:top]
         opts = {
           left: (50 + (position * 50)),
+          top: top,
           width: width,
           height: 250,
           active_fill: shoes.gray,

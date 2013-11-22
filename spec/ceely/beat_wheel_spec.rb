@@ -3,7 +3,7 @@ module Ceely
   describe Ceely::BeatWheel do
     expected_rhythms = rhythms
     context "before it's been rotated" do
-      subject(:beat_wheel) { Ceely::BeatWheel.new }
+      subject(:beat_wheel) { Ceely::BeatWheel.new(0.5) }
 
       describe '#tempo' do
         it 'has the tempo we expect' do
@@ -42,7 +42,7 @@ module Ceely
 
     rhythms.each_with_index do |rhythm, index|
       context "when it's the #{index} cycle," do
-        subject(:beat_wheel) { Ceely::BeatWheel.new.rotate!(index) }
+        subject(:beat_wheel) { Ceely::BeatWheel.new(0.5).rotate!(index) }
 
         describe '#tempo' do
           it 'has the tempo we expect' do

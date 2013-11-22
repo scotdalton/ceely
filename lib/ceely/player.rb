@@ -66,12 +66,11 @@ module Ceely
     def open_noise_clip(noise, amplitude, clip)
       file = java.io.File.new(noise.filename)
       audio_input = AudioSystem.getAudioInputStream(file)
-      # clip.open(audio_input)
       format = audio_input.format
       length = audio_input.frame_length
       wave = audio_input.to_io.bytes.collect { |byte| byte }
       java_bytes = wave.pack("c*").to_java_bytes
-      clip.open(format, java_bytes, 0, length/2)
+      clip.open(format, java_bytes, 0, length/(1/noise.duration))
     end
 
     def open_tone_clip(tone, amplitude, clip)

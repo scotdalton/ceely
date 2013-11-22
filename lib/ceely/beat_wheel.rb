@@ -7,7 +7,7 @@ module Ceely
     attr_reader :ordered_cycles, :cycles
 
     def initialize(*args)
-      super(0.5)
+      super(*args)
       beat = self.beat
       self << beat << pause << beat << pause << beat << beat
       self << pause << beat << pause << beat << pause << beat

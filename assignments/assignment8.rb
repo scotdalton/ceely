@@ -4,7 +4,7 @@ INDEXES = %w{ -5 -4 -3 -2 -1 0 1 2 3 4 5 6 }
 Ceely::Gui::Assignment.new("Assignment 7", 700, 750).run do
   @wheel = Ceely::BeatWheel.new
   def refresh_results
-    @wheel = Ceely::BeatWheel.new.rotate!(@cycle.text.to_i)
+    @wheel = Ceely::BeatWheel.new(@tempo.text.to_f).rotate!(@cycle.text.to_i)
     @cycle_para.replace "Cycle: ", em(@wheel.ordered_cycles.index(@wheel.current_cycle))
     @beats_para.replace "Beats/Pauses(X/.) for This Cycle: ", em(@wheel.current_cycle_to_s)
   end
@@ -19,6 +19,10 @@ Ceely::Gui::Assignment.new("Assignment 7", 700, 750).run do
       stack margin: 10 do
         para "Cycle: "
         @cycle = edit_line(cycle)
+      end
+      flow(margin: 10) do
+        para("Choose the seconds/beats: ")
+        @tempo = edit_line(0.5)
       end
       stack margin: 10 do
         button("Refresh the Beats Display") do
