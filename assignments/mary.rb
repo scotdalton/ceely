@@ -1,7 +1,7 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
 width = 1600
-SCALES = %w{ Meantone Zarlino Pythagorean Dodecaphonic Ptolemaic EvenTempered }
+SCALES = %w{ Rameau Meantone Zarlino Pythagorean Dodecaphonic Ptolemaic EvenTempered }
 DEFAULT_SCALE = SCALES.first
 Shoes.app width: width, height: 600, title: "Mary Had a Little Lamb" do
   background darkgray
