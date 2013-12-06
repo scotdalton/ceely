@@ -10,7 +10,8 @@ module Ceely
           expected_cents = index*100
 
           context "when it's the #{index} even tempered note," do
-            subject(:note) { Ceely::Scales::EvenTempered::Note.new(528.0, index) }
+            subject(:scale) { Ceely::Scales::EvenTempered::Scale.new(528.0) }
+            subject(:note) { scale.note_by_index(index) }
 
             describe '#index' do
               it 'has the index that we expect' do

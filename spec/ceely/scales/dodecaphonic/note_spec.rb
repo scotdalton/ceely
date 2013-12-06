@@ -18,7 +18,8 @@ module Ceely
           # expected_cents = expected_values["cents"]
 
           context "when it's the #{index} note note," do
-            subject(:note) { Ceely::Scales::Dodecaphonic::Note.new(528.0, index) }
+            subject(:scale) { Ceely::Scales::Dodecaphonic::Scale.new(528.0) }
+            subject(:note) { scale.note_by_index(index) }
 
             describe '#index' do
               it 'has the index that we expect' do
@@ -85,128 +86,6 @@ module Ceely
                   expect{ note.play(50) }.not_to raise_error
                 end
               end
-            end
-          end
-        end
-
-        context "when it's the dodecaphonic pitches," do
-          subject(:c) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 0, 0, "C") }
-          subject(:d_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -5, 0, "Db") }
-          subject(:d) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 2, 0, "D") }
-          subject(:e_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -3, 0, "Eb") }
-          subject(:e) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 4, 0, "E") }
-          subject(:f) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -1, 0, "F") }
-          subject(:g_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -6, 0, "Gb") }
-          subject(:f_sharp) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 6, 0, "F#") }
-          subject(:g) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 1, 0, "G") }
-          subject(:a_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -4, 0, "Ab") }
-          subject(:a) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 3, 0, "A") }
-          subject(:b_flat) { Ceely::Scales::Dodecaphonic::Note.new(528.0, -2, 0, "Bb") }
-          subject(:b) { Ceely::Scales::Dodecaphonic::Note.new(528.0, 5, 0, "B") }
-        
-          describe '#interval from c to d' do
-            it 'has the interval that we expect' do
-              expect(c.interval(d)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from c to d_flat' do
-            it 'has the interval that we expect' do
-              expect(c.interval(d_flat)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from d flat to d' do
-            it 'has the interval that we expect' do
-              expect(d_flat.interval(d)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from d to e' do
-            it 'has the interval that we expect' do
-              expect(d.interval(e)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from d to e flat' do
-            it 'has the interval that we expect' do
-              expect(d.interval(e_flat)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from e flat to e' do
-            it 'has the interval that we expect' do
-              expect(e_flat.interval(e)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from e to f' do
-            it 'has the interval that we expect' do
-              expect(e.interval(f)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from f to g' do
-            it 'has the interval that we expect' do
-              expect(f.interval(g)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from f to g flat' do
-            it 'has the interval that we expect' do
-              expect(f.interval(g_flat)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from g flat to f sharp' do
-            it 'has the interval that we expect' do
-              expect(g_flat.interval(f_sharp)).to eq(Rational(531441, 524288))
-            end
-
-            it 'is the pythagorean comma' do
-              expect(g_flat.interval_in_cents(f_sharp)).to be_within(0.01).of(23.46)
-            end
-          end
-
-          describe '#interval from f sharp to g' do
-            it 'has the interval that we expect' do
-              expect(f_sharp.interval(g)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from g to a' do
-            it 'has the interval that we expect' do
-              expect(g.interval(a)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from g to a flat' do
-            it 'has the interval that we expect' do
-              expect(g.interval(a_flat)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from a flat to a' do
-            it 'has the interval that we expect' do
-              expect(a_flat.interval(a)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from a to b' do
-            it 'has the interval that we expect' do
-              expect(a.interval(b)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from a to b flat' do
-            it 'has the interval that we expect' do
-              expect(a.interval(b_flat)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from b flat to b' do
-            it 'has the interval that we expect' do
-              expect(b_flat.interval(b)).to eq(Rational(2187, 2048))
             end
           end
         end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Ceely::Scale do
-    subject(:scale) { Ceely::Scale.new(528.0, 3) }
+    subject(:scale) { Ceely::Scale.new(528.0, nil, 3) }
 
     describe '#fundamental_frequency' do
       it 'has the fundamental frequency that we expect' do

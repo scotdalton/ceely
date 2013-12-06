@@ -7,7 +7,7 @@ module Ceely
           note_by_name!(note.name)
           pause!(0.5)
         end
-        self << key.note_by_name("C").in_octave(1)
+        self << key.note_by_type("1").in_octave(1)
       end
     end
   end

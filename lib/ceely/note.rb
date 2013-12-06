@@ -1,6 +1,9 @@
 module Ceely
   # An Note takes a fundamental frequency, an index and an optional name
   class Note
+    FACTOR_ERROR = -> {
+      raise NotImplementedError.new("Factor should be callable, stretch.") }
+    
     include Comparable
     include Ceely::Mixins::Playable
 
@@ -8,8 +11,8 @@ module Ceely
     attr_accessor :name, :type
     attr_reader :octave
 
-    def initialize(fundamental_frequency, *args)
-      @fundamental_frequency = fundamental_frequency
+    def initialize(fundamental_frequency, factor, *args)
+      @fundamental_frequency, @factor = fundamental_frequency, factor
       @index = (args.shift || 0)
       @octave = (args.shift || 0)
       @name = args.shift
@@ -17,20 +20,9 @@ module Ceely
       @duration = (args.shift || 0.5)
     end
 
-    def becomes(note_class)
-      note_class.new(fundamental_frequency, index, octave, name, type, duration)
-    end
-
     def in_octave(octave)
-      self.class.new(fundamental_frequency, index, octave, name, type, duration)
-    end
-
-    def flatten(interval)
-      self.class.new(frequency*(1/interval), 0, 0, "#{name} b")
-    end
-
-    def sharpen(interval)
-      self.class.new(frequency*interval, 0, 0, "#{name} #")
+      self.class.new @fundamental_frequency, -> note{ factor },
+        @index, octave, @name,@type, @duration
     end
 
     def raw_frequency
@@ -50,9 +42,10 @@ module Ceely
       @raw_octave ||= Math.log2(raw_frequency/fundamental_frequency).floor
     end
 
-    # Intended to be overridden by subclasses
+    # Factor should be a lambda
     def factor
-      raise NotImplementedError.new("You should implement factor, stretch.")
+      FACTOR_ERROR.call unless @factor.respond_to? :call
+      @_factor ||= @factor.call(self)
     end
 
     def octave_adjusted_denominator
@@ -95,7 +88,7 @@ module Ceely
 
     # Returns the interval between this note and another note.
     def interval(other_note=nil)
-      other_note ||= self.class.new(fundamental_frequency, 0)
+      other_note ||= self.class.new(@fundamental_frequency, @factor, 0)
       # Handle the octave
       # If the frequencies are the same we're either dealing with
       # the same note or the note in a different octave. Either way 

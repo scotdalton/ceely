@@ -1,20 +1,16 @@
 module Ceely
   module Scales
     module Harmonic
-      # A Harmonic::Note is an Note with the factor equal to the index
-      class Note < Ceely::Note
-
-        # A harmonic note has a factor that is a multiple of the fundamental
-        # which means it's the same as the index of the relationship
-        def factor
-          @factor ||= Rational(index+1)
-        end
-      end
+      # A Harmonic::Note is a Note
+      class Note < Ceely::Note;end
 
       # A Harmonic::Scale is a Scale with the set of Harmonic::Notes
       class Scale < Ceely::Scale
         def initialize(fundamental_frequency=528.0, size=33, offset=0)
-          super(fundamental_frequency, size, offset)
+          # A harmonic note has a factor that is a multiple of the fundamental
+          # which means it's the same as the index of the relationship
+          factor = -> note { Rational(note.index + 1) }
+          super(fundamental_frequency, factor, size, offset)
         end
 
         def sort(size=nil)
@@ -32,12 +28,18 @@ module Ceely
             when 17
               note.name = "D"
               note.type = "M2"
+            when 18
+              note.name = "Eb"
+              note.type = "m3"
             when 19
               note.name = "E"
               note.type = "M3"
             when 20
               note.name = "F"
               note.type = "4"
+            when 24
+              note.name = "Ab"
+              note.type = "m6"
             when 26
               note.name = "A"
               note.type = "M6"

@@ -7,11 +7,12 @@ module Ceely
     include Ceely::Mixins::Modes
     include Ceely::Mixins::CircleOfFifths
 
-    attr_reader :fundamental_frequency, :size, :offset, :range
+    attr_reader :fundamental_frequency, :factor
+    attr_reader :size, :offset, :range
     attr_reader :note_names, :note_types
 
-    def initialize(fundamental_frequency, *args)
-      @fundamental_frequency = fundamental_frequency
+    def initialize(fundamental_frequency, factor, *args)
+      @fundamental_frequency, @factor = fundamental_frequency, factor
       @size = (args.shift || 12)
       @offset = (args.shift || 0)
       @note_names = (args.shift || [])
@@ -26,10 +27,18 @@ module Ceely
       @notes.each { |note| note.duration = duration }
     end
 
+    def note_names
+      note_names = sorted_notes.collect { |note| note.name }
+      note_names ||= @note_names
+      note_names
+    rescue NotImplementedError
+      []
+    end
+
     # Make notes from the module name
     def new_note(index)
       name = self.class.name.deconstantize + "::Note"
-      name.constantize.new(fundamental_frequency, index)
+      name.constantize.new(@fundamental_frequency, @factor, index)
     end
 
     def note_by_index(index)
@@ -46,11 +55,11 @@ module Ceely
     end
 
     def note_name(index)
-      note_names[index % size] unless note_names.blank?
+      @note_names[index % size] unless @note_names.blank?
     end
 
     def note_type(index)
-      note_types[index % size] unless note_types.blank?
+      @note_types[index % size] unless @note_types.blank?
     end
 
     # Sort the Notes by frequency from low to high AND NAME THEM

@@ -1,0 +1,76 @@
+notes:
+  C:
+    factor: 1/1
+    octave_adjusted_factor: 1/1
+    interval: 0
+    type: "1"
+    cents: 0
+    frequency: 528
+  D:
+    factor: 9/4
+    octave_adjusted_factor: 9/8
+    interval: 9/8
+    type: M2
+    cents: 204
+    frequency: 594
+  E:
+    factor: 5/4
+    octave_adjusted_factor: 5/4
+    interval: 5/4
+    type: M3
+    cents: 386
+    frequency: 660
+  F:
+    factor: 4/3
+    octave_adjusted_factor: 4/3
+    interval: 4/3
+    type: "4"
+    cents: 498
+    frequency: 704
+  G:
+    factor: 3/2
+    octave_adjusted_factor: 3/2
+    interval: 3/2
+    type: "5"
+    cents: 702
+    frequency: 792
+  A:
+    factor: 5/3
+    octave_adjusted_factor: 5/3
+    interval: 5/3
+    type: M6
+    cents: 884
+    frequency: 880
+  B:
+    factor: 15/8
+    octave_adjusted_factor: 15/8
+    interval: 15/8
+    type: M7
+    cents: 1088
+    frequency: 990
+sharp_keys:
+  - frequencies:  [ 792, 891, 990, 1056, 1188, 1320, 1485 ]
+    names: [ G, A, B, C, D, E, F# ]
+  - frequencies:  [ 1188, 1336.50, 1485, 1584, 1782, 1980, 2227.50 ]
+    names: [ D, E, F#, G, A, B, C# ]
+  - frequencies:  [ 1782, 2004.75, 2227.5, 2376, 2673, 2970, 3341.25 ]
+    names: [ A, B, C#, D, E, F#, G# ]
+  - frequencies: [ 2673.00, 3007.125, 3341.25, 3564.00, 4009.50, 4455.00, 5011.875 ]
+    names: [ E, F#, G#, A, B, C#, D# ]
+  - frequencies: [ 4009.50, 4510.6875, 5011.875, 5346.00, 6014.25, 6682.50, 7517.8125 ]
+    names: [ B, C#, D#, E, F#, G#, A# ]
+  - frequencies: [ 6014.25, 6766.03125, 7517.8125, 8019.00, 9021.375, 10023.75, 11276.71875 ]
+    names: [ F#, G#, A#, B, C#, D#, E# ]
+flat_keys:
+  - frequencies:  [ 704, 792, 880, 938.66, 1056, 1173.33, 1320 ]
+    names: [ F, G, A, Bb, C, D, E ]
+  - frequencies:  [ 938.66, 1056.0, 1173.33, 1251.55, 1408.0, 1564.44, 1760.0 ]
+    names: [ Bb, C, D, Eb, F, G, A ]
+  - frequencies:  [ 1251.55, 1408, 1564.44, 1668.74, 1877.33, 2085.92, 2346.66 ]
+    names: [ Eb, F, G, Ab, Bb, C, D ]
+  - frequencies: [ 1668.74, 1877.33, 2085.92, 2224.98, 2503.11, 2781.23, 3128.88 ]
+    names: [ Ab, Bb, C, Db, Eb, F, G ]
+  - frequencies: [ 2224.98, 2503.11, 2781.23, 2966.65, 3337.48, 3708.31, 4171.85 ]
+    names: [ Db, Eb, F, Gb, Ab, Bb, C ]
+  - frequencies: [ 2966.65, 3337.48, 3708.31, 3955.53, 4449.97, 4944.41, 5562.46 ]
+    names: [ Gb, Ab, Bb, Cb, Db, Eb, F ]

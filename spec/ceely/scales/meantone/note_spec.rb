@@ -8,7 +8,8 @@ module Ceely
           expected_octave_adjusted_factor = expected_values["octave_adjusted_factor"]
 
           context "when it's the #{index} note note," do
-            subject(:note) { Ceely::Scales::Meantone::Note.new(528.0, index) }
+            subject(:scale) { Ceely::Scales::Meantone::Scale.new(528.0) }
+            subject(:note) { scale.note_by_index(index) }
 
             describe '#index' do
               it "has #{index} as the index" do

@@ -3,10 +3,15 @@ module Ceely
     module SyntonicComma
 
       def syntonic_comma
-        return @syntonic_comma if defined? @syntonic_comma
-        harmonic_third = harmonic.note_by_type("M3")
-        pythagorean_third = pythagorean.note_by_type("M3")
-        @syntonic_comma = harmonic_third.interval(pythagorean_third)
+        @syntonic_comma ||= harmonic_third.interval(pythagorean_third)
+      end
+
+      def harmonic_third
+        @harmonic_third ||= harmonic.note_by_type("M3")
+      end
+
+      def pythagorean_third
+        @pythagorean_third ||= pythagorean.note_by_type("M3")
       end
 
       def harmonic

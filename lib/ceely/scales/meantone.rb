@@ -18,8 +18,8 @@ module Ceely
         end
       end
 
-      # A Pythagorean::Scale is a Scale with a set Pythagorean::Notes
-      class Scale < Ceely::Scale
+      # A Meantone::Scale is a Pythagorean::Scale but tweaked.
+      class Scale < Pythagorean::Scale
         NOTE_NAMES = %w{ C C# Db D D# Eb E F F# Gb G G# Ab A A# Bb B }
         NOTE_TYPES = ["1", nil, nil, "2", nil, nil, "M3", "4", nil, nil, "5",
           nil, nil, "M6", nil, nil, "M7"]

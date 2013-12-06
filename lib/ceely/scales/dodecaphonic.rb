@@ -2,8 +2,7 @@ module Ceely
   module Scales
     module Dodecaphonic
       # A Dodecaphonic::Note is a Pythagorean Note
-      class Note < Ceely::Scales::Pythagorean::Note
-      end
+      class Note < Ceely::Scales::Pythagorean::Note;end
 
       # A Dodecaphonic::Scale is a Pythagorean::Scale
       # with an offset of -6

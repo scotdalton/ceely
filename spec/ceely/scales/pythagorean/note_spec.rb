@@ -18,7 +18,8 @@ module Ceely
           expected_cents = expected_values["cents"]
 
           context "when it's the #{index} note note," do
-            subject(:note) { Ceely::Scales::Pythagorean::Note.new(528.0, index) }
+            subject(:scale) { Ceely::Scales::Pythagorean::Scale.new(528.0) }
+            subject(:note) { scale.note_by_index(index) }
 
             describe '#index' do
               it 'has the index that we expect' do
@@ -90,124 +91,6 @@ module Ceely
                   expect{ note.play(50) }.not_to raise_error
                 end
               end
-            end
-          end
-        end
-
-        context "when it's the pythagorean natural and chromatic pitches," do
-          subject(:c) { Ceely::Scales::Pythagorean::Note.new(528.0, 0, 0, "C") }
-          subject(:c_sharp) { Ceely::Scales::Pythagorean::Note.new(528.0, 7, 0, "C#") }
-          subject(:d) { Ceely::Scales::Pythagorean::Note.new(528.0, 2, 0, "D") }
-          subject(:d_sharp) { Ceely::Scales::Pythagorean::Note.new(528.0, 9, 0, "D#") }
-          subject(:e) { Ceely::Scales::Pythagorean::Note.new(528.0, 4, 0, "E") }
-          subject(:f) { Ceely::Scales::Pythagorean::Note.new(528.0, -1, 0, "F") }
-          subject(:g_flat) { Ceely::Scales::Pythagorean::Note.new(528.0, 11, 0, "Gb") }
-          subject(:f_sharp) { Ceely::Scales::Pythagorean::Note.new(528.0, 6, 0, "F#") }
-          subject(:g) { Ceely::Scales::Pythagorean::Note.new(528.0, 1, 0, "G") }
-          subject(:g_sharp) { Ceely::Scales::Pythagorean::Note.new(528.0, 8, 0, "G#") }
-          subject(:a) { Ceely::Scales::Pythagorean::Note.new(528.0, 3, 0, "A") }
-          subject(:a_sharp) { Ceely::Scales::Pythagorean::Note.new(528.0, 10, 0, "A#") }
-          subject(:b) { Ceely::Scales::Pythagorean::Note.new(528.0, 5, 0, "B") }
-        
-          describe '#interval from c to d' do
-            it 'has the interval that we expect' do
-              expect(c.interval(d)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from c to c sharp' do
-            it 'has the interval that we expect' do
-              expect(c.interval(c_sharp)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from c sharp to d' do
-            it 'has the interval that we expect' do
-              expect(c_sharp.interval(d)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from d to e' do
-            it 'has the interval that we expect' do
-              expect(d.interval(e)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from d to d sharp' do
-            it 'has the interval that we expect' do
-              expect(d.interval(d_sharp)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from d sharp to e' do
-            it 'has the interval that we expect' do
-              expect(d_sharp.interval(e)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from e to f' do
-            it 'has the interval that we expect' do
-              expect(e.interval(f)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from f to g' do
-            it 'has the interval that we expect' do
-              expect(f.interval(g)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from f to g flat' do
-            it 'has the interval that we expect' do
-              expect(f.interval(g_flat)).to eq(Rational(531441, 524288))
-            end
-          end
-
-          describe '#interval from g flat to f sharp' do
-            it 'has the interval that we expect' do
-              expect(g_flat.interval(f_sharp)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from f sharp to g' do
-            it 'has the interval that we expect' do
-              expect(f_sharp.interval(g)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from g to a' do
-            it 'has the interval that we expect' do
-              expect(g.interval(a)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from g to g sharp' do
-            it 'has the interval that we expect' do
-              expect(g.interval(g_sharp)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from g sharp to a' do
-            it 'has the interval that we expect' do
-              expect(g_sharp.interval(a)).to eq(Rational(256, 243))
-            end
-          end
-
-          describe '#interval from a to b' do
-            it 'has the interval that we expect' do
-              expect(a.interval(b)).to eq(Rational(9, 8))
-            end
-          end
-
-          describe '#interval from a to a sharp' do
-            it 'has the interval that we expect' do
-              expect(a.interval(a_sharp)).to eq(Rational(2187, 2048))
-            end
-          end
-
-          describe '#interval from a sharp to b' do
-            it 'has the interval that we expect' do
-              expect(a_sharp.interval(b)).to eq(Rational(256, 243))
             end
           end
         end

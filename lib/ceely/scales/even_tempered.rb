@@ -4,19 +4,9 @@ module Ceely
       # An EvenTempered::Note is a Note with the factor equal to 3/2
       class Note < Ceely::Note
 
-        def initialize(fundamental_frequency, *args)
-          @fundamental_frequency = fundamental_frequency
-          @index = (args.shift || 0)
-          @octave = (args.shift || index/12)
-          @name = args.shift
-          @type = args.shift
-          @duration = (args.shift || 0.5)
-        end
-
-        # A even tempered note has a factor equal to 12 root 2
-        # raised to the power of the index
-        def factor
-          @factor ||= (2 ** (1.0/12))**index
+        def initialize(fundamental_frequency, factor, index=0, octave=nil, *args)
+          octave ||= index/12
+          super(fundamental_frequency, factor, index, octave, *args)
         end
       end
 
@@ -30,7 +20,10 @@ module Ceely
           offset = args.shift
           note_names = (args.shift || NOTE_NAMES)
           note_types = (args.shift || NOTE_TYPES)
-          super(fundamental_frequency, size, offset, note_names, note_types)
+          # A even tempered note has a factor equal to 12 root 2
+          # raised to the power of the index
+          factor = -> note { (2 ** (1.0/12))**note.index }
+          super(fundamental_frequency, factor, size, offset, note_names, note_types)
         end
       end
     end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Ceely
   describe Ceely::Note do
-    subject(:note) { Ceely::Note.new(528.0, 2, 0, "A") }
+    subject(:note) { Ceely::Note.new(528.0, nil, 2, 0, "A") }
 
     describe '#raw_frequency' do
       it 'raises a NotImplementedError' do
@@ -72,12 +72,6 @@ module Ceely
     describe '#to_s' do
       it 'does not raises an error' do
         expect{ note.to_s }.not_to raise_error
-      end
-    end
-
-    describe '#becomes' do
-      it 'becomes a Pythagorean' do
-        expect(note.becomes(Ceely::Scales::Pythagorean::Note)).to be_a(Ceely::Scales::Pythagorean::Note)
       end
     end
   end

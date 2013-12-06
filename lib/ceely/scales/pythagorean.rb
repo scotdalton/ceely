@@ -1,15 +1,9 @@
 module Ceely
   module Scales
     module Pythagorean
-      # A Pythagorean::Note is a Note with the factor equal to 3/2
+      # A Pythagorean::Note is a Note with the syntonic comma defined
       class Note < Ceely::Note
         include Ceely::Mixins::SyntonicComma
-
-        # A pythagorean note has a factor equal to 3/2
-        # raised to the power of the index
-        def factor
-          @factor ||= Rational(3, 2)**index
-        end
       end
 
       # A Pythagorean::Scale is a Scale with a set Pythagorean::Notes
@@ -23,7 +17,10 @@ module Ceely
           offset = (args.shift || -1)
           note_names = (args.shift || NOTE_NAMES)
           note_types = (args.shift || NOTE_TYPES)
-          super(fundamental_frequency, size, offset, note_names, note_types)
+          # A pythagorean note has a factor equal to 3/2
+          # raised to the power of the index
+          factor = -> note { Rational(3, 2)**note.index }
+          super(fundamental_frequency, factor, size, offset, note_names, note_types)
         end
 
         MODE_NAMES.each_with_index do |mode, index|
