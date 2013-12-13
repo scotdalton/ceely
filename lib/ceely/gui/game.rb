@@ -50,7 +50,7 @@ module Ceely
       end
 
       def valid_scale?
-        @scales.text.present?
+        @scales.text.present? unless @scales.blank?
       end
 
       def scale
@@ -145,7 +145,7 @@ module Ceely
         else
           Pro.new
         end
-        @level_para.replace("Level: #{level.name}")
+        shoes.timer(0) { @level_para.replace("Level: #{level.name}") }
       end
 
       def pregame

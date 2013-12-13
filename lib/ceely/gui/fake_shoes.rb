@@ -19,7 +19,7 @@ module Ceely
       include Ceely::Gui::FakeMethods
       def fake_methods
         [ :gui, :darkgray, :white, :darkslategray, :background, :strokewidth,
-          :keypress ]
+          :keypress, :blue, :timer ]
       end
 
       def fake_shoe(*args)
@@ -28,6 +28,7 @@ module Ceely
       alias :rect :fake_shoe
       alias :check :fake_shoe
       alias :para :fake_shoe
+      alias :subtitle :fake_shoe
       alias :stack :fake_shoe
       alias :flow :fake_shoe
   
@@ -45,7 +46,7 @@ module Ceely
         end
 
         def fake_methods
-          [ :click, :unslot, :remove, :checked?, :contents ]
+          [ :click, :unslot, :remove, :checked?, :contents, :replace, :clear ]
         end
       end
     end
