@@ -16,13 +16,15 @@ module Ceely
         super(shoes, opts)
         @score = 0
         @instruction_flow = shoes.flow margin: 10 do
-          shoes.title "How good is your ear?"
+          shoes.flow  do
+            shoes.title "How Good Is Your Ear?", { align: "center" }
+          end
           shoes.flow do
             @level_para = shoes.subtitle ""
-            @score_para = shoes.subtitle "", { left: 625 }
-            @state_oval = shoes.oval({ fill: shoes.blue, radius: 10, left: 605, top: 55 })
+            @score_para = shoes.subtitle "", { left: 925 }
+            @state_oval = shoes.oval({ fill: shoes.blue, radius: 10, left: 905, top: 55 })
           end
-          shoes.flow width: 750, height: 80, margin: 10 do
+          shoes.flow width: 1050, height: 80, margin: 10 do
             shoes.background shoes.gray
             shoes.border shoes.darkslategray
             shoes.para "This game plays a random sequence of notes and asks you to identify them on the keyboard."

@@ -31,7 +31,7 @@ module Ceely
           first_rect = self.shoe.first
           text_color = opts[:text_color]
           text_left = first_rect.left + (first_rect.width/2 - 5)
-          text_top = top - 100
+          text_top = top - 190
           @names << shoes.para(note.name, { left: text_left, top: text_top,
             stroke: text_color })
         end
