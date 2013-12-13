@@ -26,3 +26,5 @@ To run the final project on a Mac (same assumptions as above)
     $ git clone https://github.com/scotdalton/ceely.git
     $ cd ceely
     $ ./bin/final
+
+For a description of the final project, checkout the [README](https://github.com/scotdalton/ceely/tree/master/final)
