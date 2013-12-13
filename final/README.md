@@ -1,6 +1,5 @@
 # Music Software Projects - Ear Memory
 
-
 ## The Game
 ### Overview
 Ear Memory is game :game_die: that tests the player's ":ear: memory",
