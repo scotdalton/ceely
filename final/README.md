@@ -48,6 +48,7 @@ to ground themselves in the sounds of the scale.
 - [OpenJDK](http://openjdk.java.net/) for Java
 - [JRuby](http://jruby.org/) for coding
 - [Java Sound API](http://docs.oracle.com/javase/tutorial/sound/) for playing sound
+- [Shoes 4](https://github.com/shoes/shoes4) for GUI-ing
 - [Rspec](https://relishapp.com/rspec) for testing
 - [Travis](https://travis-ci.org/scotdalton/ceely) for [CI](http://en.wikipedia.org/wiki/Continuous_integration)
 - [Coveralls](https://coveralls.io/r/scotdalton/ceely) for [code coverage](http://en.wikipedia.org/wiki/Code_coverage)
