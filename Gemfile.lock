@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/shoes/shoes4.git
-  revision: 13be83d7bfde1e26cb87a77264c81711f680664a
+  revision: db0549670510531f863faf7fc945fb9165b84b8b
   specs:
     shoes (4.0.0.pre1)
       after_do (~> 0.2.2)
@@ -30,8 +30,6 @@ GEM
       thor
     diff-lcs (1.2.5)
     docile (1.1.1)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
     ffi (1.9.3-java)
     furoshiki (0.1.2)
       plist
@@ -101,7 +99,6 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 4.0.0)
   coveralls
-  factory_girl (~> 4.2.0)
   jsound (~> 0.1.3)
   pry (~> 0.9.12.2)
   rake (~> 10.1.0)
