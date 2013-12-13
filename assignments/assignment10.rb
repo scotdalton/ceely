@@ -119,8 +119,8 @@ Ceely::Gui::Assignment.new("Assignment 10", 800, 800).run do
           fundamental_frequency = @fundamental_frequency.text.to_f
           scale = @scales.text
           tempo = @tempo.text.to_f
-          key = "Ceely::Scales::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
-          song = Ceely::SongBook::MaryHadALittleLamb.new(key, tempo)
+          scale = "Ceely::Scales::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
+          song = Ceely::SongBook::MaryHadALittleLamb.new(scale, tempo)
           Thread.new do
             song.play(50)
           end

@@ -1,66 +1,96 @@
 $: <<  File.dirname(__FILE__)+'/../lib'
 require 'ceely'
-class Final < Shoes
+width = 1600
+Shoes.app width: width, height: 600, title: "Final" do
+  background darkgray
+  border black
 
-  cattr_reader :scale, :song, instance_reader: false
-  
-  SCALES = %w{ Meantone Zarlino Harmonic Pythagorean Dodecaphonic Ptolemaic EvenTempered }
-
-  url '/', :index
-  url '/keyboard', :keyboard
-
-  def validate
-    @scales.choose("EvenTempered") if @scales.text.blank?
+  def validate()
+    @scales.choose(DEFAULT_SCALE) if @scales.text.blank? unless @scales.blank?
   end
 
-  def control_panel
-    @controls = []
-    flow(margin: 10) do
-      @controls << para("Choose the scale: ")
-      @controls << @scales = list_box(items: SCALES, choose: "EvenTempered")
-    end
-    flow(margin: 10) do
-      @controls << para("Choose the fundamental frequency: ")
-      @controls << @fundamental_frequency = edit_line(528).text
-    end
-    flow(margin: 10) do
-      @controls << para("Choose the seconds/beats: ")
-      @controls << @tempo = edit_line(0.5).text
-    end
+  def selected_scale
+    validate
+    scale = @scales.text unless @scales.blank?
+    scale ||= DEFAULT_SCALE
+    "Ceely::Scales::#{scale}::Scale".safe_constantize.new
+  end
+
+  def refresh_keyboard
+    @keyboard_flow.clear
+    @keyboard.clear unless @keyboard.blank?
+    @keyboard = nil
+    validate
+    timer(0) { @keyboard_flow.append{ keyboard } }
   end
 
   def keyboard
-    @keyboard = Ceely::Gui::Keyboard.new(self, self.class.scale, 2, {width: 1800})
-    song = self.class.song
-    @keyboard.play_song(song, 50)
-      timer(song.duration + 2) { visit "/" }
+    @keyboard ||= Ceely::Gui::Keyboard.new(self, selected_scale, 2,
+      { width: width, top: 70, left: 20, height: 500 })
   end
 
-  def index
-    fundamental_frequency, index  = 528, 1
-    duration, amplitude = 0.5, 50
-    flow(height: 500) do
-      background lightgray, curve: 20
-      border darkred, curve: 20, strokewidth: 1
-      stack margin: 10 do
-        subtitle "Mary Had a Little Lamb"
-      end
-      control_panel
-      stack margin: 10 do
-        button("Play the Song") do
-          validate
-          fundamental_frequency = @fundamental_frequency.to_f
-          tempo = @tempo.to_f
-          scale = @scales.text
-          @@scale =
-            "Ceely::Scales::#{scale}::Scale".safe_constantize.new(fundamental_frequency)
-          @@song = Ceely::SongBook::MaryHadALittleLamb.new(self.class.scale, tempo)
-          visit "/keyboard"
-        end
-      end
+  def beat_wheel
+    @beat_wheel ||= Ceely::BeatWheel.new(1)
+  end
+
+  def song
+    Ceely::RandomSongGenerator.new(selected_scale, 0.5, 5).song
+  end
+
+  def play_song
+    timer(0) { @random.state = "disabled" }
+    beat_thread = Thread.new { beat_wheel.rotate!(5).jam(5, 50) } if @funky.checked?
+    song = self.song
+    keyboard.play_song(song, 50)
+    timer(song.duration + 0.5) do
+      beat_thread.kill if @funky.checked?
+      @random.state = nil
     end
+  end
+
+  def record
+    keyboard.record = true
+    @record.state = "disabled"
+    @stop.state = nil
+  end
+
+  def stop
+    keyboard.record = false
+    @record.state = nil
+    @stop.state = "disabled"
+  end
+
+  def playback
+    timer(0) { @playback.state = "disabled" }
+    beat_thread = Thread.new { beat_wheel.rotate!(5).jam(5, 50) } if @funky.checked?
+    song = keyboard.recorded_song
+    keyboard.playback(50)
+    timer(song.duration + 0.5) do
+      beat_thread.kill if @funky.checked?
+      @playback.state = nil
+    end
+  end
+
+  flow margin: 10 do
+    para "Choose the scale: "
+    @scales = list_box(items: SCALES) { refresh_keyboard }
+  end
+
+  flow margin: 10 do
+    @funky = Ceely::Gui::LabeledCheck.new(self, "Make it funky")
+  end
+
+  flow margin: 10 do
+    @random = button("Play a Random Song") { play_song }
+    @record = button("Record") { record }
+    @stop = button("Stop") { stop }
+    @playback = button("Playback") { playback }
+    # Initialize to a stopped state
+    stop
+  end
+
+  @keyboard_flow = flow do
     validate
+    keyboard
   end
 end
-
-Shoes.app :width => 1800, :height => 1000, :title => 'Final'

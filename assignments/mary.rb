@@ -40,7 +40,7 @@ Shoes.app width: width, height: 600, title: "Mary Had a Little Lamb" do
   end
 
   def play_song
-    Thread.new { beat_wheel.rotate!(5).jam(10, 4) } if @funky.checked?
+    @beat_thread = Thread.new { beat_wheel.rotate!(5).jam(10000, 4) } if @funky.checked?
     keyboard.play_song(song, 50)
   end
 

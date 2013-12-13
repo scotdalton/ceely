@@ -2,11 +2,8 @@ module Ceely
   module Gui
     class LabeledCheck
       extend Forwardable
-
       include ShoeElement
-
       attr_reader :label, :checkbox
-
       def_delegators :@checkbox, :checked?, :checked=
 
       def initialize(shoes, label, opts={})

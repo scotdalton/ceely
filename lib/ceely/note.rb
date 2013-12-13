@@ -3,7 +3,7 @@ module Ceely
   class Note
     FACTOR_ERROR = -> {
       raise NotImplementedError.new("Factor should be callable, stretch.") }
-    
+
     include Comparable
     include Ceely::Mixins::Playable
 
@@ -69,8 +69,20 @@ module Ceely
       tone.play(amplitude)
     end
 
+    # Compare notes based on their sounds
     def <=>(other_note)
       tone <=> other_note.tone
+    end
+
+    # Notes are == if they sound the same
+    def ==(other_note)
+      self.tone == other_note.tone
+    end
+
+    # Notes are eql they are the same class
+    # and are ==
+    def eql?(other_note)
+      other_note.instance_of?(self.class) and self == other_note
     end
 
     # Cents is the interval between the fundamental note and this note
@@ -100,12 +112,8 @@ module Ceely
     end
 
     def to_s
-      @s ||= (type || name || index)
+      @s ||= "#{self.class} (#{(type || name || factor)}):\n" +
+        "\tfrequency: #{frequency}\n\toctave: #{octave}\n"
     end
-
-    def clean(string)
-      string.strip.gsub(/^\s*/, "\t")
-    end
-    protected :clean
   end
 end

@@ -3,11 +3,11 @@ module Ceely
     class Scale < Ceely::Song
       def initialize(*args)
         super(*args)
-        key.sorted_notes.each do |note|
+        scale.sorted_notes.each do |note|
           note_by_name!(note.name)
           pause!(0.5)
         end
-        self << key.note_by_type("1").in_octave(1)
+        self << scale.note_by_type("1").in_octave(1)
       end
     end
   end

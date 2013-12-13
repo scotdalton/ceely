@@ -3,9 +3,11 @@ module Ceely
     class Key
       include ShoeElement
       include Comparable
-
       attr_reader :note, :position, :names
       attr_reader :active_fill, :inactive_fill
+      attr_reader :show_names
+      alias :show_names? :show_names
+      attr_accessor :click_callback
 
       def initialize(shoes, position, note, opts={}, shoe=nil)
         super(shoes, opts)
@@ -15,26 +17,50 @@ module Ceely
         @height ||= 350
         @left ||= 50 + (position * width)
         @top ||= 50
-        @right = left + width
-        @bottom = top + height
+        # Show names by default
+        @show_names = opts.delete(:show_names)
+        @show_names ||= true
         @active_fill = (opts.delete(:active_fill) || shoes.darkgray)
         @inactive_fill = (opts.delete(:inactive_fill) || shoes.white)
         shoe_opts = { left: left, top: top, fill: inactive_fill }.merge(opts)
         @shoe = (shoe || [shoes.rect(left, top, width, height, shoe_opts)])
         key = self
         self.shoe.each { |rect| rect.click { click_action(key) } }
-        text_color = opts[:text_color]
-        text_left = self.shoe.first.left + (self.shoe.first.width/2 - 7)
-        text_top = top - 50
-        @names = [ 
-          shoes.para(note.name, { left: text_left, top: text_top, stroke: text_color })
-        ]
+        @names = []
+        if show_names?
+          first_rect = self.shoe.first
+          text_color = opts[:text_color]
+          text_left = first_rect.left + (first_rect.width/2 - 5)
+          text_top = top - 100
+          @names << shoes.para(note.name, { left: text_left, top: text_top,
+            stroke: text_color })
+        end
+      end
+
+      def letter
+        return @letter if defined? @letter
+        # The next octave is signified by alt_
+        @letter = (note.octave.eql? 1) ? "alt_" : ""
+        if(note.name.match('#'))
+          # Sharps are upper case, e.g. C plays C#
+          @letter += note.name.gsub('#', '')
+        elsif(note.name.match('b'))
+          # Flats are controls, e.g. control_c plays Cb
+          @letter = "control_#{@letter}#{note.name.gsub("b", "").downcase}"
+        else
+          # Otherwise, just a lowercase letter, e.g. c plays C
+          @letter += note.name.downcase
+        end
       end
 
       def click_action(key)
         key.press
         Thread.new { key.play(50) }
-        shoes.timer(key.note.duration) { key.release }
+        shoes.timer(key.note.duration) {
+          key.release
+          # Callback on click
+          click_callback.call if click_callback.respond_to? :call
+        }
       end
 
       def play(amplitude)
@@ -90,7 +116,7 @@ module Ceely
           shoe << shoes.rect(left, top, width, accidental_height, shoe_opts)
         end
         shoe << shoes.rect(left, bottom_top, width, bottom_height, shoe_opts)
-        opts = {
+        opts.merge!({
           top: top,
           left: left,
           width: width,
@@ -98,7 +124,7 @@ module Ceely
           active_fill: active_fill,
           inactive_fill: inactive_fill,
           text_color: shoes.black
-        }
+        })
         super(shoes, position, note, opts, shoe)
       end
 
@@ -114,16 +140,14 @@ module Ceely
     class BlackKey < Key
       def initialize(shoes, position, note, opts={})
         width = 30
-        top = opts[:top]
-        opts = {
+        opts.merge!({
           left: (50 + (position * 50)),
-          top: top,
           width: width,
           height: 250,
           active_fill: shoes.gray,
           inactive_fill: shoes.black,
           text_color: shoes.white
-        }
+        })
         super(shoes, position, note, opts)
       end
     end

@@ -12,9 +12,9 @@ module Ceely
       subject(:minor_chord) { Ceely::Chord.new(u, minor_3, p5) }
       subject(:major_chord) { Ceely::Chord.new(u, major_3, p5) }
 
-      describe '#key' do
-        it 'has the Pythagorean key' do
-          expect(song.key).to be_a(Ceely::Scales::Pythagorean::Scale)
+      describe '#scale' do
+        it 'has the Pythagorean scale' do
+          expect(song.scale).to be_a(Ceely::Scales::Pythagorean::Scale)
         end
       end
 

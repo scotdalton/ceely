@@ -5,14 +5,14 @@ module Ceely
     alias :note! :<<
     alias :chord! :<<
 
-    attr_reader :key
+    attr_reader :scale
 
     def initialize(*args)
       # Default to the even tempered scale
-      @key = (args.shift || Ceely::Scales::EvenTempered::Scale.new)
+      @scale = (args.shift || Ceely::Scales::EvenTempered::Scale.new)
       super(*args)
-      @key.duration = tempo
-      @key.notes.each { |note| note.duration = tempo }
+      @scale.duration = tempo
+      @scale.notes.each { |note| note.duration = tempo }
     end
 
     def duration
@@ -22,11 +22,11 @@ module Ceely
     end
 
     def note_by_name!(name)
-      note!(key.note_by_name(name))
+      note!(scale.note_by_name(name))
     end
 
     def note_by_type!(type)
-      note!(key.note_by_type(type))
+      note!(scale.note_by_type(type))
     end
 
     def notes_by_name!(*names)
@@ -49,18 +49,22 @@ module Ceely
     end
 
     def chord_by_names!(*names)
-      notes = names.collect { |name| key.note_by_name(name) }
+      notes = names.collect { |name| scale.note_by_name(name) }
       chord!(chord(*notes))
     end
 
     def chord_by_types!(*types)
-      notes = types.collect { |type| key.note_by_type(type) }
+      notes = types.collect { |type| scale.note_by_type(type) }
       chord!(chord(*notes))
     end
 
     def chords!(*chords)
       chords.each { |chord| self << chord }
       self
+    end
+
+    def ==(other_song)
+      
     end
   end
 end

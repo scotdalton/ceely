@@ -26,16 +26,19 @@ module Ceely
     end
 
     def to_s
-      "Tone with frequency #{frequency}"
+      "#{self.class}:\n\tfrequecy: #{frequency}\n\tduration: #{duration}"
     end
 
-    # Tones are equal if they have the same frequency
+    # Tones are == if they have the same frequency and duration
     def ==(other_tone)
-      (other_tone.is_a? self.class and 
-        frequency == other_tone.frequency and
-          duration == other_tone.duration)
+      frequency == other_tone.frequency and duration == other_tone.duration
     end
-    alias :eql? :==
+
+    # Tones are eql if they are the same class
+    # and are ==
+    def eql?(other_tone)
+      other_tone.instance_of?(self.class) and self == other_tone
+    end
 
     # Compare tones by their frequencies
     def <=>(other_tone)

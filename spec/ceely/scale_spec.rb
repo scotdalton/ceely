@@ -32,13 +32,13 @@ module Ceely
     end
 
     describe '#sorted_notes' do
-      it 'raises a NotImplementedError' do
+      it 'should raise a NotImplementedError' do
         expect{ scale.sorted_notes }.to raise_error(NotImplementedError)
       end
     end
 
     describe '#sort' do
-      it 'raises a NotImplementedError' do
+      it 'should raise a NotImplementedError' do
         expect{ scale.sort }.to raise_error(NotImplementedError)
       end
     end
@@ -54,26 +54,26 @@ module Ceely
     end
 
     describe '#play' do
-      it 'raises a NotImplementedError' do
+      it 'should raise a NotImplementedError' do
         expect{ scale.play(50) }.to raise_error(NotImplementedError)
       end
     end
 
     describe '#play_circle_of_fifths' do
-      it 'raises a NotImplementedError' do
+      it 'should raise a NotImplementedError' do
         expect{ scale.play_circle_of_fifths(50) }.to raise_error(NotImplementedError)
       end
     end
 
     describe '#play_circle_of_fifths_in_octave' do
-      it 'raises a NotImplementedError' do
+      it 'should raise a NotImplementedError' do
         expect{ scale.play_circle_of_fifths_in_octave(1, 50) }.to raise_error(NotImplementedError)
       end
     end
 
     describe '#to_s' do
-      it 'does not raises an error' do
-        expect{ scale.to_s }.not_to raise_error
+      it 'should raise a NotImplementedError' do
+        expect{ scale.sorted_notes }.to raise_error(NotImplementedError)
       end
     end
   end

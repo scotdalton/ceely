@@ -3,6 +3,7 @@ require 'coveralls'
 Coveralls.wear!
 # Include the ceely lib directory in the load path
 $: <<  File.dirname(__FILE__)+'/../lib'
+# Include the spec support directory in the load path
 require 'yaml'
 require 'pry'
 require 'ceely'
