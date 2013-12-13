@@ -21,5 +21,8 @@ To run tests on a Mac (same assumptions as above)
 
 Or you could just see what [travis](https://travis-ci.org/scotdalton/ceely) says about it.
 
-Hope to make this a [vagrant box](http://www.vagrantup.com/)
-(probably Ubuntu) and distribute it that way.
+To run the final project on a Mac (same assumptions as above)
+
+    $ git clone https://github.com/scotdalton/ceely.git
+    $ cd ceely
+    $ ./bin/final

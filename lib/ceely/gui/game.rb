@@ -17,7 +17,7 @@ module Ceely
         @score = 0
         @instruction_flow = shoes.flow margin: 10 do
           shoes.flow  do
-            shoes.title "How Good Is Your Ear?", { align: "center" }
+            shoes.title "Ear Memory", { align: "center" }
           end
           shoes.flow do
             @level_para = shoes.subtitle ""
@@ -38,7 +38,7 @@ module Ceely
           shoes.flow do
             shoes.para "Choose a scale: "
             @scales = shoes.list_box(items: SCALES) { refresh_keyboard }
-            @play_scale = Ceely::Gui::LabeledCheck.new(shoes, "Play the scale before you start?")
+            @play_scale = Ceely::Gui::LabeledCheck.new(shoes, "Play the scale first?")
           end
           shoes.flow({width: 300}) do
             @play = shoes.button("Play") { ready }

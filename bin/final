@@ -1,4 +1,4 @@
 #!/bin/bash
 export JAVA_OPTS=-XstartOnFirstThread
 bundle install;
-ruby-shoes ./assignments/final.rb;
+ruby-shoes ./final/project.rb;
