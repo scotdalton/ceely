@@ -35,6 +35,9 @@ case the selected scale will be played before the random
 sequence of notes. This is intended to allow players
 to ground themselves in the sounds of the scale.
 
+## Screenshots
+![Noob](https://github.com/scotdalton/ceely/raw/master/images/Noob.png "Getting Started")
+
 ## Technologies Used
 ### Share the love, document and open source your code!
 
