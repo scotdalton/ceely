@@ -3,9 +3,9 @@
 
 ## The Game
 ### Overview
-Ear Memory is game that tests the player's "ear memory",
+Ear Memory is game :game_die: that tests the player's "ear memory",
 i.e. the ability to discern and remember a sequence of
-random notes played from a selected scale :musical_keyboard: 
+random notes :notes: played from a selected scale :musical_keyboard: 
 
 Players advance through trickier levels of difficulty
 and gain 10 points for each correct answer.
