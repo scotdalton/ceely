@@ -10,26 +10,27 @@ random notes played from a selected scale.
 Players advance through trickier levels of difficulty
 and gain 10 points for each correct answer.
 
-### Levels
-#### Noob
-Noobs will see and hear three notes played, with the note names for guidance.
-#### Beginner
+### Details
+#### Levels
+- __Noob__:
+  Noobs will see and hear three notes played, with the note names for guidance.
+- __Beginner__:
 Beginners will see and hear five notes played, with the note names for guidance.
-#### Beginner Plus
+- __Beginner Plus__
 Just like Beginners but with beats :headphones:
-#### Intermediate
+- __Intermediate__
 Intermediate players will see and hear five note played, but without the note names for guidance.
-#### Intermediate Plus
+- __Intermediate Plus__
 Just like Intermediate but with beats :headphones:
-#### Advanced
+- __Advanced__
 Advanced players will only hear seven note played.
 They will not see the keys played, nor will the names be available to them guidance.
-#### Advanced Plus
+- __Advanced Plus__
 Just like Advanced but with beats :headphones:
-#### Professional
+- __Professional__
 Just like Advanced Plus but with nine notes.
 
-### Options
+#### Options
 Players can elect to "Play the scale first" in which
 case the selected scale will be played before the random
 sequence of notes. This is intended to allow players
@@ -37,6 +38,8 @@ to ground themselves in the sounds of the scale.
 
 ## Screenshots
 ![Noob](https://github.com/scotdalton/ceely/raw/master/images/Noob.png "Getting Started")
+![Beginner](https://github.com/scotdalton/ceely/raw/master/images/Beginner.png "Playing Notes")
+![Beginner](https://github.com/scotdalton/ceely/raw/master/images/Beginner+.png "Your Turn")
 
 ## Technologies Used
 ### Share the love, document and open source your code!
