@@ -67,7 +67,7 @@ module Ceely
         return @keyboard unless @keyboard.blank?
         p level.name
         @keyboard = Ceely::Gui::Keyboard.new(shoes, scale, 2,
-          { width: width, top: top, left: left, height: height, 
+          { width: width, top: 180, left: 20, height: 465, 
             show_names: level.show_names?, press_keys: level.press_keys? })
         @keyboard.click_callback = -> { judge }
         @keyboard

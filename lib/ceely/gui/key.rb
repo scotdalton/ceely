@@ -29,7 +29,7 @@ module Ceely
         if show_names?
           first_rect = self.shoe.first
           text_color = opts[:text_color]
-          text_left = first_rect.left + (first_rect.width/2 - 5)
+          text_left = first_rect.left + (first_rect.width/2 - 7)
           text_top = top - 190
           @names << shoes.para(note.name, { left: text_left, top: text_top,
             stroke: text_color })
