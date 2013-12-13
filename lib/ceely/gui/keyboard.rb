@@ -18,10 +18,8 @@ module Ceely
         @top ||= 50
         # Show names by default
         @show_names = opts.delete(:show_names)
-        @show_names ||= true
         # Press keys by default
         @press_keys = opts.delete(:press_keys)
-        @press_keys ||= true
         @keys = []
         @shoe = shoes.stack margin: 0, width: width, height: height do
           shoes.background shoes.darkslategray

@@ -19,7 +19,6 @@ module Ceely
         @top ||= 50
         # Show names by default
         @show_names = opts.delete(:show_names)
-        @show_names ||= true
         @active_fill = (opts.delete(:active_fill) || shoes.darkgray)
         @inactive_fill = (opts.delete(:inactive_fill) || shoes.white)
         shoe_opts = { left: left, top: top, fill: inactive_fill }.merge(opts)

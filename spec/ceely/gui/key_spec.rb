@@ -46,14 +46,14 @@ module Ceely
       end
 
       describe '#show_names' do
-        it "should be true" do
-          expect(key.show_names).to be(true)
+        it "should be nil" do
+          expect(key.show_names).to be_nil
         end
       end
 
       describe '#show_names?' do
-        it "should be true" do
-          expect(key.show_names?).to be(true)
+        it "should be nil" do
+          expect(key.show_names?).to be_nil
         end
       end
 
