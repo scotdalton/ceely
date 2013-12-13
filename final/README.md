@@ -5,7 +5,7 @@
 ### Overview
 Ear Memory is game that tests the player's "ear memory",
 i.e. the ability to discern and remember a sequence of
-random notes played from a selected scale.
+random notes played from a selected scale :musical_keyboard: 
 
 Players advance through trickier levels of difficulty
 and gain 10 points for each correct answer.
@@ -17,7 +17,7 @@ and gain 10 points for each correct answer.
 - __Beginner__:
 Beginners will see and hear five notes played, with the note names for guidance.
 - __Beginner Plus__
-Just like Beginners but with beats :headphones:
+Just like Beginner but with beats :headphones:
 - __Intermediate__
 Intermediate players will see and hear five note played, but without the note names for guidance.
 - __Intermediate Plus__
